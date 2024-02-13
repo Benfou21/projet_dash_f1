@@ -1,17 +1,20 @@
 import plotly.graph_objects as go
 import plotly.express as px
-
+from plotly.subplots import make_subplots
 import numpy as np
+import pandas as pd
+
 
 def get_figure(data):
     
-    fig = go.Figure()
+    # fig = go.Figure()
+    fig = make_subplots(rows=1, cols=1)
     x = data['x']
     y = data['y']
     speed = data['speed']
     
     # Add the trace of the circuit
-    fig.add_trace(go.Scatter(x=x, y=y, mode='lines', name='Track'))
+    # fig.add_trace(go.Scatter(x=x, y=y, mode='lines', name='Track'))
     
     
     
@@ -27,10 +30,12 @@ def get_figure(data):
             showlegend=False))
 
     
+    fig.add_trace(
+        go.Scatter(x=[x[0]], y=[y[0]], mode='markers', marker=dict(size=10, color='red'), name='Car'),
+        row=1, col=1
+    )
     
-    # # Init postion point
-    #fig.add_trace(go.Scatter(x=[x[0]], y=[y[0]], mode='markers', marker=dict(size=10, color='rgb(255,0,0)')))
-
+    
     # Set up the layout of the figure
     fig.update_layout(
         title='F1 Telemetry Data Animation',
@@ -46,6 +51,7 @@ def get_figure(data):
         ],
         name=str(k)
     ) for k in range(len(x))]
+
 
     fig.frames = frames
     

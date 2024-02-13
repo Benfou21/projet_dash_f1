@@ -15,6 +15,7 @@ def load_and_save_telemetry() :
         'x': [],
         'y': [],
         'speed': [],
+        'time': [],
         'distance': []
     }
 
@@ -36,7 +37,7 @@ def load_and_save_telemetry() :
         # Extract telemetry data
         telemetry = fastest_lap.get_telemetry()
         telemetry['Speed_m_s'] = telemetry['Speed'] / 3.6  # Convert speed to m/s
-        
+        telemetry['Elapsed'] = telemetry['Time'].cumsum()
         # Calculate the distance for each telemetry point
         telemetry['Distance'] = telemetry['Speed_m_s'] * telemetry['Time'].diff().dt.total_seconds().fillna(0).cumsum()
         
@@ -46,9 +47,10 @@ def load_and_save_telemetry() :
         telemetry_data['y'].append(telemetry['Y'].tolist())
         telemetry_data['speed'].append(telemetry['Speed'].tolist())
         telemetry_data['distance'].append(telemetry['Distance'].tolist())
+        telemetry_data['time'].append(telemetry['Elapsed'].dt.total_seconds().tolist())  # Store elapsed time in seconds
     
     telemetry_df = pd.DataFrame(telemetry_data)
-    telemetry_df.to_csv("assets/data/telemetry.csv")
+    telemetry_df.to_csv("src/assets/data/telemetry.csv")
     return telemetry_df
 
 
