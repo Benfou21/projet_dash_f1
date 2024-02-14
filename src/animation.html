@@ -1,0 +1,84 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>F1 Race Animation</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+
+<div id="raceTrack" style="width:100%;height:500px;"></div>
+
+<script>
+// Example data structure. You should replace this with your actual data.
+var data = {
+    x: [/* x coordinates of the track */],
+    y: [/* y coordinates of the track */],
+    speed: [/* speed of the car at each point */],
+    time: [/* time elapsed since the start at each point */]
+};
+
+// Calculate frame time based on speed or distance/time
+function calculateFrameTime(speeds, scaleFactor = 50) {
+    // This is a simple way to adjust speed. You might need a more complex formula based on your data.
+    return speeds.map(speed => scaleFactor * (1 / speed));
+}
+
+var layout = {
+    title: 'F1 Telemetry Data Animation',
+    xaxis: {range: [Math.min(...data.x), Math.max(...data.x)], autorange: false},
+    yaxis: {range: [Math.min(...data.y), Math.max(...data.y)], autorange: false},
+    updatemenus: [{
+        type: 'buttons',
+        buttons: [{
+            label: 'Play',
+            method: 'animate',
+            args: [null, {
+                frame: {duration: 0, redraw: true},
+                fromcurrent: true,
+                mode: 'immediate'
+            }]
+        }]
+    }]
+};
+
+var trace1 = {
+    x: data.x,
+    y: data.y,
+    mode: 'lines',
+    name: 'Track'
+};
+
+var trace2 = {
+    x: [data.x[0]],
+    y: [data.y[0]],
+    mode: 'markers',
+    marker: {size: 10, color: 'red'},
+    name: 'Car'
+};
+
+var frames = data.x.map((_, i) => ({
+    data: [{x: [data.x[i]], y: [data.y[i]]}],
+    name: i.toString()
+}));
+
+Plotly.newPlot('raceTrack', [trace1, trace2], layout).then(function() {
+    var frameTime = calculateFrameTime(data.speed); // Adjust this function based on your data
+    var counter = 0;
+    var interval = setInterval(function() {
+        Plotly.animate('raceTrack', {
+            data: [{x: [data.x[counter]], y: [data.y[counter]]}],
+            traces: [1],
+            layout: {}
+        }, {
+            transition: {duration: frameTime[counter]},
+            frame: {duration: frameTime[counter], redraw: true}
+        });
+        counter++;
+        if (counter === data.x.length) clearInterval(interval);
+    }, 100); // This interval may need adjustment based on your data.
+});
+</script>
+
+</body>
+</html>

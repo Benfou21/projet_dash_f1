@@ -25,5 +25,6 @@ data = telemetry_df.iloc[0]
 
 app.layout = html.Div([
     html.H1('F1 Telemetry Animation'),
-    dcc.Graph(id='graph', figure=dy_plot.get_figure(data))
+    dcc.Graph(id='graph', figure=dy_plot.get_circuit(data)),
+    dcc.Graph(id='speed-graph', figure=dy_plot.get_bars(data))
 ])
