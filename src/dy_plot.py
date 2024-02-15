@@ -5,9 +5,9 @@ import numpy as np
 import pandas as pd
 from preprocessing import resample_based_on_speed
 from preprocessing import resample_based_on_time
+import ast
 
-
-def get_circuit(data):
+def get_circuit(data,index):
     
     # fig = go.Figure()
     fig = make_subplots(rows=1, cols=1)
@@ -26,7 +26,7 @@ def get_circuit(data):
     
     speed_normalized = (speed - min(speed)) / (max(speed) - min(speed))
     color_scale = [(v, f"rgb( {int(255 * (1 - v))},{int(255 * v)}, 0)") for v in speed_normalized]
-
+    
     for i in range(len(x) - 1):
         fig.add_trace(go.Scatter(
             x=x[i:i+2],
@@ -37,7 +37,7 @@ def get_circuit(data):
 
     
     fig.add_trace(
-        go.Scatter(x=[x[0]], y=[y[0]], mode='markers', marker=dict(size=10, color='red'), name='Car'),
+        go.Scatter(x=[x[index]], y=[y[index]], mode='markers', marker=dict(size=10, color='red'), name='Car'),
         row=1, col=1
     )
     
@@ -50,44 +50,18 @@ def get_circuit(data):
         yaxis=dict(range=[min(y), max(y)], autorange=False)
     )
     
-    frames = [go.Frame(
-        data=[
-            go.Scatter(x=x, y=y, mode='lines', name='Track'),  # include the track in each frame
-            go.Scatter(x=[x[k]], y=[y[k]], mode='markers', marker=dict(size=10, color='red'))  # car's position
-        ],
-        name=str(k)
-    ) for k in range(len(x))]
+    # frames = [go.Frame(
+    #     data=[
+    #         go.Scatter(x=x, y=y, mode='lines', name='Track'),  # include the track in each frame
+    #         go.Scatter(x=[x[k]], y=[y[k]], mode='markers', marker=dict(size=10, color='red'))  # car's position
+    #     ],
+    #     name=str(k)
+    # ) for k in range(len(x))]
 
 
-    fig.frames = frames
+    # fig.frames = frames
     
-    fig.update_layout(
-        updatemenus=[
-            dict(
-                type='buttons',
-                buttons=[
-                    dict(
-                        label='Play',
-                        method='animate',
-                        args=[None, dict(frame=dict(duration=0.5, redraw=True), fromcurrent=True, mode='immediate')]
-                    ),
-                    dict(
-                        label='Pause',
-                        method='animate',
-                        args=[[None], dict(frame=dict(duration=0, redraw=False), mode='immediate')]
-                    )
-                ],
-                direction='left',
-                pad={'r': 10, 't': 87},
-                showactive=False,
-                x=0.1,
-                xanchor='right',
-                y=0,
-                yanchor='top'
-            )
-        ]
-    )
-    
+
     
     
     return fig
@@ -104,8 +78,8 @@ def get_color(speed_value):
     else:
         return 'green'
 
-import ast
-def get_bars(data):
+
+def get_bars(data,index):
     speed = data["speed"]
     
 
@@ -119,13 +93,14 @@ def get_bars(data):
     # Définir le texte des étiquettes pour correspondre à ces emplacements
     ticktext = [str(time_list[i]) for i in tickvals]
 
-    # speed_normalized = (speed - min(speed)) / (max(speed) - min(speed))
-    # color_scale = [(v, f"rgb( {int(255 * (1 - v))},{int(255 * v)}, 0)") for v in speed_normalized]
+    speed_normalized = (speed - min(speed)) / (max(speed) - min(speed))
+    color_scale = [f"rgb({int(255 * (1 - v))}, {int(255 * v)}, 0)" for v in speed_normalized]
     
     colors = [get_color(s) for s in speed]
+    colors[index] = 'red'
     fig = go.Figure(data=[go.Bar(
         y=speed,
-        marker_color=colors  # Affecter les couleurs aux barres
+        marker_color=color_scale  # Affecter les couleurs aux barres
     )])
 
     # Personnaliser le layout si nécessaire
@@ -138,3 +113,10 @@ def get_bars(data):
     fig.update_xaxes(tickvals=tickvals, ticktext=ticktext)
 
     return fig
+
+
+
+
+
+
+# f"rgb( {int(255 * (1 - v))},{int(255 * v)}, 0)"
