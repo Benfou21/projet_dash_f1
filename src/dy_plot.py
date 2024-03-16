@@ -15,17 +15,7 @@ def get_circuit(data,index):
     y = data['y']
     speed = data['speed']
     
-    # time_str = data["time"]   # c'est une chaîne de caractères qui ressemble à une liste
-    # time_list = ast.literal_eval(time_str)
-    # x, y, speed = resample_based_on_time(data['x'], data['y'], data['speed'], time_list)
     
-    # Add the trace of the circuit
-    # fig.add_trace(go.Scatter(x=x, y=y, mode='lines', name='Track'))
-    
-    
-    
-    # Générer la couleur pour le segment actuel
-  
     colors = create_colors(speed)
     for i in range(len(x) - 1):
         
@@ -52,19 +42,7 @@ def get_circuit(data,index):
         # plot_bgcolor='white',  
         #paper_bgcolor='white',
     )
-    
-    # frames = [go.Frame(
-    #     data=[
-    #         go.Scatter(x=x, y=y, mode='lines', name='Track'),  # include the track in each frame
-    #         go.Scatter(x=[x[k]], y=[y[k]], mode='markers', marker=dict(size=10, color='red'))  # car's position
-    #     ],
-    #     name=str(k)
-    # ) for k in range(len(x))]
-
-
-    # fig.frames = frames
-    
-
+   
     
     
     return fig
@@ -72,7 +50,7 @@ def get_circuit(data,index):
 def get_color_2(speed_value, min_speed, max_speed):
     
     relative_speed = (speed_value - min_speed) / (max_speed - min_speed)
-    saturation = 60 + 40 * relative_speed  # Saturation varie à hauteur de 40%
+    saturation = 50 + 50 * (relative_speed)  # Saturation varie à hauteur de 40%
     
     if speed_value < 100:
         return f"hsl(0, {saturation}%, 50%)"  # Rouge avec saturation variable

@@ -2,7 +2,7 @@
 import dash
 import dash_html_components as html
 import dash_core_components as dcc
-from dash.dependencies import Input, Output
+from dash.dependencies import Input, Output, State
 import numpy as np
 import pandas as pd
 import dy_plot
@@ -30,8 +30,16 @@ x_length = len(data['x'])
 app.layout = html.Div(
     [
         html.H1('F1 Telemetry Animation'),
-        dcc.Graph(id='circuit-graph'),
-        dcc.Graph(id='speed-graph'),
+        
+        html.Div([
+            dcc.Graph(id='circuit-graph-1'),
+            dcc.Graph(id='circuit-graph-2'),
+        ], style={'display': 'flex','justifyContent': 'center'}),  # Div contenant les graphiques du circuit côte à côte
+        
+        html.Div([
+            dcc.Graph(id='speed-graph-1'),
+            dcc.Graph(id='speed-graph-2'),
+        ], style={'display': 'flex','justifyContent': 'center'}),  # Div contenant les graphiques de vitesse côte à côte
         
         html.Div([
             dcc.Slider(
@@ -42,21 +50,32 @@ app.layout = html.Div(
                 step=2,
                 marks={i: {'label': time_list[i]} for i in range(0, x_length, 50)} 
             ),
-        ], style={'padding-left': '50px', 'padding-right': '50px'}),  
-        
+        ],style={'padding-left': '50px', 'padding-right': '50px', 'width': '50%', 'margin': '0 auto'} ),
+       
     ],
-    )
-
+    style={'textAlign': 'center'}
+)
 
 @app.callback(
-    [Output('circuit-graph', 'figure'),
-     Output('speed-graph', 'figure')],
+    [Output('circuit-graph-1', 'figure'),
+     Output('circuit-graph-2', 'figure'),
+     Output('speed-graph-1', 'figure'),
+     Output('speed-graph-2', 'figure')],
     [Input('time-slider', 'value')]
 )
 def update_graphs(index):
-    
+    w = 1100
     circuit_figure = dy_plot.get_circuit(data, index)
-    
     bars_figure = dy_plot.get_bars(data, index)
+    circuit_figure.update_layout(
+        height=600,  # hauteur en pixels
+        width=w,  # largeur en pixels
+    )
+    bars_figure.update_layout(
+        height=600,  # hauteur en pixels
+        width=w,  # largeur en pixels
+    )
     
-    return circuit_figure, bars_figure
+    # Puisque nous doublons simplement les graphiques, nous retournons la même figure pour les graphiques 1 et 2
+    return circuit_figure, circuit_figure, bars_figure, bars_figure
+
