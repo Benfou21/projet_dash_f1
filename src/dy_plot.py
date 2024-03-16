@@ -24,30 +24,33 @@ def get_circuit(data,index):
     
     
     
-    speed_normalized = (speed - min(speed)) / (max(speed) - min(speed))
-    color_scale = [(v, f"rgb( {int(255 * (1 - v))},{int(255 * v)}, 0)") for v in speed_normalized]
-    
+    # Générer la couleur pour le segment actuel
+  
+    colors = create_colors(speed)
     for i in range(len(x) - 1):
+        
         fig.add_trace(go.Scatter(
             x=x[i:i+2],
             y=y[i:i+2],
             mode='lines',
-            line=dict(color=color_scale[i][1], width=2),
+            line=dict(color=colors[i], width=4),
             showlegend=False))
 
     
     fig.add_trace(
-        go.Scatter(x=[x[index]], y=[y[index]], mode='markers', marker=dict(size=10, color='red'), name='Car'),
+        go.Scatter(x=[x[index]], y=[y[index]], mode='markers', marker=dict(size=15, color='purple'), name='Car'),
         row=1, col=1
     )
     
     
     # Set up the layout of the figure
     fig.update_layout(
-        title='F1 Telemetry Data Animation',
+        title='Vitesse selon la position du circuit',
         showlegend=False,
-        xaxis=dict(range=[min(x), max(x)], autorange=False),
-        yaxis=dict(range=[min(y), max(y)], autorange=False)
+        xaxis=dict(range=[min(x), max(x)], autorange=False,showgrid=False,zeroline = False),
+        yaxis=dict(range=[min(y), max(y)], autorange=False,showgrid=False,zeroline = False),
+        # plot_bgcolor='white',  
+        #paper_bgcolor='white',
     )
     
     # frames = [go.Frame(
@@ -66,15 +69,24 @@ def get_circuit(data,index):
     
     return fig
 
+def get_color_2(speed_value, min_speed, max_speed):
+    
+    relative_speed = (speed_value - min_speed) / (max_speed - min_speed)
+    saturation = 60 + 40 * relative_speed  # Saturation varie à hauteur de 40%
+    
+    if speed_value < 100:
+        return f"hsl(0, {saturation}%, 50%)"  # Rouge avec saturation variable
+    elif 100 <= speed_value < 250:
+        return f"hsl(39, {saturation}%, 50%)"  # Orange avec saturation variable
+    else:
+        return f"hsl(120, {saturation}%, 50%)"  # Vert avec saturation variable
 
 
 def get_color(speed_value):
-    if speed_value < 50:
+    if speed_value < 100:
         return 'red'
-    elif 50 <= speed_value < 100:
+    elif 100 <= speed_value < 250:
         return 'orange'
-    elif 100 <= speed_value < 200 :
-        return 'yellow'
     else:
         return 'green'
 
@@ -93,14 +105,13 @@ def get_bars(data,index):
     # Définir le texte des étiquettes pour correspondre à ces emplacements
     ticktext = [str(time_list[i]) for i in tickvals]
 
-    speed_normalized = (speed - min(speed)) / (max(speed) - min(speed))
-    color_scale = [f"rgb({int(255 * (1 - v))}, {int(255 * v)}, 0)" for v in speed_normalized]
+    colors = create_colors(speed)
     
-    colors = [get_color(s) for s in speed]
-    colors[index] = 'red'
+    colors[index] = "purple"
+    
     fig = go.Figure(data=[go.Bar(
         y=speed,
-        marker_color=color_scale  # Affecter les couleurs aux barres
+        marker_color=colors  # Affecter les couleurs aux barres
     )])
 
     # Personnaliser le layout si nécessaire
@@ -108,15 +119,31 @@ def get_bars(data,index):
         title='Vitesse sur différentes plages horaires', 
         xaxis_title='Temps en seconde', 
         yaxis_title='Vitesse en km/h', 
+        
     )
     # Mettre à jour l'axe des x pour inclure les étiquettes de temps personnalisées
     fig.update_xaxes(tickvals=tickvals, ticktext=ticktext)
+
 
     return fig
 
 
 
-
+def create_colors(speed):
+    min_red_speed, max_red_speed = 0, 100
+    min_orange_speed, max_orange_speed = 100, 250
+    min_green_speed, max_green_speed = 250, max(speed)
+    
+    colors = []
+    for s in speed:
+        if s < 100:
+            colors.append(get_color_2(s, min_red_speed, max_red_speed))
+        elif 100 <= s < 250:
+            colors.append(get_color_2(s, min_orange_speed, max_orange_speed))
+        else:
+            colors.append(get_color_2(s, min_green_speed, max_green_speed))
+    return colors
+            
 
 
 # f"rgb( {int(255 * (1 - v))},{int(255 * v)}, 0)"

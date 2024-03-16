@@ -42,7 +42,7 @@ app.layout = html.Div(
                 step=2,
                 marks={i: {'label': time_list[i]} for i in range(0, x_length, 50)} 
             ),
-        ], style={'padding-left': '50px', 'padding-right': '50px'}),  # Ajustez les valeurs de padding comme nécessaire
+        ], style={'padding-left': '50px', 'padding-right': '50px'}),  
         
     ],
     )
@@ -54,10 +54,9 @@ app.layout = html.Div(
     [Input('time-slider', 'value')]
 )
 def update_graphs(index):
-    # Mettre à jour le graphique du circuit pour montrer la position à l'index sélectionné
+    
     circuit_figure = dy_plot.get_circuit(data, index)
     
-    # Mettre à jour le graphique à barres pour montrer la vitesse à l'index sélectionné
     bars_figure = dy_plot.get_bars(data, index)
     
     return circuit_figure, bars_figure
