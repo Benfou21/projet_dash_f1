@@ -5,37 +5,39 @@ import numpy as np
 import pandas as pd
 from preprocessing import resample_based_on_speed
 from preprocessing import resample_based_on_time
+import hover_template
 import ast
 
-def get_circuit(data,index):
+def get_circuit(data,index,pilote):
     
-    # fig = go.Figure()
     fig = make_subplots(rows=1, cols=1)
-    x = data['x']
-    y = data['y']
-    speed = data['speed']
-    
+    x = data['X']
+    y = data['Y']
+    speed = data['Speed']
     
     colors = create_colors(speed)
+    
     for i in range(len(x) - 1):
-        
+        text = [str(speed.iloc[i]) + ' km/h'] * 2
         fig.add_trace(go.Scatter(
             x=x[i:i+2],
             y=y[i:i+2],
             mode='lines',
-            line=dict(color=colors[i], width=4),
-            showlegend=False))
-
+            line=dict(color=colors[i], width=2),
+            showlegend=False,
+            text=text,  # Utiliser le texte de survol
+            hoverinfo='text'
+        ))
     
+    # Marquer le point actuel avec un marker
+    text_index = [str(speed.iloc[index]) + ' km/h'] * 2
     fig.add_trace(
-        go.Scatter(x=[x[index]], y=[y[index]], mode='markers', marker=dict(size=15, color='purple'), name='Car'),
-        row=1, col=1
+        go.Scatter(x=[x.iloc[index]], y=[y.iloc[index]], mode='markers', marker=dict(size=10, color='purple'), name='Car',text =text_index,hoverinfo='text')
     )
-    
     
     # Set up the layout of the figure
     fig.update_layout(
-        title='Vitesse selon la position du circuit',
+        title=f'Vitesse selon la position du circuit de {pilote}',
         showlegend=False,
         xaxis=dict(range=[min(x), max(x)], autorange=False,showgrid=False,zeroline = False),
         yaxis=dict(range=[min(y), max(y)], autorange=False,showgrid=False,zeroline = False),
@@ -43,6 +45,7 @@ def get_circuit(data,index):
         #paper_bgcolor='white',
     )
    
+    fig.update_traces(hovertemplate=hover_template.get_speed_circuit_hover_template())
     
     
     return fig
@@ -69,40 +72,43 @@ def get_color(speed_value):
         return 'green'
 
 
-def get_bars(data,index):
-    speed = data["speed"]
+def get_bars(data,index,pilote):
+    
+    speed = data["Speed"]
+    elapsed_time = data["Elapsed"]
     
 
-    # Convertir la chaîne en liste
-    time_str = data["time"]   # c'est une chaîne de caractères qui ressemble à une liste
-    time_list = ast.literal_eval(time_str)
-    # print(time_list)
-    
-    tickvals = [i for i in range(len(time_list)) if i % 50 == 0]
-
-    # Définir le texte des étiquettes pour correspondre à ces emplacements
-    ticktext = [str(time_list[i]) for i in tickvals]
 
     colors = create_colors(speed)
     
     colors[index] = "purple"
     
+    
     fig = go.Figure(data=[go.Bar(
+        x=elapsed_time,
         y=speed,
-        marker_color=colors  # Affecter les couleurs aux barres
+        marker_color=colors,
+        width=0.4
     )])
+    
+    speed_index = [speed[index]]
+    elapsed_time_index = [elapsed_time[index]]
+    colors_index = ["purple"]  # ou toute autre couleur distincte pour la barre d'index
+
+    fig.add_trace(go.Bar(x=elapsed_time_index, y=speed_index, marker_color=colors_index, width=0.6))
+
 
     # Personnaliser le layout si nécessaire
     fig.update_layout(
-        title='Vitesse sur différentes plages horaires', 
+        title=f'Vitesse sur différentes plages horaires de {pilote}', 
         xaxis_title='Temps en seconde', 
         yaxis_title='Vitesse en km/h', 
+        showlegend = False
         
     )
-    # Mettre à jour l'axe des x pour inclure les étiquettes de temps personnalisées
-    fig.update_xaxes(tickvals=tickvals, ticktext=ticktext)
-
-
+    fig.update_traces(hovertemplate=hover_template.get_speed_bar_hover_template())
+    
+   
     return fig
 
 
@@ -124,4 +130,3 @@ def create_colors(speed):
             
 
 
-# f"rgb( {int(255 * (1 - v))},{int(255 * v)}, 0)"

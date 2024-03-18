@@ -100,16 +100,90 @@ def load_and_save_telemetry_race(year) :
     telemetry_data['time'].append(telemetry['Elapsed'].tolist())  # Store elapsed time in seconds
 
     telemetry_df = pd.DataFrame(telemetry_data)
-    telemetry_df.to_csv(f"assets/data/telemetry_{year}.csv")
+    telemetry_df.to_csv(f"src/assets/data/telemetry_{year}.csv")
     
     return telemetry_df
 
-# load_and_save_telemetry_race(2019)
+# def load_and_save_telemetry_race_pilote(year,pilote) :
+    
+#     # Initialize a dictionary to hold your data
+#     telemetry_data = {
+#         'year': [],
+#         'x': [],
+#         'y': [],
+#         'speed': [],
+#         'time': [],
+#         'distance': []
+#     }
 
-# telemetry_df = pd.read_csv("./assets/data/telemetry_2019.csv")
+#     # Load the qualifying session for Monza of the given year
+#     session = f1.get_session(year, 'Spain', 'Q')
+#     session.load()
+    
+#     # Get the pole position driver
+#     pole_position_driver = session.results.iloc[0]['DriverNumber']
+    
+#     # Load the race session to get lap data
+#     race_session = f1.get_session(year, 'Spain', 'R')
+#     race_session.load(telemetry=True)
+    
+#     # Get the fastest lap data for the pole position driver
+#     fastest_lap = race_session.laps.pick_driver(pilote).pick_fastest()
+    
+#     # Extract telemetry data
+#     telemetry = fastest_lap.get_telemetry()
+#     telemetry['Speed_m_s'] = telemetry['Speed'] / 3.6  # Convert speed to m/s
+#     telemetry['Elapsed'] = telemetry['Time'].dt.total_seconds()
+    
+#     # Calculate the distance for each telemetry point
+#     telemetry['Distance'] = telemetry['Speed_m_s'] * telemetry['Time'].diff().dt.total_seconds().fillna(0).cumsum()
+    
+#     # Store telemetry data
+#     telemetry_data['year'].append(year)
+#     telemetry_data['x'].append(telemetry['X'].tolist())
+#     telemetry_data['y'].append(telemetry['Y'].tolist())
+#     telemetry_data['speed'].append(telemetry['Speed'].tolist())
+#     telemetry_data['distance'].append(telemetry['Distance'].tolist())
+#     telemetry_data['time'].append(telemetry['Elapsed'].tolist())  # Store elapsed time in seconds
 
-# data = telemetry_df
-# print(data["time"])
+#     telemetry_df = pd.DataFrame(telemetry_data)
+#     telemetry_df.to_csv(f"assets/data/telemetry_spain_{year}_{pilote}.csv")
+    
+#     return telemetry_df
+
+def load_and_save_telemetry_race_pilote(year, pilote):
+    # Chargement de la session de qualification pour Monza de l'année donnée
+    session = f1.get_session(year, 'Spain', 'Q')
+    session.load()
+    
+    # Chargement de la session de course pour obtenir les données de tour
+    race_session = f1.get_session(year, 'Spain', 'R')
+    race_session.load(telemetry=True)
+    
+    # Obtenir les données du tour le plus rapide pour le pilote en position de pole
+    fastest_lap = race_session.laps.pick_driver(pilote).pick_fastest()
+    
+    # Extraire les données de télémétrie
+    telemetry = fastest_lap.get_telemetry()
+    telemetry['Speed_m_s'] = telemetry['Speed'] / 3.6  # Convertir la vitesse en m/s
+    telemetry['Elapsed'] = telemetry['Time'].dt.total_seconds()
+    
+    # Calculer la distance pour chaque point de télémétrie
+    telemetry['Distance'] = telemetry['Speed_m_s'] * telemetry['Time'].diff().dt.total_seconds().fillna(0).cumsum()
+    
+    # Ajout de l'année et du pilote comme colonnes constantes pour chaque ligne
+    telemetry['Year'] = year
+    telemetry['Pilote'] = pilote
+
+    # Sauvegarde du DataFrame en CSV
+    telemetry.to_csv(f"assets/data/telemetry_spain_{year}_{pilote}.csv", index=False)
+    
+    return telemetry
+
+# load_and_save_telemetry_race_pilote(2021,'HAM')
+# load_and_save_telemetry_race_pilote(2021,'VER')
+
+
 
 def resample_based_on_speed(x, y, speed):
     # Pseudo-code pour illustrer le concept
@@ -142,3 +216,21 @@ def resample_based_on_time(x, y, speed,time):
             
 
     return new_x, new_y, new_speed
+
+def get_data(path):
+    
+    telemetry_df = pd.read_csv(path)
+    # telemetry_df['x'] = telemetry_df['x'].apply(lambda x: np.fromstring(x[1:-1], sep=','))
+    # telemetry_df['y'] = telemetry_df['y'].apply(lambda y: np.fromstring(y[1:-1], sep=','))
+    # telemetry_df['speed'] = telemetry_df['speed'].apply(lambda s: np.fromstring(s[1:-1], sep=','))
+    
+    return telemetry_df
+
+
+def get_max_speed(speed1,speed2):
+    max1 = max(speed1)
+    max2 = max(speed2)
+    if max1 < max2:
+        return max2
+    else :
+        return max1
