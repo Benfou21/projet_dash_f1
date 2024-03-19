@@ -35,32 +35,109 @@ circuit_figure_ham_initial = dy_plot.get_circuit(telemetry_df_ham, index_initial
 bars_figure_ham_initial = dy_plot.get_bars(telemetry_df_ham, index_initial, "Ham")
 
 
+# app.layout = html.Div(
+#     [
+#         dcc.Markdown('''
+#         # Welcome to F1 Telemetry Visualization
+        
+#         Scroll down to see the live telemetry graphs.
+#         '''),
+
+#         html.Div([
+#             dcc.Graph(id='circuit-graph-1',figure=circuit_figure_max_initial),
+#             dcc.Graph(id='circuit-graph-2',figure=circuit_figure_ham_initial),
+#         ], style={'display': 'flex','justifyContent': 'center'}),  # Div contenant les graphiques du circuit côte à côte
+        
+#         html.Div([
+#             html.Div(id='speed-display-1', children='', style={'fontSize': 24, 'margin': '10px'}),
+#             html.Div(id='speed-display-2', children='', style={'fontSize': 24, 'margin': '10px'}),
+#         ], style={'display': 'flex','justifyContent': 'center'}),  # Div contenant les graphiques du circuit côte à côte
+        
+        
+#         html.Div([
+#             dcc.Graph(id='speed-graph-1',figure=bars_figure_max_initial),
+#             dcc.Graph(id='speed-graph-2',figure=bars_figure_ham_initial),
+#         ], style={'display': 'flex','justifyContent': 'center'}),  # Div contenant les graphiques de vitesse côte à côte
+        
+#     ],
+#     style={'textAlign': 'center'}
+# )
 app.layout = html.Div(
     [
         dcc.Markdown('''
         # Welcome to F1 Telemetry Visualization
-        
+
         Scroll down to see the live telemetry graphs.
         '''),
 
+        # Horizontal block for Max
         html.Div([
-            dcc.Graph(id='circuit-graph-1',figure=circuit_figure_max_initial),
-            dcc.Graph(id='circuit-graph-2',figure=circuit_figure_ham_initial),
-        ], style={'display': 'flex','justifyContent': 'center'}),  # Div contenant les graphiques du circuit côte à côte
+            # Vertical sub-block for Max's circuit graph
+            html.Div([
+                dcc.Graph(id='circuit-graph-1', figure=circuit_figure_max_initial)
+            ], style={'display': 'inline-block', 'width': '33%'}),
+            html.Div([
+                dcc.Graph(id='circuit-graph-2', figure=circuit_figure_ham_initial)
+            ], style={'display': 'inline-block', 'width': '33%'}),
+        ], style={'display': 'flex', 'justifyContent': 'center', 'alignItems': 'center'}), # This ensures that the sub-blocks for Max are in one line
         
         html.Div([
-            dcc.Graph(id='speed-graph-1',figure=bars_figure_max_initial),
-            dcc.Graph(id='speed-graph-2',figure=bars_figure_ham_initial),
-        ], style={'display': 'flex','justifyContent': 'center'}),  # Div contenant les graphiques de vitesse côte à côte
+            # Vertical sub-block for Max's speed display
+            html.Div(
+                id='speed-display-1', 
+                children='', 
+                style={
+                    'fontSize': '24px',
+                    'display': 'inline-block',
+                    'width': '20%',
+                    'textAlign': 'center',
+                    'border': '2px solid #4CAF50',  # Green border
+                    'borderRadius': '10px',  # Rounded corners
+                    'backgroundColor': '#f9f9f9',  # Light grey background
+                    'boxShadow': '0px 4px 8px rgba(0, 0, 0, 0.1)',  # Subtle shadow
+                    'padding': '10px'
+                }
+            ),
+            html.Div(
+                id='speed-display-2', 
+                children='', 
+                style={
+                    
+                    'fontSize': '24px',
+                    'display': 'inline-block',
+                    'width': '20%',
+                    'textAlign': 'center',
+                    'border': '2px solid #4CAF50',  # Green border
+                    'borderRadius': '10px',  # Rounded corners
+                    'backgroundColor': '#f9f9f9',  # Light grey background
+                    'boxShadow': '0px 4px 8px rgba(0, 0, 0, 0.1)',  # Subtle shadow
+                    'padding': '10px'
+                }
+            ),
+          
+        ],style={'display': 'inline-block', 'width': '34%', 'textAlign': 'center'}),
         
+        # Horizontal block for Ham
+        html.Div([
+             # Vertical sub-block for Max's bar graph
+            html.Div([
+                dcc.Graph(id='speed-graph-1', figure=bars_figure_max_initial)
+            ], style={'display': 'inline-block', 'width': '33%'}),
+            # Vertical sub-block for Ham's bar graph
+            html.Div([
+                dcc.Graph(id='speed-graph-2', figure=bars_figure_ham_initial)
+            ], style={'display': 'inline-block', 'width': '33%'}),
+        ], style={'display': 'flex', 'justifyContent': 'center', 'alignItems': 'center'}), # This ensures that the sub-blocks for Ham are in one line
     ],
     style={'textAlign': 'center'}
 )
 
 
+
 @app.callback(
     [Output('circuit-graph-1', 'figure'), Output('speed-graph-1', 'figure'), 
-     Output('circuit-graph-2', 'figure'), Output('speed-graph-2', 'figure')],
+     Output('circuit-graph-2', 'figure'), Output('speed-graph-2', 'figure'),
+     Output('speed-display-1', 'children'),Output('speed-display-2', 'children')],
     [Input('circuit-graph-1', 'clickData'), Input('circuit-graph-2', 'clickData')],
     [State('circuit-graph-1', 'figure'), State('circuit-graph-2', 'figure')]
 )
@@ -71,7 +148,7 @@ def update_graph(clickData1, clickData2, fig1, fig2):
         raise PreventUpdate
 
     trigger_id = ctx.triggered[0]['prop_id'].split('.')[0]
-
+    print(trigger_id)
     if trigger_id == 'circuit-graph-1' and clickData1:
         
         x = clickData1['points'][0]['x']
@@ -79,19 +156,26 @@ def update_graph(clickData1, clickData2, fig1, fig2):
         index = find_closest_index(x, y, telemetry_df_max)
         new_fig1 = dy_plot.get_circuit(telemetry_df_max, index, "Max")
         new_fig1_bars = dy_plot.get_bars(telemetry_df_max, index, "Max")
-        return new_fig1, new_fig1_bars, dash.no_update, dash.no_update
+        speed_value_max = telemetry_df_max.loc[index, 'Speed']
+        speed_display_max = f"Current Speed: {speed_value_max} km/h"
+
+        return new_fig1, new_fig1_bars, dash.no_update, dash.no_update, speed_display_max, dash.no_update
+
 
     elif trigger_id == 'circuit-graph-2' and clickData2:
-        x = clickData1['points'][0]['x']
-        y = clickData1['points'][0]['y']
+        
+        x = clickData2['points'][0]['x']
+        y = clickData2['points'][0]['y']
         index = find_closest_index(x, y, telemetry_df_max)
         new_fig2 = dy_plot.get_circuit(telemetry_df_ham, index, "Ham")
         new_fig2_bars = dy_plot.get_bars(telemetry_df_ham, index, "Ham")
-        return dash.no_update, dash.no_update, new_fig2, new_fig2_bars
-    
-    
+        speed_value_ham = telemetry_df_ham.loc[index, 'Speed']
+        speed_display_ham = f"Current Speed: {speed_value_ham} km/h"
 
-    return dash.no_update, dash.no_update, dash.no_update, dash.no_update
+        return dash.no_update, dash.no_update, new_fig2, new_fig2_bars, dash.no_update, speed_display_ham
+    
+    
+    return dash.no_update, dash.no_update, dash.no_update, dash.no_update, dash.no_update
 
 def find_closest_index(x, y, dataframe):
    
