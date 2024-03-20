@@ -11,7 +11,7 @@ Si vous avez besoin de nouvelles librairies, ajoutez les au fichier requirements
 
 ### Organisation
 
-__Créez une branche__ de ce rep, pour faire vos modifications.
+__Créez une branche__ de main, pour faire vos modifications.
 
 Pour éviter les problèmes, chacun travaille sur ces fichiers et dans les dossiers spécifiques. 
 Nommez avec l'id de votre parti et le nom de votre graph, ex : hover_template_3_circuit.py
