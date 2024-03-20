@@ -64,11 +64,7 @@ bars_figure_ham_initial = graph__3_circuit.get_bars(telemetry_df_ham, index_init
 # )
 app.layout = html.Div(
     [
-        dcc.Markdown('''
-        # Welcome to F1 Telemetry Visualization
-
-        Scroll down to see the live telemetry graphs.
-        '''),
+        html.H1(children='Scrollable Story pour la Formule 1'),
 
         # Horizontal block for Max
         html.Div([
