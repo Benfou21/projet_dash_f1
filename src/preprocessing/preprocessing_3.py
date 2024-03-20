@@ -4,6 +4,7 @@ import pandas as pd
 
 
 
+#Permet de ne pas à avoir re downlaod les données 
 # f1.Cache.enable_cache('./cache')  # replace with your cache directory
 
 

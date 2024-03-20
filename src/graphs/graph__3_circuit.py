@@ -5,7 +5,7 @@ import numpy as np
 import pandas as pd
 from preprocessing.preprocessing_3 import resample_based_on_speed
 from preprocessing.preprocessing_3 import resample_based_on_time
-import hover_template.hover_template as hover_template
+import hover_template.hover_template_3_circuit as hover_template_3_circuit
 import ast
 
 def get_circuit(data,index,pilote):
@@ -45,7 +45,7 @@ def get_circuit(data,index,pilote):
         #paper_bgcolor='white',
     )
    
-    fig.update_traces(hovertemplate=hover_template.get_speed_circuit_hover_template())
+    fig.update_traces(hovertemplate=hover_template_3_circuit.get_speed_circuit_hover_template())
     
     
     return fig
@@ -106,7 +106,7 @@ def get_bars(data,index,pilote):
         showlegend = False
         
     )
-    fig.update_traces(hovertemplate=hover_template.get_speed_bar_hover_template())
+    fig.update_traces(hovertemplate=hover_template_3_circuit.get_speed_bar_hover_template())
     
    
     return fig

@@ -9,7 +9,7 @@ import graphs.graph__3_circuit as graph__3_circuit
 import ast
 from preprocessing.preprocessing_3 import get_data
 from preprocessing.preprocessing_3 import get_max_speed
-import hover_template.hover_template as hover_template
+import hover_template.hover_template_3_circuit as hover_template_3_circuit
 from dash.exceptions import PreventUpdate
 
 app = dash.Dash(__name__)
