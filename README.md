@@ -25,6 +25,6 @@ Dans /src, il y a
 
 ### App.py
 
-Le fichier app.py sera là où seront rassembler tous les graphs. Comme vous êtes sur votre branche vous pouvez le modifier.
+Le fichier app.py sera là où seront rassemblés tous les graphs. Comme vous êtes sur votre branche vous pouvez le modifier.
 
 Il reste à savoir comment on fait le scrollable story. 
