@@ -5,11 +5,11 @@ import dash_core_components as dcc
 from dash.dependencies import Input, Output, State
 import numpy as np
 import pandas as pd
-import dy_plot
+import graphs.graph__3_circuit as graph__3_circuit
 import ast
-from preprocessing import get_data
-from preprocessing import get_max_speed
-import hover_template
+from preprocessing.preprocessing_3 import get_data
+from preprocessing.preprocessing_3 import get_max_speed
+import hover_template.hover_template as hover_template
 from dash.exceptions import PreventUpdate
 
 app = dash.Dash(__name__)
@@ -27,12 +27,12 @@ time_str = telemetry_df_max["Time"]   # c'est une chaîne de caractères qui res
 x_length = len(telemetry_df_max['X'])
 
 index_initial = 0
-circuit_figure_max_initial = dy_plot.get_circuit(telemetry_df_max, index_initial, "Max")
-bars_figure_max_initial = dy_plot.get_bars(telemetry_df_max, index_initial, "Max")
+circuit_figure_max_initial = graph__3_circuit.get_circuit(telemetry_df_max, index_initial, "Max")
+bars_figure_max_initial = graph__3_circuit.get_bars(telemetry_df_max, index_initial, "Max")
 
 # Génération initiale des figures pour telemetry_df_ham
-circuit_figure_ham_initial = dy_plot.get_circuit(telemetry_df_ham, index_initial, "Ham")
-bars_figure_ham_initial = dy_plot.get_bars(telemetry_df_ham, index_initial, "Ham")
+circuit_figure_ham_initial = graph__3_circuit.get_circuit(telemetry_df_ham, index_initial, "Ham")
+bars_figure_ham_initial = graph__3_circuit.get_bars(telemetry_df_ham, index_initial, "Ham")
 
 
 # app.layout = html.Div(
@@ -154,8 +154,8 @@ def update_graph(clickData1, clickData2, fig1, fig2):
         x = clickData1['points'][0]['x']
         y = clickData1['points'][0]['y']
         index = find_closest_index(x, y, telemetry_df_max)
-        new_fig1 = dy_plot.get_circuit(telemetry_df_max, index, "Max")
-        new_fig1_bars = dy_plot.get_bars(telemetry_df_max, index, "Max")
+        new_fig1 = graph__3_circuit.get_circuit(telemetry_df_max, index, "Max")
+        new_fig1_bars = graph__3_circuit.get_bars(telemetry_df_max, index, "Max")
         speed_value_max = telemetry_df_max.loc[index, 'Speed']
         speed_display_max = f"Current Speed: {speed_value_max} km/h"
 
@@ -167,8 +167,8 @@ def update_graph(clickData1, clickData2, fig1, fig2):
         x = clickData2['points'][0]['x']
         y = clickData2['points'][0]['y']
         index = find_closest_index(x, y, telemetry_df_max)
-        new_fig2 = dy_plot.get_circuit(telemetry_df_ham, index, "Ham")
-        new_fig2_bars = dy_plot.get_bars(telemetry_df_ham, index, "Ham")
+        new_fig2 = graph__3_circuit.get_circuit(telemetry_df_ham, index, "Ham")
+        new_fig2_bars = graph__3_circuit.get_bars(telemetry_df_ham, index, "Ham")
         speed_value_ham = telemetry_df_ham.loc[index, 'Speed']
         speed_display_ham = f"Current Speed: {speed_value_ham} km/h"
 

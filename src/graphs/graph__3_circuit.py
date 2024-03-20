@@ -3,9 +3,9 @@ import plotly.express as px
 from plotly.subplots import make_subplots
 import numpy as np
 import pandas as pd
-from preprocessing import resample_based_on_speed
-from preprocessing import resample_based_on_time
-import hover_template
+from preprocessing.preprocessing_3 import resample_based_on_speed
+from preprocessing.preprocessing_3 import resample_based_on_time
+import hover_template.hover_template as hover_template
 import ast
 
 def get_circuit(data,index,pilote):
