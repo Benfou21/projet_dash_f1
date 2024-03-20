@@ -23,5 +23,8 @@ Dans /src, il y a
 - /preprocessing : pour vos fonctions de données 
 
 
+### App.py
+
 Le fichier app.py sera là où seront rassembler tous les graphs. Comme vous êtes sur votre branche vous pouvez le modifier.
 
+Il reste à savoir comment on fait le scrollable story. 
