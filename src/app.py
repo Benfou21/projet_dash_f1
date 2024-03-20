@@ -62,6 +62,7 @@ bars_figure_ham_initial = graph__3_circuit.get_bars(telemetry_df_ham, index_init
 #     ],
 #     style={'textAlign': 'center'}
 # )
+
 app.layout = html.Div(
     [
         html.H1(children='Scrollable Story pour la Formule 1'),
