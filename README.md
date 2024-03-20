@@ -11,7 +11,7 @@ Si vous avez besoin de nouvelles librairies, ajoutez les au fichier requirements
 
 ### Organisation
 
-Créez une branche de ce rep, pour faire vos modifications.
+__Créez une branche__ de main, pour faire vos modifications.
 
 Pour éviter les problèmes, chacun travaille sur ces fichiers et dans les dossiers spécifiques. 
 Nommez avec l'id de votre parti et le nom de votre graph, ex : hover_template_3_circuit.py
@@ -25,6 +25,6 @@ Dans /src, il y a
 
 ### App.py
 
-Le fichier app.py sera là où seront rassembler tous les graphs. Comme vous êtes sur votre branche vous pouvez le modifier.
+Le fichier app.py sera là où seront rassemblés tous les graphs. Comme vous êtes sur votre branche vous pouvez le modifier.
 
 Il reste à savoir comment on fait le scrollable story. 
