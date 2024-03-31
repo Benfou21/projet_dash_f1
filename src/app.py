@@ -70,50 +70,54 @@ app.layout = html.Div(
         # Horizontal block for Max
         html.Div([
             # Vertical sub-block for Max's circuit graph
+            html.Div(
+                id='speed-display-1', 
+                children=f'Current Speed: {telemetry_df_max["Speed"][0]} km/h', 
+                style={
+                    'fontSize': '18px',
+                    'display': 'inline-block',
+                    'width': '15%',
+                    'textAlign': 'center',
+                    'border': '2px solid #4CAF50',  # Green border
+                    'borderRadius': '10px',  # Rounded corners
+                    'backgroundColor': '#f9f9f9',  # Light grey background
+                    'boxShadow': '0px 4px 8px rgba(0, 0, 0, 0.1)',  # Subtle shadow
+                    'padding': '10px'
+                }
+            ),
             html.Div([
                 dcc.Graph(id='circuit-graph-1', figure=circuit_figure_max_initial)
             ], style={'display': 'inline-block', 'width': '33%'}),
+            
             html.Div([
                 dcc.Graph(id='circuit-graph-2', figure=circuit_figure_ham_initial)
             ], style={'display': 'inline-block', 'width': '33%'}),
+            html.Div(
+                id='speed-display-2', 
+                children=f'Current Speed: {telemetry_df_ham["Speed"][0]} km/h',  
+                style={
+                    
+                    'fontSize': '18px',
+                    'display': 'inline-block',
+                    'width': '15%',
+                    'textAlign': 'center',
+                    'border': '2px solid #4CAF50',  # Green border
+                    'borderRadius': '10px',  # Rounded corners
+                    'backgroundColor': '#f9f9f9',  # Light grey background
+                    'boxShadow': '0px 4px 8px rgba(0, 0, 0, 0.1)',  # Subtle shadow
+                    'padding': '10px'
+                }
+            ),
         ], style={'display': 'flex', 'justifyContent': 'center', 'alignItems': 'center'}), # This ensures that the sub-blocks for Max are in one line
         
         html.Div([
-            # Vertical sub-block for Max's speed display
-            html.Div(
-                id='speed-display-1', 
-                children='', 
-                style={
-                    'fontSize': '24px',
-                    'display': 'inline-block',
-                    'width': '20%',
-                    'textAlign': 'center',
-                    'border': '2px solid #4CAF50',  # Green border
-                    'borderRadius': '10px',  # Rounded corners
-                    'backgroundColor': '#f9f9f9',  # Light grey background
-                    'boxShadow': '0px 4px 8px rgba(0, 0, 0, 0.1)',  # Subtle shadow
-                    'padding': '10px'
-                }
-            ),
-            html.Div(
-                id='speed-display-2', 
-                children='', 
-                style={
-                    
-                    'fontSize': '24px',
-                    'display': 'inline-block',
-                    'width': '20%',
-                    'textAlign': 'center',
-                    'border': '2px solid #4CAF50',  # Green border
-                    'borderRadius': '10px',  # Rounded corners
-                    'backgroundColor': '#f9f9f9',  # Light grey background
-                    'boxShadow': '0px 4px 8px rgba(0, 0, 0, 0.1)',  # Subtle shadow
-                    'padding': '10px'
-                }
-            ),
-          
-        ],style={'display': 'inline-block', 'width': '34%', 'textAlign': 'center'}),
-        
+            dcc.Checklist(
+                id='toggle-sync',
+                options=[{'label': ' Synchroniser les graphes ', 'value': 'sync'}],
+                value=[],
+                labelStyle={'display': 'block'}
+            )
+    ], style={'textAlign': 'center', 'margin': '20px'}),
         # Horizontal block for Ham
         html.Div([
              # Vertical sub-block for Max's bar graph
@@ -135,41 +139,62 @@ app.layout = html.Div(
     [Output('circuit-graph-1', 'figure'), Output('speed-graph-1', 'figure'), 
      Output('circuit-graph-2', 'figure'), Output('speed-graph-2', 'figure'),
      Output('speed-display-1', 'children'),Output('speed-display-2', 'children')],
-    [Input('circuit-graph-1', 'clickData'), Input('circuit-graph-2', 'clickData')],
+    [Input('circuit-graph-1', 'clickData'), Input('circuit-graph-2', 'clickData'),Input('toggle-sync', 'value')],
     [State('circuit-graph-1', 'figure'), State('circuit-graph-2', 'figure')]
 )
-def update_graph(clickData1, clickData2, fig1, fig2):
+def update_graph(clickData1, clickData2,sync_value, fig1, fig2):
     ctx = dash.callback_context
 
     if not ctx.triggered:
         raise PreventUpdate
 
     trigger_id = ctx.triggered[0]['prop_id'].split('.')[0]
-    print(trigger_id)
-    if trigger_id == 'circuit-graph-1' and clickData1:
-        
-        x = clickData1['points'][0]['x']
-        y = clickData1['points'][0]['y']
-        index = find_closest_index(x, y, telemetry_df_max)
-        new_fig1 = graph__3_circuit.get_circuit(telemetry_df_max, index, "Max")
-        new_fig1_bars = graph__3_circuit.get_bars(telemetry_df_max, index, "Max")
-        speed_value_max = telemetry_df_max.loc[index, 'Speed']
-        speed_display_max = f"Current Speed: {speed_value_max} km/h"
+    
+    if 'sync' in sync_value:  # Si le toggle est activé
+        if trigger_id in ['circuit-graph-1', 'circuit-graph-2']:
+            clickData = clickData1 if trigger_id == 'circuit-graph-1' else clickData2
+            if clickData:
+                x = clickData['points'][0]['x']
+                y = clickData['points'][0]['y']
+                index_max = find_closest_index(x, y, telemetry_df_max)
+                index_ham = find_closest_index(x, y, telemetry_df_ham)
 
-        return new_fig1, new_fig1_bars, dash.no_update, dash.no_update, speed_display_max, dash.no_update
+                new_fig1 = graph__3_circuit.get_circuit(telemetry_df_max, index_max, "Max")
+                new_fig1_bars = graph__3_circuit.get_bars(telemetry_df_max, index_max, "Max")
+                speed_value_max = telemetry_df_max.loc[index_max, 'Speed']
+                speed_display_max = f"Current Speed: {speed_value_max} km/h"
+
+                new_fig2 = graph__3_circuit.get_circuit(telemetry_df_ham, index_ham, "Ham")
+                new_fig2_bars = graph__3_circuit.get_bars(telemetry_df_ham, index_ham, "Ham")
+                speed_value_ham = telemetry_df_ham.loc[index_ham, 'Speed']
+                speed_display_ham = f"Current Speed: {speed_value_ham} km/h"
+
+                return new_fig1, new_fig1_bars, new_fig2, new_fig2_bars, speed_display_max, speed_display_ham
+    else :
+        if trigger_id == 'circuit-graph-1' and clickData1:
+            
+            x = clickData1['points'][0]['x']
+            y = clickData1['points'][0]['y']
+            index = find_closest_index(x, y, telemetry_df_max)
+            new_fig1 = graph__3_circuit.get_circuit(telemetry_df_max, index, "Max")
+            new_fig1_bars = graph__3_circuit.get_bars(telemetry_df_max, index, "Max")
+            speed_value_max = telemetry_df_max.loc[index, 'Speed']
+            speed_display_max = f"Current Speed: {speed_value_max} km/h"
+
+            return new_fig1, new_fig1_bars, dash.no_update, dash.no_update, speed_display_max, dash.no_update
 
 
-    elif trigger_id == 'circuit-graph-2' and clickData2:
-        
-        x = clickData2['points'][0]['x']
-        y = clickData2['points'][0]['y']
-        index = find_closest_index(x, y, telemetry_df_max)
-        new_fig2 = graph__3_circuit.get_circuit(telemetry_df_ham, index, "Ham")
-        new_fig2_bars = graph__3_circuit.get_bars(telemetry_df_ham, index, "Ham")
-        speed_value_ham = telemetry_df_ham.loc[index, 'Speed']
-        speed_display_ham = f"Current Speed: {speed_value_ham} km/h"
+        elif trigger_id == 'circuit-graph-2' and clickData2:
+            
+            x = clickData2['points'][0]['x']
+            y = clickData2['points'][0]['y']
+            index = find_closest_index(x, y, telemetry_df_max)
+            new_fig2 = graph__3_circuit.get_circuit(telemetry_df_ham, index, "Ham")
+            new_fig2_bars = graph__3_circuit.get_bars(telemetry_df_ham, index, "Ham")
+            speed_value_ham = telemetry_df_ham.loc[index, 'Speed']
+            speed_display_ham = f"Current Speed: {speed_value_ham} km/h"
 
-        return dash.no_update, dash.no_update, new_fig2, new_fig2_bars, dash.no_update, speed_display_ham
+            return dash.no_update, dash.no_update, new_fig2, new_fig2_bars, dash.no_update, speed_display_ham
     
     
     return dash.no_update, dash.no_update, dash.no_update, dash.no_update, dash.no_update
