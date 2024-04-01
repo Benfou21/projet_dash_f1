@@ -14,7 +14,7 @@ from dash.exceptions import PreventUpdate
 import dash_bootstrap_components as dbc
 app = dash.Dash(__name__,external_stylesheets=[dbc.themes.BOOTSTRAP])
 
-app.title = 'F1 visualiationssssssss'
+app.title = 'F1 visualiation'
 
 path_max = "assets\\data\\telemetry_spain_2021_VER.csv"
 telemetry_df_max = get_data(path_max)
