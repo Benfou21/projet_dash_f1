@@ -12,19 +12,27 @@ from preprocessing.preprocessing_3 import get_max_speed
 import hover_template.hover_template_3_circuit as hover_template_3_circuit
 from dash.exceptions import PreventUpdate
 import dash_bootstrap_components as dbc
+import graphs.graph_1_classement as graph_1_classement
+
 app = dash.Dash(__name__,external_stylesheets=[dbc.themes.BOOTSTRAP])
 
 app.title = 'F1 visualiation'
 
-path_max = "assets\\data\\telemetry_spain_2021_VER.csv"
+path_max = 'src/assets/data/telemetry_spain_2021_HAM.csv'
 telemetry_df_max = get_data(path_max)
 
-path_ham = "assets\\data\\telemetry_spain_2021_HAM.csv"
+path_ham = 'src/assets/data/telemetry_spain_2021_HAM.csv'
 telemetry_df_ham = get_data(path_ham)
+
+path_classement = 'src/assets/data/classement_2021.csv'
+classement_df = pd.read_csv(path_classement, sep=';')
 
 
 time_str = telemetry_df_max["Time"]   # c'est une chaîne de caractères qui ressemble à une liste
 x_length = len(telemetry_df_max['X'])
+
+# Génération de la figure évolution du classement au championnat du monde
+evol_classement_1 = graph_1_classement.get_evol_classement(classement_df)
 
 index_initial = 0
 circuit_figure_max_initial = graph__3_circuit.get_circuit(telemetry_df_max, index_initial, "Max")
@@ -35,23 +43,47 @@ circuit_figure_ham_initial = graph__3_circuit.get_circuit(telemetry_df_ham, inde
 bars_figure_ham_initial = graph__3_circuit.get_bars(telemetry_df_ham, index_initial, "Ham")
 
 
+# app.layout = html.Div(
+#     [
+#         dcc.Markdown('''
+#         # Welcome to F1 Telemetry Visualization
+        
+#         Scroll down to see the live telemetry graphs.
+#         '''),
 
+#         html.Div([
+#             dcc.Graph(id='circuit-graph-1',figure=circuit_figure_max_initial),
+#             dcc.Graph(id='circuit-graph-2',figure=circuit_figure_ham_initial),
+#         ], style={'display': 'flex','justifyContent': 'center'}),  # Div contenant les graphiques du circuit côte à côte
+        
+#         html.Div([
+#             html.Div(id='speed-display-1', children='', style={'fontSize': 24, 'margin': '10px'}),
+#             html.Div(id='speed-display-2', children='', style={'fontSize': 24, 'margin': '10px'}),
+#         ], style={'display': 'flex','justifyContent': 'center'}),  # Div contenant les graphiques du circuit côte à côte
+        
+        
+#         html.Div([
+#             dcc.Graph(id='speed-graph-1',figure=bars_figure_max_initial),
+#             dcc.Graph(id='speed-graph-2',figure=bars_figure_ham_initial),
+#         ], style={'display': 'flex','justifyContent': 'center'}),  # Div contenant les graphiques de vitesse côte à côte
+        
+#     ],
+#     style={'textAlign': 'center'}
+# )
 app.layout = html.Div(
     [
         html.H1(children='Scrollable Story pour la Formule 1'),
+        # Évolution classement championnat du monde
+        html.Div([
+            html.Div([
+                dcc.Graph(id='graph_evol_classement', figure=evol_classement_1,config=dict(
+                      showTips=False,
+                      showAxisDragHandles=False,
+                      displayModeBar=False))
+                ])
+        ]), # This ensures that the sub-blocks for Max are in one line
         
-        dbc.Button("Ouvrir l'explication", id="open-modal", n_clicks=0),
-        dbc.Modal(
-            [
-                dbc.ModalHeader(dbc.ModalTitle("Explication des graphes de vitesses")),
-                dbc.ModalBody("Ces graphes vous permet d'explorer la vitesses des deux pilotes et de les comparer"),
-                dbc.ModalFooter(
-                    dbc.Button("Fermer", id="close-modal", className="ms-auto", n_clicks=0)
-                ),
-            ],
-            id="modal",
-            is_open=False,  # Commence avec le modal fermé
-        ),
+        
         # Horizontal block for Max
         html.Div([
             # Vertical sub-block for Max's circuit graph

@@ -79,9 +79,9 @@ def resample_based_on_time(x, y, speed,time):
 
 def get_data(path):
     
-    telemetry_df = pd.read_csv(path)
+    df = pd.read_csv(path)
     
-    return telemetry_df
+    return df
 
 
 def get_max_speed(speed1,speed2):
