@@ -32,5 +32,7 @@ Il reste à savoir comment on fait le scrollable story.
 ### Merge 
 
 Avant de merge, pour ne pas avoir de conflit sur le fichier App.py, renomez le.
+
 Si vous avez bien suivi les consignes précédentes, il ne devrait pas y avoir de problèmes. 
+
 Pour merge : allez sur la branch main ( git checkout main) puis (git merge votre_branch)
