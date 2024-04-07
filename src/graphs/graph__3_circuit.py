@@ -37,10 +37,28 @@ def get_circuit(data,index,pilote):
     
     # Set up the layout of the figure
     fig.update_layout(
+        
         title=f'Vitesse selon la position du circuit de {pilote}',
+        
         showlegend=False,
-        xaxis=dict(range=[min(x), max(x)], autorange=False,showgrid=False,zeroline = False),
-        yaxis=dict(range=[min(y), max(y)], autorange=False,showgrid=False,zeroline = False),
+        
+        xaxis=dict(
+            range=[min(x), max(x)], 
+            autorange=False,
+            showgrid=False,
+            zeroline = False,
+            tickvals=[],  
+            ticktext=[] 
+        ),
+        
+        yaxis=dict(
+            range=[min(y), max(y)], 
+            autorange=False,
+            showgrid=False,
+            zeroline = False,
+            tickvals=[],  
+            ticktext=[] 
+        ),
         # plot_bgcolor='white',  
         #paper_bgcolor='white',
     )
