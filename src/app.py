@@ -2,7 +2,7 @@
 import dash
 import dash_html_components as html
 import dash_core_components as dcc
-from dash.dependencies import Input, Output, State
+from dash.dependencies import Input, Output, State, ClientsideFunction
 import numpy as np
 import pandas as pd
 import graphs.graph__3_circuit as graph__3_circuit
@@ -11,8 +11,8 @@ from preprocessing.preprocessing_3 import get_data
 from preprocessing.preprocessing_3 import get_max_speed
 import hover_template.hover_template_3_circuit as hover_template_3_circuit
 from dash.exceptions import PreventUpdate
-
-app = dash.Dash(__name__)
+import dash_bootstrap_components as dbc
+app = dash.Dash(__name__,external_stylesheets=[dbc.themes.BOOTSTRAP])
 
 app.title = 'F1 visualiation'
 
@@ -35,38 +35,23 @@ circuit_figure_ham_initial = graph__3_circuit.get_circuit(telemetry_df_ham, inde
 bars_figure_ham_initial = graph__3_circuit.get_bars(telemetry_df_ham, index_initial, "Ham")
 
 
-# app.layout = html.Div(
-#     [
-#         dcc.Markdown('''
-#         # Welcome to F1 Telemetry Visualization
-        
-#         Scroll down to see the live telemetry graphs.
-#         '''),
-
-#         html.Div([
-#             dcc.Graph(id='circuit-graph-1',figure=circuit_figure_max_initial),
-#             dcc.Graph(id='circuit-graph-2',figure=circuit_figure_ham_initial),
-#         ], style={'display': 'flex','justifyContent': 'center'}),  # Div contenant les graphiques du circuit côte à côte
-        
-#         html.Div([
-#             html.Div(id='speed-display-1', children='', style={'fontSize': 24, 'margin': '10px'}),
-#             html.Div(id='speed-display-2', children='', style={'fontSize': 24, 'margin': '10px'}),
-#         ], style={'display': 'flex','justifyContent': 'center'}),  # Div contenant les graphiques du circuit côte à côte
-        
-        
-#         html.Div([
-#             dcc.Graph(id='speed-graph-1',figure=bars_figure_max_initial),
-#             dcc.Graph(id='speed-graph-2',figure=bars_figure_ham_initial),
-#         ], style={'display': 'flex','justifyContent': 'center'}),  # Div contenant les graphiques de vitesse côte à côte
-        
-#     ],
-#     style={'textAlign': 'center'}
-# )
 
 app.layout = html.Div(
     [
         html.H1(children='Scrollable Story pour la Formule 1'),
-
+        
+        dbc.Button("Ouvrir l'explication", id="open-modal", n_clicks=0),
+        dbc.Modal(
+            [
+                dbc.ModalHeader(dbc.ModalTitle("Explication des graphes de vitesses")),
+                dbc.ModalBody("Ces graphes vous permet d'explorer la vitesses des deux pilotes et de les comparer"),
+                dbc.ModalFooter(
+                    dbc.Button("Fermer", id="close-modal", className="ms-auto", n_clicks=0)
+                ),
+            ],
+            id="modal",
+            is_open=False,  # Commence avec le modal fermé
+        ),
         # Horizontal block for Max
         html.Div([
             # Vertical sub-block for Max's circuit graph
@@ -78,7 +63,7 @@ app.layout = html.Div(
                     'display': 'inline-block',
                     'width': '15%',
                     'textAlign': 'center',
-                    'border': '2px solid #4CAF50',  # Green border
+                    'border': '2px solid #344feb',  # color border
                     'borderRadius': '10px',  # Rounded corners
                     'backgroundColor': '#f9f9f9',  # Light grey background
                     'boxShadow': '0px 4px 8px rgba(0, 0, 0, 0.1)',  # Subtle shadow
@@ -101,7 +86,7 @@ app.layout = html.Div(
                     'display': 'inline-block',
                     'width': '15%',
                     'textAlign': 'center',
-                    'border': '2px solid #4CAF50',  # Green border
+                    'border': '2px solid #344feb',  # color border
                     'borderRadius': '10px',  # Rounded corners
                     'backgroundColor': '#f9f9f9',  # Light grey background
                     'boxShadow': '0px 4px 8px rgba(0, 0, 0, 0.1)',  # Subtle shadow
@@ -204,3 +189,14 @@ def find_closest_index(x, y, dataframe):
     distances = np.sqrt((dataframe['X'] - x)**2 + (dataframe['Y'] - y)**2)
     
     return distances.idxmin()
+
+
+@app.callback(
+    Output("modal", "is_open"),
+    [Input("open-modal", "n_clicks"), Input("close-modal", "n_clicks")],
+    [State("modal", "is_open")],
+)
+def toggle_modal(n1, n2, is_open):
+    if n1 or n2:
+        return not is_open
+    return is_open
