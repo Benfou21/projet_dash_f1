@@ -10,7 +10,7 @@ def create_app():
             The server to be run
     '''
     # the import is intentionally inside to work with the server failsafe
-    from app import app  # pylint: disable=import-outside-toplevel
+    from app_martin import app  # pylint: disable=import-outside-toplevel
     return app.server
 
 
