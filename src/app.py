@@ -36,9 +36,70 @@ bars_figure_ham_initial = graph__3_circuit.get_bars(telemetry_df_ham, index_init
 
 
 
-app.layout = html.Div(
-    [
-        html.H1(children='Scrollable Story pour la Formule 1'),
+app.layout = html.Div([
+        html.H1(children=["Comprendre une course de Formule 1,la bataille",
+                        html.Br(),
+                        "Verstappen-Hamilton lors du GP d'Espagne 2021"]),
+        html.P(children=[
+            "Une course de Formule 1 dure deux heures, et les pilotes parcourent le circuit près de 60 fois à plus de 300 km/h. Ils se battent tous pour dépasser leurs adversaires et",
+            html.Br(),
+            "franchir la ligne d'arrivée en premier, mais un seul gagne! Le spectacle d'une course est captivant, mais pour un amateur, il est compliqué de comprendre les stratégies et",
+            html.Br(),
+            "les idées que suivent les équipes et les pilotes pour parvenir à la victoire.La bataille pour remporter le Grand Prix d'Espagne 2021 servira d'exemple pour",
+            html.Br(),
+            "comprendre certains de ces principes de course."
+        ]),
+        html.Div(style={'margin-top': '100px'}),        
+        html.Table([
+                html.Tr([
+                    html.Td([
+                        html.Div(children = 'Red Bull', style={'text-align': 'right'}),
+                        html.Div(children='23 ans', style={'text-align': 'right'}),
+                        html.Div(children='7e saison en F1', style={'text-align': 'right'}),
+                        html.Div(children='10 Grand Prix remportés', style={'text-align': 'right'})
+                        ]),
+                    html.Td([
+                        html.Img(src='assets/data/verstappen.png'),
+                        ]),
+                    html.Td([
+                        html.Img(src='assets/data/Hamilton.png')
+                        ]),
+                    html.Td([
+                        html.Div(children = 'Mercedes', style={'text-align': 'left'}),
+                        html.Div(children = '36 ans', style={'text-align': 'left'}),
+                        html.Div(children = '15e saison en F1', style={'text-align': 'left'}),
+                        html.Div(children = '95 Grand Prix remportés', style={'text-align': 'left'}),
+                        html.Div(children = '7 fois champion du monde', style={'text-align': 'left'}),
+                        ])
+                    ])       
+            ]),
+        
+        html.Div(style={'margin-top': '30px'}),  
+        
+        html.P(children=[
+            " La saison 2021 est l'une des plus disputée des 10 dernières années. L'expérience du champion en titre Lexis ",
+            html.Br(),
+            "Hamilton et le talent brut de Max Verstappen s'affronte tout au long de l'année 2021. Les 2 pilotes se livrent ",
+            html.Br(),
+            "d'incroyables duels pour remporter le championnat du monde. Le GP d'Espagne se déroule au début de la saison, ",
+            html.Br(),
+            "alors que Hamilton est déjà 1er au classement. Verstappen se bat pour ne pas prendre trop de retard."
+        ]),   
+        html.Div(style={'margin-top': '200px'}), 
+        
+        html.H1(children = "Le Grand Prix d'Espagne 2021 "),
+        
+        html.P(children=[
+            "Le GP d'Espagne 2021 prend place le dimanche 9 mai à Barcelone, sur le circuit de Barcelona-Catalunya, utilisé depuis 1991. La",
+            html.Br(),
+            "caractéristique principale du circuit est sa longue ligne droite des stands d'environ 1,05km où les pilotes peuvent atteindre des ",
+            html.Br(),
+            "vitesses supérieures à 310 km/h. C'est la plus longue ligne droite dite « des stands » du championnat du monde de Formule 1.",
+            html.Br(),
+            "Le reste du circuit est composé de successions de virages rapides, de quelques gros freinages et d'une ligne droite opposée."
+        ]),   
+        
+        html.Div(style={'margin-top': '200px'}), 
         
         dbc.Button("Ouvrir l'explication", id="open-modal", n_clicks=0),
         dbc.Modal(
