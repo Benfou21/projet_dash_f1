@@ -40,5 +40,13 @@ def get_evol_classement(df):
         yaxis_title='Points',
         legend_title='Pilotes'
     )
+    
+    # Ajout de la ligne de highlight pour le gp d'espagne étudié
+    fig.add_vline(x=3, line_width=3,
+                  line_dash="dash", line_color="red",
+                  annotation_text="Grand Prix<br>d'Espagne",
+                  annotation_position="top right",
+                  annotation=dict(font_size=20, font_family="Times New Roman")
+                  )
 
     return fig
