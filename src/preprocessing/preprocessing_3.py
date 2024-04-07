@@ -36,7 +36,7 @@ def load_and_save_telemetry_race_pilote(year, pilote):
     telemetry['Pilote'] = pilote
 
     # Sauvegarde du DataFrame en CSV
-    telemetry.to_csv(f"assets/data//telemetry_spain_{year}_{pilote}.csv", index=False)
+    telemetry.to_csv(f"assets/data/telemetry_spain_{year}_{pilote}.csv", index=False)
     
     return telemetry
 
