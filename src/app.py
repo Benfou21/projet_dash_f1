@@ -12,6 +12,7 @@ from preprocessing.preprocessing_3 import get_max_speed
 import hover_template.hover_template_3_circuit as hover_template_3_circuit
 from dash.exceptions import PreventUpdate
 import dash_bootstrap_components as dbc
+import graphs.graph_1_classement as graph_1_classement
 app = dash.Dash(__name__,external_stylesheets=[dbc.themes.BOOTSTRAP])
 
 app.title = 'F1 visualiation'
@@ -21,6 +22,9 @@ telemetry_df_max = get_data(path_max)
 
 path_ham = "assets\\data\\telemetry_spain_2021_HAM.csv"
 telemetry_df_ham = get_data(path_ham)
+
+path_classement = 'assets\\data\\classement_2021.csv'
+classement_df = pd.read_csv(path_classement, sep=';')
 
 
 time_str = telemetry_df_max["Time"]   # c'est une chaîne de caractères qui ressemble à une liste
@@ -34,11 +38,22 @@ bars_figure_max_initial = graph__3_circuit.get_bars(telemetry_df_max, index_init
 circuit_figure_ham_initial = graph__3_circuit.get_circuit(telemetry_df_ham, index_initial, "Ham")
 bars_figure_ham_initial = graph__3_circuit.get_bars(telemetry_df_ham, index_initial, "Ham")
 
-
+# Génération de la figure évolution du classement au championnat du monde
+evol_classement_1 = graph_1_classement.get_evol_classement(classement_df)
 
 app.layout = html.Div(
     [
         html.H1(children='Scrollable Story pour la Formule 1'),
+        
+        # Évolution classement championnat du monde
+        html.Div([
+            html.Div([
+                dcc.Graph(id='graph_evol_classement', figure=evol_classement_1,config=dict(
+                      showTips=False,
+                      showAxisDragHandles=False,
+                      displayModeBar=False))
+                ])
+        ]),
         
         dbc.Button("Ouvrir l'explication", id="open-modal", n_clicks=0),
         dbc.Modal(
