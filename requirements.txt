@@ -37,7 +37,7 @@ markupsafe==2.1.1
     # via
     #   jinja2
     #   werkzeug
-numpy==1.23.4
+numpy
     # via
     #   -r requirements.linux.in
     #   pandas
