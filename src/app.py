@@ -169,7 +169,7 @@ app.layout = html.Div([
     html.H3(children = "Stratégie de Pneu et leur impact sur le temps au tour"),
     html.Div(style={'margin-top': '50px'}),
     html.P(children=[
-        "Ce graphisue met en evidence les delta de temps entre Verstappen et Hamilton en fonction des tour.",
+        "Ce graphique met en evidence les delta de temps entre Verstappen et Hamilton en fonction des tour.",
         html.Br(),
         "La liste déroulantes en bas du graphique permet de changer de pilote",
         html.Br(),
@@ -204,6 +204,9 @@ app.layout = html.Div([
     # section mounirman
     ##################  
     # met ton code ici 
+    
+    
+    
     #################   
         
         #Partie 3 
@@ -292,12 +295,13 @@ app.layout = html.Div([
     html.H3(children = "Observation de la vitesse relatives sur les section de circuit "),
     html.Div(style={'margin-top': '50px'}),
     html.P(children=[
-        "Ce graphiques montre les section de circuit ou Max Verstappen est plus rapide que Lewis Hamilton.",
+        "Ce graphique montre les section de circuit ou Max Verstappen est plus rapide que Lewis Hamilton.",
         html.Br(),
         "En rouge sont les protions de circuit ou Verstappen avait une vistesse supérieur à Hamilton",
         html.Br(),
         "En vert sont les protions de circuit ou Verstappen avait une vistesse Inférieur à Hamilton."
-        ]), 
+    ]),
+    html.Div(style={'margin-top': '50px'}),
     html.Div([
         dcc.Graph(id='speed-difference-plot')  # Nouvel ID pour le graphique de différence de vitesse
     ], style={'padding': '20px', 'display': 'flex', 'justifyContent': 'center'}),  
