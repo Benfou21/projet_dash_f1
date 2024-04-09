@@ -2,7 +2,7 @@ import plotly.graph_objects as go
 import numpy as np
 from preprocessing.preprocess_idriss import preprocess_idriss
 import plotly.express as px
-import webcolors  # Ajoutez ceci en haut de votre fichier
+import webcolors  
 
 
 

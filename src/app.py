@@ -157,19 +157,21 @@ app.layout = html.Div([
                       displayModeBar=False))
                 ])
         ]),
+        html.Div(style={'margin-top': '200px'}),
         
-        dbc.Button("Ouvrir l'explication", id="open-modal", n_clicks=0),
-        dbc.Modal(
-            [
-                dbc.ModalHeader(dbc.ModalTitle("Explication des graphes de vitesses")),
-                dbc.ModalBody("Ces graphes vous permet d'explorer la vitesses des deux pilotes et de les comparer"),
-                dbc.ModalFooter(
-                    dbc.Button("Fermer", id="close-modal", className="ms-auto", n_clicks=0)
-                ),
-            ],
-            id="modal",
-            is_open=False,  # Commence avec le modal fermé
-        ),
+        html.H2(children = "La vitesse et la conduite en F1"),
+        html.Div(style={'margin-top': '100px'}),
+        html.H3(children = "Observation de la vitesse"),
+        html.Div(style={'margin-top': '50px'}),
+        html.P(children=[
+            "Ces graphiques vous montrent la vitesse des deux pilotes sur leurs meilleurs tours.",
+            html.Br(),
+            "Vous pouvez cliquer sur une position du circuit pour vous y déplacer et observer la vitesse.",
+            html.Br(),
+            "Vous pouvez cocher la case de synchronisation pour interargir avec les deux graphs en même temps."
+        ]),   
+        html.Div(style={'margin-top': '50px'}),
+        
         # Horizontal block for Max
         html.Div([
             # Vertical sub-block for Max's circuit graph
@@ -220,7 +222,7 @@ app.layout = html.Div([
                 value=[],
                 labelStyle={'display': 'block'}
             )
-    ], style={'textAlign': 'center', 'margin': '20px'}),
+    ], style={'textAlign': 'center', 'margin': '5px'}),
         # Horizontal block for Ham
         html.Div([
              # Vertical sub-block for Max's bar graph
@@ -232,7 +234,9 @@ app.layout = html.Div([
                 dcc.Graph(id='speed-graph-2', figure=bars_figure_ham_initial)
             ], style={'display': 'inline-block', 'width': '33%'}),
         ], style={'display': 'flex', 'justifyContent': 'center', 'alignItems': 'center'}), # This ensures that the sub-blocks for Ham are in one line
+    
     ## section youyou
+    html.Div(style={'margin-top': '200px'}),
     
     html.Div([
         # Votre graphique ici
@@ -252,18 +256,14 @@ app.layout = html.Div([
             )
         ], style=graph_container_style),
     ], style={'textAlign': 'center'}),  # Centre tout le contenu de la page
-
+    
+    html.Div(style={'margin-top': '200px'}),
+    
     # idriss plot
     html.Div([
         dcc.Graph(id='speed-difference-plot')  # Nouvel ID pour le graphique de différence de vitesse
     ], style={'padding': '20px', 'display': 'flex', 'justifyContent': 'center'}),
   
-    
-    
-    
-    
-    
-    
     ],
     style={'textAlign': 'center'},  
 )
@@ -341,15 +341,7 @@ def find_closest_index(x, y, dataframe):
     return distances.idxmin()
 
 
-@app.callback(
-    Output("modal", "is_open"),
-    [Input("open-modal", "n_clicks"), Input("close-modal", "n_clicks")],
-    [State("modal", "is_open")],
-)
-def toggle_modal(n1, n2, is_open):
-    if n1 or n2:
-        return not is_open
-    return is_open
+
 
 
 
