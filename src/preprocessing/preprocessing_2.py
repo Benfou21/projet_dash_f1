@@ -12,8 +12,6 @@ import fastf1.plotting
 
 
 
-
-
 def load_and_save_driver_laps_race_pilote(year, pilote):
     # Chargement de la session de qualification pour Monza de l'année donnée
     session = f1.get_session(year, 'Spain', 'Q')
@@ -83,8 +81,6 @@ def preprocess_data(ver_csv_path, ham_csv_path):
     ham_df = add_segments(ham_df)
 
     return ver_df, ham_df
-
-
 
 
 

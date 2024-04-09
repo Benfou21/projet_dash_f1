@@ -13,6 +13,11 @@ import hover_template.hover_template_3_circuit as hover_template_3_circuit
 from dash.exceptions import PreventUpdate
 import dash_bootstrap_components as dbc
 import graphs.graph_1_classement as graph_1_classement
+from graphs.graph_2_scatterplot_pneu import create_scatter_plot
+from graphs.graph_idriss import graph_idriss  # Assurez-vous que graph_idriss est le fichier correct
+
+
+
 app = dash.Dash(__name__,external_stylesheets=[dbc.themes.BOOTSTRAP])
 
 app.title = 'F1 visualiation'
@@ -40,6 +45,44 @@ bars_figure_ham_initial = graph__3_circuit.get_bars(telemetry_df_ham, index_init
 
 # Génération de la figure évolution du classement au championnat du monde
 evol_classement_1 = graph_1_classement.get_evol_classement(classement_df)
+
+# Créez le tracé scatter initial pour un pilote
+scatter_plot_initial = create_scatter_plot("HAM", "assets/data/driver_laps_2021_VER.csv", "assets/data/driver_laps_2021_HAM.csv")
+
+
+
+dropdown = dcc.Dropdown(
+    id='pilote-dropdown',
+    options=[
+        {'label': 'Max Verstappen', 'value': 'VER'},
+        {'label': 'Lewis Hamilton', 'value': 'HAM'}
+    ],
+    value='VER',  # Valeur par défaut
+    clearable=False
+)
+graph_style = {
+    'padding': '20px',
+    'borderRadius': '5px',
+    'boxShadow': '0 2px 4px rgba(0,0,0,0.1)',
+}
+
+dropdown_style = {
+    'width': '50%',  # Ajustez en fonction de la taille de votre graphique
+    'margin': '10px auto 20px',  # Centre le dropdown avec une marge en haut et en bas
+}
+
+legend_style = {
+    'textAlign': 'center',  # Centre le texte de la légende
+    'padding': '10px',
+    'margin': '0 auto',  # Centre la légende
+    'width': '100%',  # La légende prend toute la largeur disponible
+}
+graph_container_style = {
+    'display': 'flex',
+    'flexDirection': 'column',
+    'alignItems': 'center',  # Centre le graphique scatter plot horizontalement
+    'margin': '0 auto',  # Centre le conteneur sur la page
+}
 
 app.layout = html.Div([
          html.H1(children=["Comprendre une course de Formule 1,la bataille",
@@ -189,8 +232,40 @@ app.layout = html.Div([
                 dcc.Graph(id='speed-graph-2', figure=bars_figure_ham_initial)
             ], style={'display': 'inline-block', 'width': '33%'}),
         ], style={'display': 'flex', 'justifyContent': 'center', 'alignItems': 'center'}), # This ensures that the sub-blocks for Ham are in one line
+    ## section youyou
+    
+    html.Div([
+        # Votre graphique ici
+        dcc.Graph(id='delta-scatter-plot', figure=scatter_plot_initial),
+
+        # Le Dropdown juste en dessous du graphique
+        html.Div([
+            dcc.Dropdown(
+                id='pilote-dropdown',
+                options=[
+                    {'label': 'Max Verstappen', 'value': 'VER'},
+                    {'label': 'Lewis Hamilton', 'value': 'HAM'}
+                ],
+                value='VER',  # Valeur par défaut
+                clearable=False,
+                style=dropdown_style,
+            )
+        ], style=graph_container_style),
+    ], style={'textAlign': 'center'}),  # Centre tout le contenu de la page
+
+    # idriss plot
+    html.Div([
+        dcc.Graph(id='speed-difference-plot')  # Nouvel ID pour le graphique de différence de vitesse
+    ], style={'padding': '20px', 'display': 'flex', 'justifyContent': 'center'}),
+  
+    
+    
+    
+    
+    
+    
     ],
-    style={'textAlign': 'center'}
+    style={'textAlign': 'center'},  
 )
 
 
@@ -275,3 +350,27 @@ def toggle_modal(n1, n2, is_open):
     if n1 or n2:
         return not is_open
     return is_open
+
+
+
+@app.callback(
+    Output('delta-scatter-plot', 'figure'),
+    [Input('pilote-dropdown', 'value')]
+)
+
+def update_scatter_plot(selected_pilote):
+    # Mettez à jour le scatter plot basé sur le pilote sélectionné
+    return create_scatter_plot(selected_pilote, "assets/data/driver_laps_2021_VER.csv", "assets/data/driver_laps_2021_HAM.csv")
+
+
+@app.callback(
+    Output('speed-difference-plot', 'figure'),
+    [Input('pilote-dropdown', 'value')]  # Vous pouvez utiliser le même dropdown pour déclencher ce callback
+)
+def update_speed_difference_plot(selected_pilote):
+    # Vous pouvez ajouter la logique ici pour choisir le chemin en fonction du pilote sélectionné
+    # Pour l'instant, je vais utiliser les chemins en dur que vous avez fournis
+    ver_path = "assets/data/telemetry_spain_2021_VER.csv"
+    ham_path = "assets/data/telemetry_spain_2021_HAM.csv"
+    # Appel à votre fonction de graphique ici
+    return graph_idriss(ver_path, ham_path)
