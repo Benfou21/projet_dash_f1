@@ -23,13 +23,13 @@ app = dash.Dash(__name__,external_stylesheets=[dbc.themes.BOOTSTRAP])
 
 app.title = 'F1 visualiation'
 
-path_max = "assets\\data\\telemetry_spain_2021_VER.csv"
+path_max = "assets//data//telemetry_spain_2021_VER.csv"
 telemetry_df_max = get_data(path_max)
 
-path_ham = "assets\\data\\telemetry_spain_2021_HAM.csv"
+path_ham = "assets//data//telemetry_spain_2021_HAM.csv"
 telemetry_df_ham = get_data(path_ham)
 
-path_classement = 'assets\\data\\classement_2021.csv'
+path_classement = 'assets//data//classement_2021.csv'
 classement_df = pd.read_csv(path_classement, sep=';')
 
 
@@ -51,7 +51,7 @@ evol_classement_1 = graph_1_classement.get_evol_classement(classement_df)
 scatter_plot_initial = create_scatter_plot("HAM", "assets/data/driver_laps_2021_VER.csv", "assets/data/driver_laps_2021_HAM.csv")
 
 # Récupération données pitstops
-pitstop_data = get_combined_pitstop_data("assets\\data\\pitstops.csv")
+pitstop_data = get_combined_pitstop_data("assets//data//pitstops.csv")
 
 # Généré la figure Pitstop
 pitstops_graph = create_pitstop_plot(pitstop_data)
@@ -92,9 +92,11 @@ graph_container_style = {
 }
 
 app.layout = html.Div([
-         html.H1(children=["Comprendre une course de Formule 1,la bataille",
+        html.Div(style={'margin-top': '100px'}), 
+        html.H1(children=["Comprendre une course de Formule 1,la bataille",
                         html.Br(),
                         "Verstappen-Hamilton lors du GP d'Espagne 2021"]),
+        html.Div(style={'margin-top': '50px'}), 
         html.P(children=[
             "Une course de Formule 1 dure deux heures, et les pilotes parcourent le circuit près de 60 fois à plus de 300 km/h. Ils se battent tous pour dépasser leurs adversaires et",
             html.Br(),
@@ -132,26 +134,32 @@ app.layout = html.Div([
         html.Div(style={'margin-top': '30px'}),  
         
         html.P(children=[
-            " La saison 2021 est l'une des plus disputée des 10 dernières années. L'expérience du champion en titre Lexis ",
+            " La saison 2021 est l'une des plus disputée des 10 dernières années. L'expérience du",
             html.Br(),
-            "Hamilton et le talent brut de Max Verstappen s'affronte tout au long de l'année 2021. Les 2 pilotes se livrent ",
+            "champion en titre Lexis Hamilton et le talent brut de Max Verstappen s'affronte tout",
             html.Br(),
-            "d'incroyables duels pour remporter le championnat du monde. Le GP d'Espagne se déroule au début de la saison, ",
+            "au long de l'année 2021. Les 2 pilotes se livrent d'incroyables duels pour remporter",
             html.Br(),
-            "alors que Hamilton est déjà 1er au classement. Verstappen se bat pour ne pas prendre trop de retard."
+            "le championnat du monde. Le GP d'Espagne se déroule au début de la saison, alors que",
+            html.Br(),
+            "Hamilton est déjà 1er au classement. Verstappen se bat pour ne pas prendre trop de retard."
         ]),   
         html.Div(style={'margin-top': '200px'}), 
         
         html.H1(children = "Le Grand Prix d'Espagne 2021 "),
         
         html.P(children=[
-            "Le GP d'Espagne 2021 prend place le dimanche 9 mai à Barcelone, sur le circuit de Barcelona-Catalunya, utilisé depuis 1991. La",
+            "Le GP d'Espagne 2021 prend place le dimanche 9 mai à Barcelone, sur le circuit de",
+            html.Br(), 
+            "Barcelona-Catalunya, utilisé depuis 1991.La caractéristique principale du circuit",
             html.Br(),
-            "caractéristique principale du circuit est sa longue ligne droite des stands d'environ 1,05km où les pilotes peuvent atteindre des ",
+            "est sa longue ligne droite des stands d'environ 1,05km où les pilotes peuvent  ",
             html.Br(),
-            "vitesses supérieures à 310 km/h. C'est la plus longue ligne droite dite « des stands » du championnat du monde de Formule 1.",
+            "atteindre des vitesses supérieures à 310 km/h. C'est la plus longue ligne droite",
             html.Br(),
-            "Le reste du circuit est composé de successions de virages rapides, de quelques gros freinages et d'une ligne droite opposée."
+            "dite « des stands » du championnat du monde de Formule 1.Le reste du circuit est",
+            html.Br(),
+            " composé de successions de virages rapides, de quelques gros freinages et d'une ligne droite opposée."
         ]),   
         
         html.Div(style={'margin-top': '200px'}),
@@ -168,19 +176,19 @@ app.layout = html.Div([
     #Partie 2  
     #Titre 2 eme section
     html.Div(style={'margin-top': '200px'}),
-    html.H2(children = "Stratégie des Pneus"),        
+    html.H1(children = "Stratégie des Pneus"),        
     #1er partie 2 eme section
     html.Div(style={'margin-top': '100px'}),
-    html.H3(children = "Stratégie des Pneus et leurs impacts sur le temps au tour"),
+    html.H2(children = "Stratégie des Pneus et leurs impacts sur le temps au tour"),
     html.Div(style={'margin-top': '50px'}),
     html.P(children=[
-        "Ce graphique met en evidence les delta de temps entre Verstappen et Hamilton en fonction des tour.",
+        "Ce graphique met en evidence les delta de temps entre Verstappen et Hamilton en",
         html.Br(),
-        "La liste déroulantes en bas du graphique permet de changer de pilote",
+        "fonction des tour.La liste déroulantes en bas du graphique permet de changer de",
         html.Br(),
-        "En vert nous avons un delta positif et en rouge le delta est négatif."
+        "pilote.En vert nous avons un delta positif et en rouge le delta est négatif.",
     ]),      
-    html.Div(style={'margin-top': '50px'}), 
+    html.Div(style={'margin-top': '100px'}), 
     html.Div([
         dcc.Graph(id='delta-scatter-plot', figure=scatter_plot_initial),
         html.P(children=[
@@ -198,31 +206,24 @@ app.layout = html.Div([
                 style=dropdown_style
             )
         ], style=graph_container_style),
-    ], style={
-        'display': 'flex',
-        'flexDirection': 'column',
-        'alignItems': 'center',  # Centre les enfants horizontalement dans le conteneur
-        'justifyContent': 'center',  # Centre les enfants verticalement dans le conteneur
-        'width': '100%',  # Assure que le conteneur prend toute la largeur
-        'margin': 'auto'  # Centrage horizontal du conteneur lui-même
-    }),
-        
+    ]),
+    
     # section mounirman
     ##################  
     # met ton code ici 
     html.Div(style={'margin-top': '100px'}),
-    html.H3(children = "Les temps de pit stops des pilotes"),
+    html.H2(children = "Les temps de pit stops des pilotes"),
     html.Div(style={'margin-top': '50px'}),
     html.P(children=[
-        "Ce graphique permet d'observer les temps que passes les deux pilotes lors des arrêts aux stands.",
+        "Ce graphique permet d'observer les temps que passes les deux pilotes lors des arrêts aux ",
         html.Br(),
-        "Les points bleu corresponds aux pit stops antérieurs au GP d'Espagne.",
+        "stands. Les points bleu corresponds aux pit stops antérieurs au GP d'Espagne.Les points",
         html.Br(),
-        "Les points orange corresponds aux pit stops du GP d'Espagne.",
+        "orange corresponds aux pit stops du GP d'Espagne.Vous pouvez affichez uniquement les",
         html.Br(),
-        "Vous pouvez affichez uniquement les points bleu ou orange en cliquant sur la légende.",
+        "points bleu ou orange en cliquant sur la légende.",
     ]),  
-    
+    html.Div(style={'margin-top': '100px'}),
     # Graphes Pitstops
     html.Div([
         dcc.Graph(id='pitstop-graph', figure=pitstops_graph)
@@ -244,9 +245,11 @@ app.layout = html.Div([
         html.P(children=[
             "Ces graphiques vous montrent la vitesse des deux pilotes sur leurs meilleurs tours.",
             html.Br(),
-            "Vous pouvez cliquer sur une position du circuit pour vous y déplacer et observer la vitesse.",
+            "Vous pouvez cliquer sur une position du circuit pour vous y déplacer et observer la",
+            html.Br(), 
+            "vitesse. Vous pouvez cocher la case de synchronisation pour interargir avec les deux",
             html.Br(),
-            "Vous pouvez cocher la case de synchronisation pour interargir avec les deux graphiques en même temps."
+            " graphiques en même temps."
         ]),   
         html.Div(style={'margin-top': '50px'}),
         
@@ -320,11 +323,13 @@ app.layout = html.Div([
     html.H3(children = "Observation de la vitesse relatives sur les section de circuit "),
     html.Div(style={'margin-top': '50px'}),
     html.P(children=[
-        "Ce graphique montre les section de circuit ou Max Verstappen est plus rapide que Lewis Hamilton.",
+        "Ce graphique montre les section de circuit ou Max Verstappen est plus rapide que Lewis",
         html.Br(),
-        "En rouge sont les protions de circuit ou Verstappen avait une vistesse supérieur à Hamilton",
+        "Hamilton.En rouge sont les protions de circuit ou Verstappen avait une vistesse supérieur",
         html.Br(),
-        "En vert sont les protions de circuit ou Verstappen avait une vistesse Inférieur à Hamilton."
+        "à Hamilton. En vert sont les protions de circuit ou Verstappen avait une vistesse",
+        html.Br(),
+        " inférieur à Hamilton."
     ]),
     html.Div(style={'margin-top': '50px'}),
     html.Div([

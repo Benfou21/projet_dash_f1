@@ -4,25 +4,61 @@ body {
     color: #333;
     line-height: 1.6;
     margin: 0;
-    padding: 0 20px;
-    background-color: #f4f4f4;
+    padding: 20px;
+    background-color:linear-gradient(135deg, #6e8efb, #a777e3);
+    overflow-x: hidden; /* Évite les débordements horizontaux */
 }
 
 
 h1 {
-    font-size: 2.5rem; /* 40px */
-    color: #444;
+    font-size: 2.5rem;
+    color: #333; /* Couleur de texte neutre */
     text-transform: uppercase;
-    margin-bottom: 20px;
-    text-shadow: 1px 1px 0px #fff;
+    margin: 0; /* Enlève la marge par défaut du h1 */
+    font-weight: 700; /* Gras pour correspondre au style moderne */
+    text-align: center;
+    display: inline-block; /* Permet au conteneur de s'adapter à la taille du texte */
+    padding: 10px 20px; /* Espacement autour du texte */
+    background-color: #eee; /* Couleur de fond neutre */
+    border-radius: 10px; /* Coins arrondis */
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1); /* Effet d'ombre simple pour un effet 3D */
+    margin: 20px 0; /* Espacement autour du conteneur */
 }
 
+h2 {
+    font-size: 2rem; /* Légèrement plus petit que le h1 pour une hiérarchie visuelle */
+    color: #333; /* Couleur foncée pour un contraste fort */
+    font-weight: 600; /* Assez gras pour se démarquer, mais moins que le h1 */
+    margin-bottom: 15px; /* Espacement sous le titre */
+    text-align: center; /* Centrage du titre */
+    text-transform: uppercase; /* Style cohérent avec le h1 */
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1); /* Ombre plus douce et moins étendue */
+}
+
+h3 {
+    font-size: 1.75rem; /* Taille réduite par rapport au h2 pour respecter la hiérarchie */
+    color: #444; /* Légèrement plus clair que le h2 pour différencier les niveaux */
+    font-weight: 500; /* Équilibre entre le gras et le normal */
+    margin-bottom: 10px; /* Un peu moins d'espace en dessous que le h2 */
+    text-align: center; /* Alignement à gauche pour varier selon le niveau de titre */
+    text-transform: none; /* Pas de transformation pour différencier du h1 et h2 */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.05); /* Ombre plus légère pour un effet subtil */
+}
 
 p {
-    font-size: 1rem; /* 16px */
-    margin-bottom: 10px;
-    text-align: center;
-    text-justify: inter-word;
+    font-size: 1.2rem; /* Augmente la taille du texte pour améliorer la lisibilité */
+    color: #222; /* Couleur de texte plus foncée pour un contraste accru */
+    font-weight: 500; /* Rend le texte plus gras pour correspondre à l'aspect "gonflé" du H1 */
+    line-height: 1.8; /* Augmente l'espacement entre les lignes pour une lecture confortable */
+    text-align: center; /* Justification du texte pour un look soigné */
+    max-width: 800px; /* Contrôle la largeur du paragraphe pour une meilleure lisibilité */
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px; /* Espacement entre les paragraphes */
+    padding: 10px; /* Espacement intérieur pour un aspect plus aéré */
+   
+     
+    
 }
 
 table {
@@ -30,29 +66,56 @@ table {
     margin-left: auto;
     margin-right: auto;
     border-collapse: collapse;
-    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1); /* Ombre subtile pour un effet "flottant" */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Ombre subtile pour un effet "flottant" */
     background-color: #ffffff; /* Fond blanc pour le tableau */
 }
 
 
 td, th {
-    border: 1px solid #dddddd; /* Bordure légère pour les cellules */
+    border: 1px solid #e1e1e1; /* Bordure légère pour les cellules */
     text-align: left; /* Alignement du texte */
-    padding: 8px; /* Espacement intérieur */
+    padding: 12px; /* Espacement intérieur */
 }
 
 th {
-    background-color: #f2f2f2; /* Fond légèrement gris pour les en-têtes */
-    color: #333; /* Couleur du texte */
-    font-weight: bold; /* Texte en gras */
+    background-color: #009879; /* Fond légèrement gris pour les en-têtes */
+    color: #ffffff; /* Couleur du texte */
+    text-transform: uppercase; /* Texte en gras */
+}
+
+
+tr:nth-child(even){
+    background-color: #f2f2f2; /* Alternance de couleurs pour les lignes */
 }
 
 tr:hover {
-    background-color: #f5f5f5; /* Changement de fond au survol */
+    background-color: #dddfe2; /* Couleur de survol plus subtile */
 }
 
 img {
-    width: 300px; /* Largeur fixe pour toutes les images */
-    height: 300px; /* Hauteur fixe pour toutes les images */
-    object-fit: cover; /* Couvre la zone de l'image sans en conserver les proportions */
+    width: 100%; /* Rend les images responsives */
+    max-width: 300px; /* Largeur maximale */
+    height: auto; /* Hauteur auto pour conserver les proportions */
+    border-radius: 8px; /* Bordures arrondies pour un look moderne */
+    transition: transform 0.3s ease; /* Transition douce */
+}
+
+img:hover {
+    transform: scale(1.05); /* Effet de zoom au survol */
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3); /* Ombre portée plus prononcée */
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
+    table {
+        width: 100%;
+    }
+
+    h1 {
+        font-size: 2rem; /* Taille de police ajustée pour les écrans plus petits */
+    }
 }
