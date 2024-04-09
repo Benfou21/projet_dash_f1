@@ -67,8 +67,10 @@ graph_style = {
 }
 
 dropdown_style = {
-    'width': '50%',  # Ajustez en fonction de la taille de votre graphique
-    'margin': '10px auto 20px',  # Centre le dropdown avec une marge en haut et en bas
+    'width': '100%',  # Ajustez la largeur à 100% de son conteneur
+    'margin': '10px auto',  # Centre le dropdown avec une marge en haut et en bas
+    'font-size': '16px',  # Ajustez ceci selon vos préférences et la longueur du texte
+
 }
 
 legend_style = {
@@ -157,6 +159,54 @@ app.layout = html.Div([
                       displayModeBar=False))
                 ])
         ]),
+        
+    #Partie 2  
+    #Titre 2 eme section
+    html.Div(style={'margin-top': '200px'}),
+    html.H2(children = "Stratégie des Pneu"),        
+    #1er partie 2 eme section
+    html.Div(style={'margin-top': '100px'}),
+    html.H3(children = "Stratégie de Pneu et leur impact sur le temps au tour"),
+    html.Div(style={'margin-top': '50px'}),
+    html.P(children=[
+        "Ce graphisue met en evidence les delta de temps entre Verstappen et Hamilton en fonction des tour.",
+        html.Br(),
+        "La liste déroulantes en bas du graphique permet de changer de pilote",
+        html.Br(),
+        "En vert nous avons un delta positif et en rouge le delta est négatif."
+        ]),       
+    html.Div([
+        dcc.Graph(id='delta-scatter-plot', figure=scatter_plot_initial),
+        html.P(children=[
+        html.Br(),
+        "changement de pilote dans cette liste déroulante.",]),
+        html.Div([
+            dcc.Dropdown(
+                id='pilote-dropdown',
+                options=[
+                    {'label': 'Max Verstappen', 'value': 'VER'},
+                    {'label': 'Lewis Hamilton', 'value': 'HAM'}
+                ],
+                value='VER',  # Valeur par défaut
+                clearable=False,
+                style=dropdown_style
+            )
+        ], style=graph_container_style),
+    ], style={
+        'display': 'flex',
+        'flexDirection': 'column',
+        'alignItems': 'center',  # Centre les enfants horizontalement dans le conteneur
+        'justifyContent': 'center',  # Centre les enfants verticalement dans le conteneur
+        'width': '100%',  # Assure que le conteneur prend toute la largeur
+        'margin': 'auto'  # Centrage horizontal du conteneur lui-même
+    }),
+        
+    # section mounirman
+    ##################  
+    # met ton code ici 
+    #################   
+        
+        #Partie 3 
         html.Div(style={'margin-top': '200px'}),
         
         html.H2(children = "La vitesse et la conduite en F1"),
@@ -233,37 +283,27 @@ app.layout = html.Div([
             html.Div([
                 dcc.Graph(id='speed-graph-2', figure=bars_figure_ham_initial)
             ], style={'display': 'inline-block', 'width': '33%'}),
-        ], style={'display': 'flex', 'justifyContent': 'center', 'alignItems': 'center'}), # This ensures that the sub-blocks for Ham are in one line
-    
-    ## section youyou
-    html.Div(style={'margin-top': '200px'}),
-    
-    html.Div([
-        # Votre graphique ici
-        dcc.Graph(id='delta-scatter-plot', figure=scatter_plot_initial),
-
-        # Le Dropdown juste en dessous du graphique
-        html.Div([
-            dcc.Dropdown(
-                id='pilote-dropdown',
-                options=[
-                    {'label': 'Max Verstappen', 'value': 'VER'},
-                    {'label': 'Lewis Hamilton', 'value': 'HAM'}
-                ],
-                value='VER',  # Valeur par défaut
-                clearable=False,
-                style=dropdown_style,
-            )
-        ], style=graph_container_style),
-    ], style={'textAlign': 'center'}),  # Centre tout le contenu de la page
-    
-    html.Div(style={'margin-top': '200px'}),
-    
-    # idriss plot
+        ], style={'display': 'flex', 'justifyContent': 'center', 'alignItems': 'center'}),
+        # This ensures that the sub-blocks for Ham are in one line
+        
+        
+        
+    html.Div(style={'margin-top': '100px'}),
+    html.H3(children = "Observation de la vitesse relatives sur les section de circuit "),
+    html.Div(style={'margin-top': '50px'}),
+    html.P(children=[
+        "Ce graphiques montre les section de circuit ou Max Verstappen est plus rapide que Lewis Hamilton.",
+        html.Br(),
+        "En rouge sont les protions de circuit ou Verstappen avait une vistesse supérieur à Hamilton",
+        html.Br(),
+        "En vert sont les protions de circuit ou Verstappen avait une vistesse Inférieur à Hamilton."
+        ]), 
     html.Div([
         dcc.Graph(id='speed-difference-plot')  # Nouvel ID pour le graphique de différence de vitesse
-    ], style={'padding': '20px', 'display': 'flex', 'justifyContent': 'center'}),
-  
+    ], style={'padding': '20px', 'display': 'flex', 'justifyContent': 'center'}),  
+    
+    
+    html.Div(style={'margin-top': '200px'}),
     ],
     style={'textAlign': 'center'},  
 )
