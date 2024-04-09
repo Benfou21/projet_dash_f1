@@ -16,7 +16,8 @@ import graphs.graph_1_classement as graph_1_classement
 from graphs.graph_2_scatterplot_pneu import create_scatter_plot
 from graphs.graph_idriss import graph_idriss  # Assurez-vous que graph_idriss est le fichier correct
 
-
+from preprocessing.preprocessing_2b import get_combined_pitstop_data
+from graphs.graph_2b import create_pitstop_plot
 
 app = dash.Dash(__name__,external_stylesheets=[dbc.themes.BOOTSTRAP])
 
@@ -37,11 +38,11 @@ x_length = len(telemetry_df_max['X'])
 
 index_initial = 0
 circuit_figure_max_initial = graph__3_circuit.get_circuit(telemetry_df_max, index_initial, "Max")
-bars_figure_max_initial = graph__3_circuit.get_bars(telemetry_df_max, index_initial, "Max")
+bars_figure_max_initial = graph__3_circuit.get_bars(telemetry_df_max, index_initial, "Max",False)
 
 # Génération initiale des figures pour telemetry_df_ham
 circuit_figure_ham_initial = graph__3_circuit.get_circuit(telemetry_df_ham, index_initial, "Ham")
-bars_figure_ham_initial = graph__3_circuit.get_bars(telemetry_df_ham, index_initial, "Ham")
+bars_figure_ham_initial = graph__3_circuit.get_bars(telemetry_df_ham, index_initial, "Ham",True)
 
 # Génération de la figure évolution du classement au championnat du monde
 evol_classement_1 = graph_1_classement.get_evol_classement(classement_df)
@@ -49,7 +50,11 @@ evol_classement_1 = graph_1_classement.get_evol_classement(classement_df)
 # Créez le tracé scatter initial pour un pilote
 scatter_plot_initial = create_scatter_plot("HAM", "assets/data/driver_laps_2021_VER.csv", "assets/data/driver_laps_2021_HAM.csv")
 
+# Récupération données pitstops
+pitstop_data = get_combined_pitstop_data("assets\\data\\pitstops.csv")
 
+# Généré la figure Pitstop
+pitstops_graph = create_pitstop_plot(pitstop_data)
 
 dropdown = dcc.Dropdown(
     id='pilote-dropdown',
@@ -205,9 +210,28 @@ app.layout = html.Div([
     # section mounirman
     ##################  
     # met ton code ici 
+    html.Div(style={'margin-top': '100px'}),
+    html.H3(children = "Les temps de pit stops des pilotes"),
+    html.Div(style={'margin-top': '50px'}),
+    html.P(children=[
+        "Ce graphique permet d'observer les temps que passes les deux pilotes lors des arrêts aux stands.",
+        html.Br(),
+        "Les points bleu corresponds aux pit stops antérieurs au GP d'Espagne.",
+        html.Br(),
+        "Les points orange corresponds aux pit stops du GP d'Espagne.",
+        html.Br(),
+        "Vous pouvez affichez uniquement les points bleu ou orange en cliquant sur la légende.",
+    ]),  
     
-    
-    
+    # Graphes Pitstops
+    html.Div([
+        dcc.Graph(id='pitstop-graph', figure=pitstops_graph)
+    ], style={
+        'display': 'flex', 
+        'justifyContent': 'center', 
+        'width': '100%',  
+        'height': 'auto'  
+    }),
     #################   
         
         #Partie 3 
@@ -222,7 +246,7 @@ app.layout = html.Div([
             html.Br(),
             "Vous pouvez cliquer sur une position du circuit pour vous y déplacer et observer la vitesse.",
             html.Br(),
-            "Vous pouvez cocher la case de synchronisation pour interargir avec les deux graphs en même temps."
+            "Vous pouvez cocher la case de synchronisation pour interargir avec les deux graphiques en même temps."
         ]),   
         html.Div(style={'margin-top': '50px'}),
         
@@ -235,7 +259,6 @@ app.layout = html.Div([
                 style={
                     'fontSize': '18px',
                     'display': 'inline-block',
-                    'width': '15%',
                     'textAlign': 'center',
                     'border': '2px solid #344feb',  # color border
                     'borderRadius': '10px',  # Rounded corners
@@ -246,11 +269,11 @@ app.layout = html.Div([
             ),
             html.Div([
                 dcc.Graph(id='circuit-graph-1', figure=circuit_figure_max_initial)
-            ], style={'display': 'inline-block', 'width': '33%'}),
+            ], style={'display': 'inline-block'}),
             
             html.Div([
                 dcc.Graph(id='circuit-graph-2', figure=circuit_figure_ham_initial)
-            ], style={'display': 'inline-block', 'width': '33%'}),
+            ], style={'display': 'inline-block'}),
             html.Div(
                 id='speed-display-2', 
                 children=f'Current Speed: {telemetry_df_ham["Speed"][0]} km/h',  
@@ -258,13 +281,14 @@ app.layout = html.Div([
                     
                     'fontSize': '18px',
                     'display': 'inline-block',
-                    'width': '15%',
+                    
                     'textAlign': 'center',
                     'border': '2px solid #344feb',  # color border
                     'borderRadius': '10px',  # Rounded corners
                     'backgroundColor': '#f9f9f9',  # Light grey background
                     'boxShadow': '0px 4px 8px rgba(0, 0, 0, 0.1)',  # Subtle shadow
-                    'padding': '10px'
+                    'padding': '10px',
+                    
                 }
             ),
         ], style={'display': 'flex', 'justifyContent': 'center', 'alignItems': 'center'}), # This ensures that the sub-blocks for Max are in one line
@@ -282,11 +306,11 @@ app.layout = html.Div([
              # Vertical sub-block for Max's bar graph
             html.Div([
                 dcc.Graph(id='speed-graph-1', figure=bars_figure_max_initial)
-            ], style={'display': 'inline-block', 'width': '33%'}),
+            ], style={'display': 'inline-block'}),
             # Vertical sub-block for Ham's bar graph
             html.Div([
                 dcc.Graph(id='speed-graph-2', figure=bars_figure_ham_initial)
-            ], style={'display': 'inline-block', 'width': '33%'}),
+            ], style={'display': 'inline-block'}),
         ], style={'display': 'flex', 'justifyContent': 'center', 'alignItems': 'center'}),
         # This ensures that the sub-blocks for Ham are in one line
         

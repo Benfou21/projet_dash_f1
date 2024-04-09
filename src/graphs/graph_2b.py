@@ -84,8 +84,8 @@ def create_pitstop_plot(df_combined):
         yaxis_title='Pilotes',
         showlegend=True,
         
-        width=1000,  # Largeur en pixels
-        height=400   # Hauteur en pixels
+        width=1200,  # Largeur en pixels
+        height=600   # Hauteur en pixels
     )
 
     fig.update_yaxes(

@@ -41,7 +41,8 @@ def get_circuit(data,index,pilote):
         title=f'Vitesse selon la position du circuit de {pilote}',
         
         showlegend=False,
-        
+        width = 800,
+        height = 500,
         xaxis=dict(
             range=[min(x), max(x)], 
             autorange=False,
@@ -90,7 +91,7 @@ def get_color(speed_value):
         return 'green'
 
 
-def get_bars(data,index,pilote):
+def get_bars(data,index,pilote,legend):
     
     speed = data["Speed"]
     elapsed_time = data["Elapsed"]
@@ -106,24 +107,50 @@ def get_bars(data,index,pilote):
         x=elapsed_time,
         y=speed,
         marker_color=colors,
-        width=0.4
+        width=0.4,
+        showlegend=False
     )])
     
     speed_index = [speed[index]]
     elapsed_time_index = [elapsed_time[index]]
     colors_index = ["purple"]  # ou toute autre couleur distincte pour la barre d'index
 
-    fig.add_trace(go.Bar(x=elapsed_time_index, y=speed_index, marker_color=colors_index, width=0.6))
+    fig.add_trace(go.Bar(x=elapsed_time_index, y=speed_index, marker_color=colors_index, width=0.6, showlegend=True, name="Point selectionné"))
 
+    fig.add_trace(go.Bar(x=[None], y=[None], marker_color='green', name='Vert - Vitesses de pointe'))
+    fig.add_trace(go.Bar(x=[None], y=[None], marker_color='orange', name='Orange - Accélération/Décélération'))
+    fig.add_trace(go.Bar(x=[None], y=[None], marker_color='red', name='Rouge - Freinage'))
+    
+    
 
     # Personnaliser le layout si nécessaire
     fig.update_layout(
         title=f'Vitesse sur différentes plages horaires de {pilote}', 
         xaxis_title='Temps en seconde', 
         yaxis_title='Vitesse en km/h', 
-        showlegend = False
+        showlegend = legend,
+       
+        width = 800,
+        height = 500
         
     )
+    
+    fig.update_layout(
+        legend=dict(
+            traceorder='normal',
+            font=dict(
+                family='sans-serif',
+                size=10,
+                color='black'
+            ),
+            bordercolor='#344feb',
+            borderwidth=1,
+            y=1.10,
+            xanchor='right',  # 'left', 'center', 'right'
+            yanchor='top',  # 'top', 'middle', 'bottom'
+        )
+    )
+    
     fig.update_traces(hovertemplate=hover_template_3_circuit.get_speed_bar_hover_template())
     
    
