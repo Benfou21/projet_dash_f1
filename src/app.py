@@ -163,10 +163,10 @@ app.layout = html.Div([
     #Partie 2  
     #Titre 2 eme section
     html.Div(style={'margin-top': '200px'}),
-    html.H2(children = "Stratégie des Pneu"),        
+    html.H2(children = "Stratégie des Pneus"),        
     #1er partie 2 eme section
     html.Div(style={'margin-top': '100px'}),
-    html.H3(children = "Stratégie de Pneu et leur impact sur le temps au tour"),
+    html.H3(children = "Stratégie des Pneus et leurs impacts sur le temps au tour"),
     html.Div(style={'margin-top': '50px'}),
     html.P(children=[
         "Ce graphique met en evidence les delta de temps entre Verstappen et Hamilton en fonction des tour.",
@@ -174,7 +174,8 @@ app.layout = html.Div([
         "La liste déroulantes en bas du graphique permet de changer de pilote",
         html.Br(),
         "En vert nous avons un delta positif et en rouge le delta est négatif."
-        ]),       
+    ]),      
+    html.Div(style={'margin-top': '50px'}), 
     html.Div([
         dcc.Graph(id='delta-scatter-plot', figure=scatter_plot_initial),
         html.P(children=[
