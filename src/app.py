@@ -66,9 +66,10 @@ dropdown = dcc.Dropdown(
     clearable=False
 )
 graph_style = {
-    'padding': '20px',
+    # 'padding': '20px',
     'borderRadius': '5px',
     'boxShadow': '0 2px 4px rgba(0,0,0,0.1)',
+    # 'textAlign': 'center',  # Centre le texte de la légende
 }
 
 dropdown_style = {
@@ -85,7 +86,7 @@ legend_style = {
 graph_container_style = {
     'display': 'flex',
     'flexDirection': 'column',
-    'alignItems': 'center',  # Centre le graphique scatter plot horizontalement
+    # 'alignItems': 'center',  # Centre le graphique scatter plot horizontalement
     'margin': '0 auto',  # Centre le conteneur sur la page
 }
 
@@ -188,7 +189,6 @@ app.layout = html.Div([
     ]),      
     html.Div(style={'margin-top': '100px'}), 
     html.Div([
-        dcc.Graph(id='delta-scatter-plot', figure=scatter_plot_initial),
         html.P(children=[
         html.Br(),
         "changement de pilote dans cette liste déroulante.",]),
@@ -204,11 +204,10 @@ app.layout = html.Div([
                 style=dropdown_style
             )
         ], style=graph_container_style),
+        dcc.Graph(id='delta-scatter-plot', figure=scatter_plot_initial),
     ]),
     
-    # section mounirman
-    ##################  
-    # met ton code ici 
+  
     html.Div(style={'margin-top': '100px'}),
     html.H2(children = "Les temps de pit stops des pilotes"),
     html.Div(style={'margin-top': '50px'}),
@@ -231,7 +230,6 @@ app.layout = html.Div([
         'width': '100%',  
         'height': 'auto'  
     }),
-    #################   
         
         #Partie 3 
         html.Div(style={'margin-top': '200px'}),

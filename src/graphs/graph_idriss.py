@@ -57,17 +57,31 @@ def graph_idriss(ver_csv_path, ham_csv_path):
     fig = go.Figure()
 
     for i in range(len(ver_df) - 1):
-        delta_speed_normalized = ver_df['delta_speed'].iloc[i] / max_delta
-        # Créez ici un gradient de couleurs en fonction de la valeur de delta_speed_normalized
+        delta_speed = ver_df['delta_speed'].iloc[i]
+        delta_speed_normalized = delta_speed / max_delta
         color = get_color_based_on_speed(delta_speed_normalized)
+
+        
+        if delta_speed > 0:
+                faster_pilot = "Plus rapide: Max Verstappen"
+        else:
+            faster_pilot = "Plus rapide: Lewis Hamilton"
+    
+        hovertemplate = f"<b>Vitesse Delta: {delta_speed:.2f} m/s </b><br>" \
+                    f"<b>{faster_pilot}</b><br>" \
+                    "<extra></extra>"  # Supprime les informations supplémentaires par défaut
 
         fig.add_trace(go.Scatter(
             x=ver_df['X'].iloc[i:i+2],
             y=ver_df['Y'].iloc[i:i+2],
             mode='lines',
-            line=dict(color=color, width=6),  # Utilisez une largeur de ligne plus épaisse
-            showlegend=False  # Changez cela en True si vous souhaitez voir la légende
+            line=dict(color=color, width=6),
+            hoverinfo='all',
+            hovertemplate=hovertemplate,
+            showlegend=False
         ))
+        
+        
 
     # Mise à jour du layout
     fig.update_layout(

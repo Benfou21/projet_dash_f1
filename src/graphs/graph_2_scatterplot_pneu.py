@@ -40,15 +40,27 @@ def create_scatter_plot(reference_pilot, ver_csv_path, ham_csv_path):
         show_legend = compound not in plotted_compounds
         color = color_map.get(compound, 'black')  # Utiliser 'black' si le compound n'est pas dans le dictionnaire
 
+        
+        hovertemplate = (
+            "Tour: %{x}<br>" +
+            f"Pilote: {reference_pilot}<br>" +
+            "Delta Temps: %{y:.2f} s<br>" +
+            f"Type de Pneu: {compound}<br>" +
+            "<extra></extra>"  # Cela empêche l'affichage du nom de la trace supplémentaire
+            )
+        
         fig.add_trace(go.Scatter(
             x=segment_df['LapNumber'], y=segment_df[delta_column],
-            mode='lines+markers', 
+            mode='lines+markers',
             name=f'{compound}',
             line=dict(color=color, width=2),
             marker=dict(color=color, size=8, line=dict(width=1)),
-            showlegend=show_legend
+            showlegend=show_legend,
+            hoverinfo='all',
+            hovertemplate=hovertemplate
         ))
-    
+        
+        
         plotted_compounds.add(compound)
         
         
