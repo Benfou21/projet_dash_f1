@@ -431,7 +431,7 @@ def find_closest_index(x, y, dataframe):
 
 def update_scatter_plot(selected_pilote):
     # Mettez à jour le scatter plot basé sur le pilote sélectionné
-    return create_scatter_plot(selected_pilote, "assets/data/driver_laps_2021_VER.csv", "assets/data/driver_laps_2021_HAM.csv")
+    return create_scatter_plot(selected_pilote, "src/assets/data/driver_laps_2021_VER.csv", "src/assets/data/driver_laps_2021_HAM.csv")
 
 
 
@@ -447,3 +447,8 @@ def update_speed_difference_plot(selected_pilote):
    
     # Appel à votre fonction de graphique ici
     return graph_idriss(path_max, path_ham)
+
+
+
+if __name__ == '__main__':
+    app.run_server(debug=True)
