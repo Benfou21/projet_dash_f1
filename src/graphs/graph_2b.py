@@ -19,7 +19,9 @@ def create_pitstop_plot(df_combined):
         mode='markers',
         marker=dict(color='blue', size=10),
         name='Temps de pit stop<br>avant le Grand prix d\'Espagne',
-        legendgroup='pit_avant'  
+        legendgroup='pit_avant',
+        hovertemplate='Temps  au stand: %{x}s<br>Grand Prix: %{customdata[0]}<br>Ordre d\'arrêt au stand: %{customdata[1]} arrêt <extra></extra>',  
+        customdata=df_combined[df_combined['Driver'] == 'HAM'][['GP', 'PitOrder']] 
 
     ))
 
@@ -30,7 +32,9 @@ def create_pitstop_plot(df_combined):
         mode='markers',
         marker=dict(color='blue', size=10),
         legendgroup='pit_avant',  
-        showlegend=False  # Masquer la légende pour éviter la duplication
+        showlegend=False,  # Masquer la légende pour éviter la duplication
+        hovertemplate='Temps au stand: %{x}s<br>Grand Prix: %{customdata[0]}<br>Ordre d\'arrêt au stand: %{customdata[1]} arrêt <extra></extra>',  
+        customdata=df_combined[df_combined['Driver'] == 'VER'][['GP', 'PitOrder']]
     ))
 
     # Marquer en vert les points correspondant à la session 4 (Grand Prix d'Espagne)
@@ -43,7 +47,13 @@ def create_pitstop_plot(df_combined):
         mode='markers',
         marker=dict(color='orange', size=10),
         name='Pit stop Grand prix d\'Espagne',  # Utilisation d'un seul nom pour les deux ensembles de données
-        legendgroup='pit_esp'  
+        legendgroup='pit_esp',
+        hovertemplate=(
+        "Temps  au stand: %{x}s<br>"
+        "Grand Prix:Espagne<br>"  
+        "Ordre du pit stop: %{customdata} arrêt <extra></extra>" 
+        ),
+        customdata=session_4_data_verstappen['PitOrder']
 
     ))
 
@@ -53,7 +63,13 @@ def create_pitstop_plot(df_combined):
         mode='markers',
         marker=dict(color='orange',size=10),
         legendgroup='pit_esp',  
-        showlegend=False  # Masquer la légende pour éviter la duplication
+        showlegend=False,
+        hovertemplate=(
+        "Temps  au stand: %{x}s<br>"
+        "Grand Prix:Espagne<br>"  
+        "Ordre du pit stop: %{customdata} arrêt <extra></extra>"  
+        ),
+        customdata=session_4_data_verstappen['PitOrder'] 
     ))
 
     # Ajouter la moyenne des pit stops pour Hamilton
@@ -63,7 +79,8 @@ def create_pitstop_plot(df_combined):
         mode='markers',
         marker=dict(color='black', symbol='line-ns-open' , size=15, line=dict(width=2)),
         name='Moyenne des pit stops<br>avant le Grand prix d\'Espagne',
-        legendgroup='moyenne'  
+        legendgroup='moyenne',
+        hovertemplate='Temps moyen des pitstops d\'Hamilton en 2021 avant le GP d\'Espagne: %{x}s <extra></extra>',
 
     ))
 
@@ -74,7 +91,8 @@ def create_pitstop_plot(df_combined):
         mode='markers',
         marker=dict(color='black', symbol='line-ns-open' , size=15, line=dict(width=2)),
         legendgroup='moyenne', 
-        showlegend=False  # Masquer la légende pour éviter la duplication
+        showlegend=False,  # Masquer la légende pour éviter la duplication
+        hovertemplate='Temps moyen des pitstops de Verstappen en 2021 avant le GP d\'Espagne: %{x}s <extra></extra>',  
     ))
 
     # Mise en forme du graphique
