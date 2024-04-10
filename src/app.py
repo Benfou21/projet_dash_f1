@@ -4,31 +4,35 @@ import dash_core_components as dcc
 from dash.dependencies import Input, Output, State, ClientsideFunction
 import numpy as np
 import pandas as pd
-import graphs.graph__3_circuit as graph__3_circuit
+import os
+from .graphs import graph__3_circuit
+
 import ast
-from preprocessing.preprocessing_3 import get_data
-from preprocessing.preprocessing_3 import get_max_speed
-import hover_template.hover_template_3_circuit as hover_template_3_circuit
+from .preprocessing.preprocessing_3 import get_data, get_max_speed
+
+from .hover_template import hover_template_3_circuit
+
 from dash.exceptions import PreventUpdate
 import dash_bootstrap_components as dbc
 import graphs.graph_1_classement as graph_1_classement
-from graphs.graph_2_scatterplot_pneu import create_scatter_plot
-from graphs.graph_idriss import graph_idriss  # Assurez-vous que graph_idriss est le fichier correct
 
-from preprocessing.preprocessing_2b import get_combined_pitstop_data
-from graphs.graph_2b import create_pitstop_plot
+from .graphs.graph_2_scatterplot_pneu import create_scatter_plot
+from .graphs.graph_idriss import graph_idriss  # Assurez-vous que graph_idriss est le fichier correct
+
+from .preprocessing.preprocessing_2b import get_combined_pitstop_data
+from .graphs.graph_2b import create_pitstop_plot
 
 app = dash.Dash(__name__,external_stylesheets=[dbc.themes.BOOTSTRAP])
 
 app.title = 'F1 visualiation'
 server = app.server
-path_max = "assets//data//telemetry_spain_2021_VER.csv"
-telemetry_df_max = get_data(path_max)
 
-path_ham = "assets//data//telemetry_spain_2021_HAM.csv"
+path_max = os.path.join("assets", "data", "telemetry_spain_2021_VER.csv")
+telemetry_df_max = get_data(path_max)
+path_ham = os.path.join("assets", "data", "telemetry_spain_2021_HAM.csv")
 telemetry_df_ham = get_data(path_ham)
 
-path_classement = 'assets//data//classement_2021.csv'
+path_classement = os.path.join("assets", "data", "classement_2021.csv")
 classement_df = pd.read_csv(path_classement, sep=';')
 
 
@@ -47,10 +51,12 @@ bars_figure_ham_initial = graph__3_circuit.get_bars(telemetry_df_ham, index_init
 evol_classement_1 = graph_1_classement.get_evol_classement(classement_df)
 
 # Créez le tracé scatter initial pour un pilote
-scatter_plot_initial = create_scatter_plot("HAM", "assets/data/driver_laps_2021_VER.csv", "assets/data/driver_laps_2021_HAM.csv")
+
+scatter_plot_initial = create_scatter_plot("HAM", path_max, path_ham)
 
 # Récupération données pitstops
-pitstop_data = get_combined_pitstop_data("assets//data//pitstops.csv")
+path_pit = os.path.join("assets", "data", "pitstops.csv")
+pitstop_data = get_combined_pitstop_data(path_pit)
 
 # Généré la figure Pitstop
 pitstops_graph = create_pitstop_plot(pitstop_data)
