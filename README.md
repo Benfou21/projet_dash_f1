@@ -36,3 +36,11 @@ Avant de merge, pour ne pas avoir de conflit sur le fichier App.py, renomez le.
 Si vous avez bien suivi les consignes précédentes, il ne devrait pas y avoir de problèmes. 
 
 Pour merge : allez sur la branch main ( git checkout main) puis (git merge votre_branch)
+
+
+### Deploy
+
+Ajouter Procfile et requirements.txt dans la racine du git
+Python version --> 3.11.3
+Numpy wheel --> numpy-1.26.3-cp311-cp311-win_amd64.whl   (mettre numpy==1.26.3 dans requirements.txt)
+Pandas wheel --> pandas-2.1.0-cp311-cp311-win_amd64.whl (mettre pandas==2.1.0)
