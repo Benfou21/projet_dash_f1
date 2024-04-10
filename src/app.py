@@ -75,9 +75,7 @@ dropdown_style = {
     'width': '100%',  # Ajustez la largeur à 100% de son conteneur
     'margin': '10px auto',  # Centre le dropdown avec une marge en haut et en bas
     'font-size': '16px',  # Ajustez ceci selon vos préférences et la longueur du texte
-
 }
-
 legend_style = {
     'textAlign': 'center',  # Centre le texte de la légende
     'padding': '10px',
