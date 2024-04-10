@@ -6,7 +6,6 @@ import numpy as np
 import pandas as pd
 import os
 from .graphs import graph__3_circuit
-from flask import Flask
 
 
 
@@ -29,7 +28,7 @@ from .graphs.graph_2b import create_pitstop_plot
 app = dash.Dash(__name__,external_stylesheets=[dbc.themes.BOOTSTRAP])
 
 app.title = 'F1 visualiation'
-server = Flask(__name__)
+server = app.server
 
 path_max = os.path.join("src","assets", "data", "telemetry_spain_2021_VER.csv")
 telemetry_df_max = get_data(path_max)
