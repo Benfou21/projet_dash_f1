@@ -57,5 +57,9 @@ Attention aux importations :
 
 Vous pouvez toujours travailler nomalement sur le main. Lorsque vous push, cela va build à nouveau 
 
+
+Attention ! nouvelle commande pour lancer localement : python -m src.server
+
+
 Site : 
 https://dash-equipe-15-320e9a161b3c.herokuapp.com/

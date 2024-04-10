@@ -246,7 +246,7 @@ app.layout = html.Div([
         #Partie 3 
         html.Div(style={'margin-top': '200px'}),
         
-        html.H2(children = "La vitesse et la conduite en F1"),
+        html.H1(children = "La vitesse et la conduite en F1"),
         html.Div(style={'margin-top': '100px'}),
         html.H3(children = "Observation de la vitesse"),
         html.Div(style={'margin-top': '50px'}),
