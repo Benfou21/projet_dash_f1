@@ -22,7 +22,7 @@ from graphs.graph_2b import create_pitstop_plot
 app = dash.Dash(__name__,external_stylesheets=[dbc.themes.BOOTSTRAP])
 
 app.title = 'F1 visualiation'
-
+server = app.server
 path_max = "assets//data//telemetry_spain_2021_VER.csv"
 telemetry_df_max = get_data(path_max)
 
@@ -384,7 +384,7 @@ def update_graph(clickData1, clickData2,sync_value, fig1, fig2):
             y = clickData1['points'][0]['y']
             index = find_closest_index(x, y, telemetry_df_max)
             new_fig1 = graph__3_circuit.get_circuit(telemetry_df_max, index, "Max")
-            new_fig1_bars = graph__3_circuit.get_bars(telemetry_df_max, index, "Max")
+            new_fig1_bars = graph__3_circuit.get_bars(telemetry_df_max, index, "Max",False)
             speed_value_max = telemetry_df_max.loc[index, 'Speed']
             speed_display_max = f"Current Speed: {speed_value_max} km/h"
 
@@ -397,7 +397,7 @@ def update_graph(clickData1, clickData2,sync_value, fig1, fig2):
             y = clickData2['points'][0]['y']
             index = find_closest_index(x, y, telemetry_df_max)
             new_fig2 = graph__3_circuit.get_circuit(telemetry_df_ham, index, "Ham")
-            new_fig2_bars = graph__3_circuit.get_bars(telemetry_df_ham, index, "Ham")
+            new_fig2_bars = graph__3_circuit.get_bars(telemetry_df_ham, index, "Ham",True)
             speed_value_ham = telemetry_df_ham.loc[index, 'Speed']
             speed_display_ham = f"Current Speed: {speed_value_ham} km/h"
 
@@ -425,6 +425,7 @@ def find_closest_index(x, y, dataframe):
 def update_scatter_plot(selected_pilote):
     # Mettez à jour le scatter plot basé sur le pilote sélectionné
     return create_scatter_plot(selected_pilote, "assets/data/driver_laps_2021_VER.csv", "assets/data/driver_laps_2021_HAM.csv")
+
 
 
 @app.callback(
