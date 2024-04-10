@@ -1,4 +1,4 @@
-dash==2.16.0
+dash==2.16.1
 dash_bootstrap_components==1.5.0
 fastf1==3.2.0
 Flask_Failsafe==0.2
