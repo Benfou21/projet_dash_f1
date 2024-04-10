@@ -18,11 +18,12 @@ def preprocess_idriss(ver_csv_path, ham_csv_path):
 
     return ver_df, ham_df
 
-# Chemins vers les fichiers CSV
-ver_csv_path = "assets/data/telemetry_spain_2021_VER.csv"
-ham_csv_path = "assets/data/telemetry_spain_2021_HAM.csv"
+# Chemins vers les fichiers CSV*
 
+import os
+path_max = os.path.join("src","assets", "data", "telemetry_spain_2021_VER.csv")
+path_ham = os.path.join("src","assets", "data", "telemetry_spain_2021_HAM.csv")
 # Appeler la fonction avec les chemins des fichiers CSV
-ver_df, ham_df = preprocess_idriss(ver_csv_path, ham_csv_path)
+ver_df, ham_df = preprocess_idriss(path_max, path_ham)
 
 # Afficher les DataFrames modifiés

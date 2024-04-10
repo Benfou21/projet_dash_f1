@@ -1,35 +1,41 @@
-
 import dash
-import dash_html_components as html
-import dash_core_components as dcc
+
+from dash import html, dcc
 from dash.dependencies import Input, Output, State, ClientsideFunction
 import numpy as np
 import pandas as pd
-import graphs.graph__3_circuit as graph__3_circuit
+import os
+from .graphs import graph__3_circuit
+
+
+
+
 import ast
-from preprocessing.preprocessing_3 import get_data
-from preprocessing.preprocessing_3 import get_max_speed
-import hover_template.hover_template_3_circuit as hover_template_3_circuit
+from .preprocessing.preprocessing_3 import get_data, get_max_speed
+
+from .hover_template import hover_template_3_circuit
+
 from dash.exceptions import PreventUpdate
 import dash_bootstrap_components as dbc
 import graphs.graph_1_classement as graph_1_classement
-from graphs.graph_2_scatterplot_pneu import create_scatter_plot
-from graphs.graph_idriss import graph_idriss  # Assurez-vous que graph_idriss est le fichier correct
 
-from preprocessing.preprocessing_2b import get_combined_pitstop_data
-from graphs.graph_2b import create_pitstop_plot
+from .graphs.graph_2_scatterplot_pneu import create_scatter_plot
+from .graphs.graph_idriss import graph_idriss  # Assurez-vous que graph_idriss est le fichier correct
+
+from .preprocessing.preprocessing_2b import get_combined_pitstop_data
+from .graphs.graph_2b import create_pitstop_plot
 
 app = dash.Dash(__name__,external_stylesheets=[dbc.themes.BOOTSTRAP])
 
 app.title = 'F1 visualiation'
 server = app.server
-path_max = "assets//data//telemetry_spain_2021_VER.csv"
-telemetry_df_max = get_data(path_max)
 
-path_ham = "assets//data//telemetry_spain_2021_HAM.csv"
+path_max = os.path.join("src","assets", "data", "telemetry_spain_2021_VER.csv")
+telemetry_df_max = get_data(path_max)
+path_ham = os.path.join("src","assets", "data", "telemetry_spain_2021_HAM.csv")
 telemetry_df_ham = get_data(path_ham)
 
-path_classement = 'assets//data//classement_2021.csv'
+path_classement = os.path.join("src","assets", "data", "classement_2021.csv")
 classement_df = pd.read_csv(path_classement, sep=';')
 
 
@@ -48,10 +54,14 @@ bars_figure_ham_initial = graph__3_circuit.get_bars(telemetry_df_ham, index_init
 evol_classement_1 = graph_1_classement.get_evol_classement(classement_df)
 
 # Créez le tracé scatter initial pour un pilote
-scatter_plot_initial = create_scatter_plot("HAM", "assets/data/driver_laps_2021_VER.csv", "assets/data/driver_laps_2021_HAM.csv")
+
+path_scatter_max = os.path.join("src","assets", "data", "driver_laps_2021_VER.csv")
+path_scatter_ham = os.path.join("src","assets", "data", "driver_laps_2021_HAM.csv")
+scatter_plot_initial = create_scatter_plot("HAM", path_scatter_max, path_scatter_ham)
 
 # Récupération données pitstops
-pitstop_data = get_combined_pitstop_data("assets//data//pitstops.csv")
+path_pit = os.path.join("src","assets", "data", "pitstops.csv")
+pitstop_data = get_combined_pitstop_data(path_pit)
 
 # Généré la figure Pitstop
 pitstops_graph = create_pitstop_plot(pitstop_data)
@@ -234,7 +244,7 @@ app.layout = html.Div([
         #Partie 3 
         html.Div(style={'margin-top': '200px'}),
         
-        html.H2(children = "La vitesse et la conduite en F1"),
+        html.H1(children = "La vitesse et la conduite en F1"),
         html.Div(style={'margin-top': '100px'}),
         html.H3(children = "Observation de la vitesse"),
         html.Div(style={'margin-top': '50px'}),
@@ -422,7 +432,7 @@ def find_closest_index(x, y, dataframe):
 
 def update_scatter_plot(selected_pilote):
     # Mettez à jour le scatter plot basé sur le pilote sélectionné
-    return create_scatter_plot(selected_pilote, "assets/data/driver_laps_2021_VER.csv", "assets/data/driver_laps_2021_HAM.csv")
+    return create_scatter_plot(selected_pilote, "src/assets/data/driver_laps_2021_VER.csv", "src/assets/data/driver_laps_2021_HAM.csv")
 
 
 
@@ -433,7 +443,13 @@ def update_scatter_plot(selected_pilote):
 def update_speed_difference_plot(selected_pilote):
     # Vous pouvez ajouter la logique ici pour choisir le chemin en fonction du pilote sélectionné
     # Pour l'instant, je vais utiliser les chemins en dur que vous avez fournis
-    ver_path = "assets/data/telemetry_spain_2021_VER.csv"
-    ham_path = "assets/data/telemetry_spain_2021_HAM.csv"
+    path_max = os.path.join("src","assets", "data", "telemetry_spain_2021_VER.csv")
+    path_ham = os.path.join("src","assets", "data", "telemetry_spain_2021_HAM.csv")
+   
     # Appel à votre fonction de graphique ici
-    return graph_idriss(ver_path, ham_path)
+    return graph_idriss(path_max, path_ham)
+
+
+
+if __name__ == '__main__':
+    app.run_server(debug=True)

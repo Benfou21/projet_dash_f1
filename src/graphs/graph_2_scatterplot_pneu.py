@@ -1,4 +1,10 @@
 import plotly.graph_objs as go
+
+
+import os
+import sys
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 from preprocessing.preprocessing_2 import preprocess_data
 
 def create_scatter_plot(reference_pilot, ver_csv_path, ham_csv_path):

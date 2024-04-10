@@ -33,16 +33,21 @@ def load_and_save_driver_laps_race_pilote(year, pilote):
 #load_and_save_driver_laps_race_pilote(2021,'HAM')
 #load_and_save_driver_laps_race_pilote(2021,'VER')
 
-
+import os
 def add_delta_columns(ver_csv_path, ham_csv_path):
     # Charger les données des CSV dans des DataFrames
+    
+
     ver_df = pd.read_csv(ver_csv_path)
+    
     ham_df = pd.read_csv(ham_csv_path)
+    
 
     # Convertir les temps au tour en timedelta
     ver_df['LapTime'] = pd.to_timedelta(ver_df['LapTime'])
     ham_df['LapTime'] = pd.to_timedelta(ham_df['LapTime'])
-
+    
+    
     # Calculer les différences de temps entre VER et HAM
     delta_ver = ver_df['LapTime'] - ham_df['LapTime']
     delta_ham = ham_df['LapTime'] - ver_df['LapTime']
@@ -83,12 +88,14 @@ def preprocess_data(ver_csv_path, ham_csv_path):
     return ver_df, ham_df
 
 
-
+import os
 # Chemins vers les fichiers CSV
-ver_csv_path = "assets/data/driver_laps_2021_VER.csv"
-ham_csv_path = "assets/data/driver_laps_2021_HAM.csv"
+# ver_csv_path = os.path.join("src","assets", "data", "driver_laps_2021_VER.csv")
+# ham_csv_path = os.path.join("src","assets", "data", "driver_laps_2021_HAM.csv")
+
+
 
 # Appeler la fonction avec les chemins des fichiers CSV
-ver_df, ham_df = add_delta_columns(ver_csv_path, ham_csv_path)
+#ver_df, ham_df = add_delta_columns(ver_csv_path, ham_csv_path)
 
 # Afficher les DataFrames modifiés
