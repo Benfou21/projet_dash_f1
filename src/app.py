@@ -348,7 +348,7 @@ app.layout = html.Div([
     html.Div(style={'margin-top': '50px'}),
     html.Div([
         dcc.Graph(id='speed-difference-plot')  # Nouvel ID pour le graphique de différence de vitesse
-    ], style={'padding': '20px', 'display': 'flex', 'justifyContent': 'center'}),  
+    ], style={'paddingLeft': '15%', 'paddingRight': '15%', 'alignItems': 'center', 'justifyContent': 'center',}),  
     
     
     html.Div(style={'margin-top': '200px'}),

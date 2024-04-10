@@ -98,8 +98,9 @@ def graph_idriss(ver_csv_path, ham_csv_path):
     xaxis=dict(showticklabels=False),
     yaxis=dict(showticklabels=False),
     margin=dict(l=0, r=0, t=40, b=0),  # Margin top pour le titre
-    width=1200,
-    height=800,
+    autosize=True,
+    # width=1200,
+    # height=800,
 )
     fig.add_trace(go.Scatter(
     x=[None], y=[None], mode='lines',
