@@ -149,7 +149,9 @@ def create_scatter_plot(reference_pilot, ver_csv_path, ham_csv_path):
         borderwidth=1
     ),
     margin=dict(l=40, r=40, t=60, b=40),  # Marges autour du graphique
-    autosize=False, width=1400, height=800
+    # autosize=False, width=1400, height=800
+    height=800,
+    autosize=True,
 )
 
     # Retourner la figure prête pour l'affichage

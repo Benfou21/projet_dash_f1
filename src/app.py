@@ -235,10 +235,10 @@ app.layout = html.Div([
     html.Div([
         dcc.Graph(id='pitstop-graph', figure=pitstops_graph)
     ], style={
-        'display': 'flex', 
+        # 'display': 'flex', 
         'justifyContent': 'center', 
-        'width': '100%',  
-        'height': 'auto'  
+        # 'width': '100%',  
+        # 'height': 'auto'  
     }),
         
         #Partie 3 
@@ -259,48 +259,56 @@ app.layout = html.Div([
         ]),   
         html.Div(style={'margin-top': '50px'}),
         
-        # Horizontal block for Max
+        
         html.Div([
-            # Vertical sub-block for Max's circuit graph
+            
+            
+            html.Div([
+                dcc.Graph(id='circuit-graph-1', figure=circuit_figure_max_initial)
+            ], style={'display': 'inline-block','flex' : '1'}),
+            
+            html.Div([
+                dcc.Graph(id='circuit-graph-2', figure=circuit_figure_ham_initial)
+            ], style={'display': 'inline-block','flex' : '1'}),
+            
+        ], style={'display': 'flex', 'justifyContent': 'center', 'alignItems': 'center'}), # This ensures that the sub-blocks for Max are in one line
+        
+        html.Div([
             html.Div(
                 id='speed-display-1', 
                 children=f'Current Speed: {telemetry_df_max["Speed"][0]} km/h', 
                 style={
-                    'fontSize': '18px',
+                    'flex': '1',
+                    'fontSize': '12px',
                     'display': 'inline-block',
                     'textAlign': 'center',
                     'border': '2px solid #344feb',  # color border
                     'borderRadius': '10px',  # Rounded corners
                     'backgroundColor': '#f9f9f9',  # Light grey background
                     'boxShadow': '0px 4px 8px rgba(0, 0, 0, 0.1)',  # Subtle shadow
-                    'padding': '10px'
+                    'padding': '5px',
+                    'margin': '0 200px',
                 }
             ),
-            html.Div([
-                dcc.Graph(id='circuit-graph-1', figure=circuit_figure_max_initial)
-            ], style={'display': 'inline-block'}),
-            
-            html.Div([
-                dcc.Graph(id='circuit-graph-2', figure=circuit_figure_ham_initial)
-            ], style={'display': 'inline-block'}),
             html.Div(
                 id='speed-display-2', 
                 children=f'Current Speed: {telemetry_df_ham["Speed"][0]} km/h',  
                 style={
-                    
-                    'fontSize': '18px',
+                    'flex': '1',
+                    'fontSize': '12px',
                     'display': 'inline-block',
-                    
                     'textAlign': 'center',
-                    'border': '2px solid #344feb',  # color border
-                    'borderRadius': '10px',  # Rounded corners
-                    'backgroundColor': '#f9f9f9',  # Light grey background
-                    'boxShadow': '0px 4px 8px rgba(0, 0, 0, 0.1)',  # Subtle shadow
-                    'padding': '10px',
+                    'border': '2px solid #344feb', 
+                    'borderRadius': '10px',  
+                    'backgroundColor': '#f9f9f9', 
+                    'boxShadow': '0px 4px 8px rgba(0, 0, 0, 0.1)', 
+                    'padding': '5px',
+                    'margin': '0 200px',
+                    
                     
                 }
             ),
-        ], style={'display': 'flex', 'justifyContent': 'center', 'alignItems': 'center'}), # This ensures that the sub-blocks for Max are in one line
+        ], style={'justifyContent': 'space-between', 'alignItems': 'center', 'display': 'flex',}),
         
         html.Div([
             dcc.Checklist(
@@ -309,17 +317,17 @@ app.layout = html.Div([
                 value=[],
                 labelStyle={'display': 'block'}
             )
-    ], style={'textAlign': 'center', 'margin': '5px'}),
+        ], style={'textAlign': 'center', 'margin': '5px'}),
         # Horizontal block for Ham
         html.Div([
              # Vertical sub-block for Max's bar graph
             html.Div([
                 dcc.Graph(id='speed-graph-1', figure=bars_figure_max_initial)
-            ], style={'display': 'inline-block'}),
+            ], style={'display': 'inline-block','flex' : '1'}),
             # Vertical sub-block for Ham's bar graph
             html.Div([
                 dcc.Graph(id='speed-graph-2', figure=bars_figure_ham_initial)
-            ], style={'display': 'inline-block'}),
+            ], style={'display': 'inline-block','flex' : '1'}),
         ], style={'display': 'flex', 'justifyContent': 'center', 'alignItems': 'center'}),
         # This ensures that the sub-blocks for Ham are in one line
         
@@ -375,12 +383,12 @@ def update_graph(clickData1, clickData2,sync_value, fig1, fig2):
                 index_ham = find_closest_index(x, y, telemetry_df_ham)
 
                 new_fig1 = graph__3_circuit.get_circuit(telemetry_df_max, index_max, "Max")
-                new_fig1_bars = graph__3_circuit.get_bars(telemetry_df_max, index_max, "Max")
+                new_fig1_bars = graph__3_circuit.get_bars(telemetry_df_max, index_max, "Max",False)
                 speed_value_max = telemetry_df_max.loc[index_max, 'Speed']
                 speed_display_max = f"Current Speed: {speed_value_max} km/h"
 
                 new_fig2 = graph__3_circuit.get_circuit(telemetry_df_ham, index_ham, "Ham")
-                new_fig2_bars = graph__3_circuit.get_bars(telemetry_df_ham, index_ham, "Ham")
+                new_fig2_bars = graph__3_circuit.get_bars(telemetry_df_ham, index_ham, "Ham",True)
                 speed_value_ham = telemetry_df_ham.loc[index_ham, 'Speed']
                 speed_display_ham = f"Current Speed: {speed_value_ham} km/h"
 
