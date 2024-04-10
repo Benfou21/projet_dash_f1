@@ -27,12 +27,12 @@ app = dash.Dash(__name__,external_stylesheets=[dbc.themes.BOOTSTRAP])
 app.title = 'F1 visualiation'
 server = app.server
 
-path_max = os.path.join("assets", "data", "telemetry_spain_2021_VER.csv")
+path_max = os.path.join("src","assets", "data", "telemetry_spain_2021_VER.csv")
 telemetry_df_max = get_data(path_max)
-path_ham = os.path.join("assets", "data", "telemetry_spain_2021_HAM.csv")
+path_ham = os.path.join("src","assets", "data", "telemetry_spain_2021_HAM.csv")
 telemetry_df_ham = get_data(path_ham)
 
-path_classement = os.path.join("assets", "data", "classement_2021.csv")
+path_classement = os.path.join("src","assets", "data", "classement_2021.csv")
 classement_df = pd.read_csv(path_classement, sep=';')
 
 
@@ -52,10 +52,12 @@ evol_classement_1 = graph_1_classement.get_evol_classement(classement_df)
 
 # Créez le tracé scatter initial pour un pilote
 
-scatter_plot_initial = create_scatter_plot("HAM", path_max, path_ham)
+path_scatter_max = os.path.join("src","assets", "data", "driver_laps_2021_VER.csv")
+path_scatter_ham = os.path.join("src","assets", "data", "driver_laps_2021_HAM.csv")
+scatter_plot_initial = create_scatter_plot("HAM", path_scatter_max, path_scatter_ham)
 
 # Récupération données pitstops
-path_pit = os.path.join("assets", "data", "pitstops.csv")
+path_pit = os.path.join("src","assets", "data", "pitstops.csv")
 pitstop_data = get_combined_pitstop_data(path_pit)
 
 # Généré la figure Pitstop
@@ -440,7 +442,8 @@ def update_scatter_plot(selected_pilote):
 def update_speed_difference_plot(selected_pilote):
     # Vous pouvez ajouter la logique ici pour choisir le chemin en fonction du pilote sélectionné
     # Pour l'instant, je vais utiliser les chemins en dur que vous avez fournis
-    ver_path = "assets/data/telemetry_spain_2021_VER.csv"
-    ham_path = "assets/data/telemetry_spain_2021_HAM.csv"
+    path_max = os.path.join("src","assets", "data", "telemetry_spain_2021_VER.csv")
+    path_ham = os.path.join("src","assets", "data", "telemetry_spain_2021_HAM.csv")
+   
     # Appel à votre fonction de graphique ici
-    return graph_idriss(ver_path, ham_path)
+    return graph_idriss(path_max, path_ham)
