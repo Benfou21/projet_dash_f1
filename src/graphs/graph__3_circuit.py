@@ -44,8 +44,9 @@ def get_circuit(data,index,pilote):
         title=f'Vitesse selon la position du circuit de {pilote}',
         
         showlegend=False,
-        width = 800,
-        height = 500,
+        # width = 800,
+        # height = 500,
+        autosize=True,
         xaxis=dict(
             range=[min(x), max(x)], 
             autorange=False,
@@ -132,9 +133,9 @@ def get_bars(data,index,pilote,legend):
         xaxis_title='Temps en seconde', 
         yaxis_title='Vitesse en km/h', 
         showlegend = legend,
-       
-        width = 800,
-        height = 500
+        autosize=True,
+        # width = 800,
+        # height = 500
         
     )
     
