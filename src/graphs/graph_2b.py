@@ -83,8 +83,8 @@ def create_pitstop_plot(df_combined):
         xaxis_title='Temps (s)',
         yaxis_title='Pilotes',
         showlegend=True,
-        
-        width=1200,  # Largeur en pixels
+        autosize=True,
+        # width=1200,  # Largeur en pixels
         height=600   # Hauteur en pixels
     )
 

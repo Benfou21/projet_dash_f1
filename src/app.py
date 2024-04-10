@@ -236,10 +236,9 @@ app.layout = html.Div([
     html.Div([
         dcc.Graph(id='pitstop-graph', figure=pitstops_graph)
     ], style={
-        'display': 'flex', 
+        
         'justifyContent': 'center', 
-        'width': '100%',  
-        'height': 'auto'  
+         
     }),
     #################   
         
