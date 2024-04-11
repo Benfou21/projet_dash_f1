@@ -7,9 +7,13 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')
 
 from preprocessing.preprocessing_2 import preprocess_data
 
-def create_scatter_plot(reference_pilot, ver_csv_path, ham_csv_path):
+def create_scatter_plot(reference_pilot , ver_csv_path, ham_csv_path):
     # Charger les données des CSV dans des DataFrames et ajouter les segments
     ver_df, ham_df = preprocess_data(ver_csv_path, ham_csv_path)
+    
+    #pour debugger
+    # print("1er print")
+    # print(ver_df[["LapNumber"]])
 
     # Définition d'un dictionnaire pour la correspondance des couleurs
     color_map = {
@@ -35,7 +39,7 @@ def create_scatter_plot(reference_pilot, ver_csv_path, ham_csv_path):
         mode='lines',
         line=dict(color="black", width=1, dash="dot"),
         name='Pit Stop 1'
-         ))
+        ))
 
 
     # Un dictionnaire pour garder une trace des numéros de pit stop pour chaque compound
@@ -43,6 +47,12 @@ def create_scatter_plot(reference_pilot, ver_csv_path, ham_csv_path):
 
     # Traiter et tracer une ligne pour chaque segment de chaque compound
     for (compound, segment), segment_df in df_to_plot.groupby(['Compound', 'Segment']):
+        
+        # pour debug
+        # print(compound, segment)
+        # print(segment_df[['LapNumber', delta_column]])
+        
+        
         show_legend = compound not in plotted_compounds
         color = color_map.get(compound, 'black')  # Utiliser 'black' si le compound n'est pas dans le dictionnaire
 
@@ -65,6 +75,14 @@ def create_scatter_plot(reference_pilot, ver_csv_path, ham_csv_path):
             hoverinfo='all',
             hovertemplate=hovertemplate
         ))
+            # pour debug
+#         fig.add_trace(go.Scatter(
+#                     x=ver_df['LapNumber'],
+#                     y=ver_df['delta_ver_seconds'],
+#                     mode='markers',
+#                     name='Debug Trace',
+#                     marker=dict(color='purple', size=5),
+# ))
         
         
         plotted_compounds.add(compound)
@@ -91,12 +109,15 @@ def create_scatter_plot(reference_pilot, ver_csv_path, ham_csv_path):
                     line=dict(color="black", width=1, dash="dot"),
                     name=f'Pit Stop {pit_stop_number}'
                 ))
+                
+                
+                
+
 
 
     # Définir la plage de l'axe des abscisses
     fig.update_xaxes(range=[0, 70])
     lim = max(df_to_plot[delta_column]+1)
-    lim2 = -lim
     # Ajouter un arrière-plan coloré pour les valeurs positives et négatives
     fig.add_shape(
         # Rectangle coloré pour les valeurs positives

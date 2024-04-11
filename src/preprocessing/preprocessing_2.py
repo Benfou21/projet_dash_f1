@@ -41,7 +41,7 @@ def add_delta_columns(ver_csv_path, ham_csv_path):
     ver_df = pd.read_csv(ver_csv_path)
     
     ham_df = pd.read_csv(ham_csv_path)
-    
+    print(ver_df[["LapNumber"]])
 
     # Convertir les temps au tour en timedelta
     ver_df['LapTime'] = pd.to_timedelta(ver_df['LapTime'])
@@ -75,6 +75,11 @@ def preprocess_data(ver_csv_path, ham_csv_path):
     
     # Ajoutez ici d'autres traitements si nécessaire
     ver_df, ham_df = add_delta_columns(ver_csv_path, ham_csv_path)
+    
+    #pour debug
+    # print(ver_df[["LapNumber"]])
+    
+    
     # Assurez-vous que les colonnes nécessaires sont présentes
     if 'Compound' not in ver_df or 'LapNumber' not in ver_df:
         raise ValueError("Les données requises sont manquantes dans ver_df")
@@ -85,14 +90,27 @@ def preprocess_data(ver_csv_path, ham_csv_path):
     ver_df = add_segments(ver_df)
     ham_df = add_segments(ham_df)
 
+
+    # # Encore une fois, imprimez les tours manquants pour vérifier
+    # print(ver_df[ver_df['LapNumber'] == 5])
+    # print(ham_df[ham_df['LapNumber'] == 5])
+    
     return ver_df, ham_df
 
 
-import os
-# Chemins vers les fichiers CSV
+
+# import os
+# # Chemins vers les fichiers CSV
 # ver_csv_path = os.path.join("src","assets", "data", "driver_laps_2021_VER.csv")
 # ham_csv_path = os.path.join("src","assets", "data", "driver_laps_2021_HAM.csv")
 
+
+# ver_df = pd.read_csv(ver_csv_path)
+# ham_df = pd.read_csv(ham_csv_path)
+
+# # Par exemple, si vous savez que le tour 5 est manquant, vérifiez:
+# print(ver_df[ver_df['LapNumber'] == 24])
+# print(ham_df[ham_df['LapNumber'] == 24])
 
 
 # Appeler la fonction avec les chemins des fichiers CSV
