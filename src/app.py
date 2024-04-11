@@ -297,7 +297,7 @@ app.layout = html.Div([
         html.Div([
             html.Div(
                 id='speed-display-1', 
-                children=f'Current Speed: {telemetry_df_max["Speed"][0]} km/h', 
+                children=f'Vitesse actuelle: {telemetry_df_max["Speed"][0]} km/h', 
                 style={
                     'flex': '1',
                     'fontSize': '16px',
