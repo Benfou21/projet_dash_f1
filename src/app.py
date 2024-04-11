@@ -191,17 +191,19 @@ app.layout = html.Div([
     html.H2(children = "Stratégie des Pneus et leurs impacts sur le temps au tour"),
     html.Div(style={'margin-top': '50px'}),
     html.P(children=[
+        "Description : ",
+        html.Br(),
         "Ce graphique met en evidence les delta de temps entre Verstappen et Hamilton en",
         html.Br(),
-        "fonction des tour.La liste déroulantes en bas du graphique permet de changer de",
+        "fonction des tours et en fonction des pneus. La liste déroulantes en bas du graphique permet de changer de",
         html.Br(),
-        "pilote.En vert nous avons un delta positif et en rouge le delta est négatif.",
+        "pilote. En vert nous avons un delta positif et en rouge le delta est négatif.",
     ]),      
-    html.Div(style={'margin-top': '100px'}), 
+    html.Div(style={'margin-top': '50px'}), 
     html.Div([
         html.P(children=[
         html.Br(),
-        "changement de pilote dans cette liste déroulante.",]),
+        "Changement de pilote dans cette liste déroulante.",]),
         html.Div([
             dcc.Dropdown(
                 id='pilote-dropdown',
@@ -216,12 +218,19 @@ app.layout = html.Div([
         ], style=graph_container_style),
         dcc.Graph(id='delta-scatter-plot', figure=scatter_plot_initial),
     ]),
-    
+    html.Div(style={'margin-top': '50px'}), 
+    html.P(children=[
+            "Observation",
+            html.Br(),
+           
+    ]),  
   
     html.Div(style={'margin-top': '100px'}),
     html.H2(children = "Les temps de pit stops des pilotes"),
     html.Div(style={'margin-top': '50px'}),
     html.P(children=[
+        "Description : ",
+        html.Br(),
         "Ce graphique permet d'observer les temps que passes les deux pilotes lors des arrêts aux ",
         html.Br(),
         "stands. Les points bleu corresponds aux pit stops antérieurs au GP d'Espagne.Les points",
@@ -230,7 +239,7 @@ app.layout = html.Div([
         html.Br(),
         "points bleu ou orange en cliquant sur la légende.",
     ]),  
-    html.Div(style={'margin-top': '100px'}),
+    html.Div(style={'margin-top': '50px'}),
     # Graphes Pitstops
     html.Div([
         dcc.Graph(id='pitstop-graph', figure=pitstops_graph)
@@ -240,7 +249,17 @@ app.layout = html.Div([
         # 'width': '100%',  
         # 'height': 'auto'  
     }),
+    html.Div(style={'margin-top': '50px'}),
+    html.P(children=[
+        "Observation : ",
+        html.Br(),
+        "On remarque que l'équipe de Verstappen a été plus consitant sur la course que celle de Hamilton lors du GP d'Espagne.",
+        html.Br(),
+        "On note cependant que Hamilton possède le temps le plus rapide.",
+        html.Br(),
+        "Sur ce point Max Verstappen possède l'avantage."
         
+    ]),  
         #Partie 3 
         html.Div(style={'margin-top': '200px'}),
         
@@ -249,6 +268,8 @@ app.layout = html.Div([
         html.H3(children = "Observation de la vitesse"),
         html.Div(style={'margin-top': '50px'}),
         html.P(children=[
+            "Description : ",
+            html.Br(),
             "Ces graphiques vous montrent la vitesse des deux pilotes sur leurs meilleurs tours.",
             html.Br(),
             "Vous pouvez cliquer sur une position du circuit pour vous y déplacer et observer la",
@@ -279,7 +300,7 @@ app.layout = html.Div([
                 children=f'Current Speed: {telemetry_df_max["Speed"][0]} km/h', 
                 style={
                     'flex': '1',
-                    'fontSize': '12px',
+                    'fontSize': '16px',
                     'display': 'inline-block',
                     'textAlign': 'center',
                     'border': '2px solid #344feb',  # color border
@@ -295,7 +316,7 @@ app.layout = html.Div([
                 children=f'Current Speed: {telemetry_df_ham["Speed"][0]} km/h',  
                 style={
                     'flex': '1',
-                    'fontSize': '12px',
+                    'fontSize': '16px',
                     'display': 'inline-block',
                     'textAlign': 'center',
                     'border': '2px solid #344feb', 
@@ -337,20 +358,41 @@ app.layout = html.Div([
     html.H3(children = "Observation de la vitesse relatives sur les section de circuit "),
     html.Div(style={'margin-top': '50px'}),
     html.P(children=[
+        "Description : ",
+        html.Br(),
         "Ce graphique montre les section de circuit ou Max Verstappen est plus rapide que Lewis",
         html.Br(),
-        "Hamilton.En rouge sont les protions de circuit ou Verstappen avait une vistesse supérieur",
+        "Hamilton. En rouge sont les protions de circuit ou Verstappen avait une vistesse inférieur",
         html.Br(),
         "à Hamilton. En vert sont les protions de circuit ou Verstappen avait une vistesse",
         html.Br(),
-        " inférieur à Hamilton."
+        " supérieur à Hamilton."
     ]),
     html.Div(style={'margin-top': '50px'}),
     html.Div([
         dcc.Graph(id='speed-difference-plot')  # Nouvel ID pour le graphique de différence de vitesse
     ], style={'paddingLeft': '15%', 'paddingRight': '15%', 'alignItems': 'center', 'justifyContent': 'center',}),  
-    
-    
+    html.Div(style={'margin-top': '50px'}),
+    html.P(children=[
+            "Observation : ",
+            html.Br(),
+            "On remarque que Max Verstappen est plus rapide en sortie de virage. Il est cependant plus lent que Lewis dans les virages.",
+            html.Br(),
+            " Enfin la grande ligne droite du circuit est à l'avantage de Lewis.",
+            html.Br(),
+            "On ne peut faire ressortir l'un des pilotes comme celui ayant la conduite la plus rapide. "
+           
+        ]),  
+    html.Div(style={'margin-top': '200px'}),
+    html.H1("Conlusion"),
+    html.P(children=[
+            "Le vainqueur de le course est Lewis Hamilton, Max Verstappen finissant deuxième.",
+            html.Br(),
+            " Ces graphiques nous ont montrés une bataille très sérrée entre les deux pilotes, les deux possèdants des conduites performantes",
+            html.Br(),
+            "C'est la stratégie des pneus de Hamilton qui lui a donné sa victoire en fin de course."
+           
+        ]), 
     html.Div(style={'margin-top': '200px'}),
     ],
     style={'textAlign': 'center'},  

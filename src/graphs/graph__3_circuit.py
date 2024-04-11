@@ -17,16 +17,21 @@ def get_circuit(data,index,pilote):
     x = data['X']
     y = data['Y']
     speed = data['Speed']
-    
+    max_speed = speed.max()
+    min_speed = speed.min()
     colors = create_colors(speed)
+    min_line_width = 2
+    max_line_width = 10
     
     for i in range(len(x) - 1):
+        relative_speed = (speed.iloc[i] - min_speed) / (max_speed - min_speed)
+        line_width = min_line_width + (max_line_width - min_line_width) * relative_speed
         text = [str(speed.iloc[i]) + ' km/h'] * 2
         fig.add_trace(go.Scatter(
             x=x[i:i+2],
             y=y[i:i+2],
             mode='lines',
-            line=dict(color=colors[i], width=2),
+            line=dict(color=colors[i], width=5),
             showlegend=False,
             text=text,  # Utiliser le texte de survol
             hoverinfo='text'
@@ -73,27 +78,6 @@ def get_circuit(data,index,pilote):
     
     return fig
 
-def get_color_2(speed_value, min_speed, max_speed):
-    
-    relative_speed = (speed_value - min_speed) / (max_speed - min_speed)
-    saturation = 50 + 50 * (relative_speed)  # Saturation varie à hauteur de 40%
-    
-    if speed_value < 100:
-        return f"hsl(0, {saturation}%, 50%)"  # Rouge avec saturation variable
-    elif 100 <= speed_value < 250:
-        return f"hsl(39, {saturation}%, 50%)"  # Orange avec saturation variable
-    else:
-        return f"hsl(120, {saturation}%, 50%)"  # Vert avec saturation variable
-
-
-def get_color(speed_value):
-    if speed_value < 100:
-        return 'red'
-    elif 100 <= speed_value < 250:
-        return 'orange'
-    else:
-        return 'green'
-
 
 def get_bars(data,index,pilote,legend):
     
@@ -121,15 +105,15 @@ def get_bars(data,index,pilote,legend):
 
     fig.add_trace(go.Bar(x=elapsed_time_index, y=speed_index, marker_color=colors_index, width=0.6, showlegend=True, name="Point selectionné"))
 
-    fig.add_trace(go.Bar(x=[None], y=[None], marker_color='green', name='Vert - Vitesses de pointe'))
-    fig.add_trace(go.Bar(x=[None], y=[None], marker_color='orange', name='Orange - Accélération/Décélération'))
-    fig.add_trace(go.Bar(x=[None], y=[None], marker_color='red', name='Rouge - Freinage'))
+    # fig.add_trace(go.Bar(x=[None], y=[None], marker_color='green', name='Vert - Vitesses de pointe'))
+    # fig.add_trace(go.Bar(x=[None], y=[None], marker_color='orange', name='Orange - Accélération/Décélération'))
+    # fig.add_trace(go.Bar(x=[None], y=[None], marker_color='red', name='Rouge - Freinage'))
     
     
 
     # Personnaliser le layout si nécessaire
     fig.update_layout(
-        title=f'Vitesse sur différentes plages horaires de {pilote}', 
+        title=f'Vitesse de {pilote} lors de son tour', 
         xaxis_title='Temps en seconde', 
         yaxis_title='Vitesse en km/h', 
         showlegend = legend,
@@ -170,13 +154,47 @@ def create_colors(speed):
     
     colors = []
     for s in speed:
-        if s < 100:
-            colors.append(get_color_2(s, min_red_speed, max_red_speed))
-        elif 100 <= s < 250:
-            colors.append(get_color_2(s, min_orange_speed, max_orange_speed))
-        else:
-            colors.append(get_color_2(s, min_green_speed, max_green_speed))
+        colors.append(get_color_with_single_hue(s, 0, max(speed)))
+        # if s < 100:
+        #     colors.append(get_color_2(s, min_red_speed, max_red_speed))
+        # elif 100 <= s < 250:
+        #     colors.append(get_color_2(s, min_orange_speed, max_orange_speed))
+        # else:
+        #     colors.append(get_color_2(s, min_green_speed, max_green_speed))
     return colors
             
 
 
+def get_color_with_single_hue(speed_value, min_speed, max_speed):
+    
+    hue = 90
+    
+    # Calculer la valeur relative de la vitesse pour varier la saturation
+    relative_speed = (speed_value - min_speed) / (max_speed - min_speed)
+    saturation = 100 * relative_speed  
+    lumi= 10 + 45* relative_speed
+    # Retourner la couleur HSL avec la saturation variable
+    return f"hsl({hue}, {saturation}%, {lumi}%)"
+
+
+
+def get_color_2(speed_value, min_speed, max_speed):
+    
+    relative_speed = (speed_value - min_speed) / (max_speed - min_speed)
+    saturation = 50 + 50 * (relative_speed)  # Saturation varie à hauteur de 40%
+    
+    if speed_value < 100:
+        return f"hsl(0, {saturation}%, 50%)"  # Rouge avec saturation variable
+    elif 100 <= speed_value < 250:
+        return f"hsl(39, {saturation}%, 50%)"  # Orange avec saturation variable
+    else:
+        return f"hsl(120, {saturation}%, 50%)"  # Vert avec saturation variable
+
+
+def get_color(speed_value):
+    if speed_value < 100:
+        return 'red'
+    elif 100 <= speed_value < 250:
+        return 'orange'
+    else:
+        return 'green'

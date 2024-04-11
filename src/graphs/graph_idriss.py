@@ -104,7 +104,7 @@ def graph_idriss(ver_csv_path, ham_csv_path):
 )
     fig.add_trace(go.Scatter(
     x=[None], y=[None], mode='lines',
-    name='Max plus rapide (rouge)',
+    name='Lewis plus rapide (rouge)',
     line=dict(color='red', width=10)
 ))
     fig.add_trace(go.Scatter(
@@ -114,7 +114,7 @@ def graph_idriss(ver_csv_path, ham_csv_path):
     ))
     fig.add_trace(go.Scatter(
         x=[None], y=[None], mode='lines',
-        name='Lewis plus rapide (vert)',
+        name='Max plus rapide (vert)',
         line=dict(color='green', width=10)
     ))
 
@@ -127,22 +127,27 @@ def graph_idriss(ver_csv_path, ham_csv_path):
             x=0.01
         )
     )
-
     return fig
 
 # Fonction pour obtenir une couleur basée sur la vitesse
 def get_color_based_on_speed(normalized_speed):
     # Ici vous pouvez créer un gradient de couleurs personnalisé
+    
+    if normalized_speed == 0:
+        return f"hsl(60, 100%, {50}%)"
     if normalized_speed < 0:
         # Pour les vitesses plus lentes que la moyenne, du rouge au blanc
-        return px.colors.sample_colorscale(px.colors.diverging.RdYlGn, -normalized_speed)[0]
+        return get_color_with_hue(0,-normalized_speed)
     else:
-        # Pour les vitesses plus rapides que la moyenne, du blanc au vert
-        return px.colors.sample_colorscale(px.colors.diverging.RdYlGn, normalized_speed)[0]
+        return get_color_with_hue(120,normalized_speed)
+    #     return px.colors.sample_colorscale(px.colors.diverging.RdYlGn, -normalized_speed)[0]
+    # else:
+    #     # Pour les vitesses plus rapides que la moyenne, du blanc au vert
+    #     return px.colors.sample_colorscale(px.colors.diverging.RdYlGn, normalized_speed)[0]
 
-# Assurez-vous d'avoir cette partie de code pour exécuter le script indépendamment
-# if __name__ == "__main__":
-#     ver_csv_path = "assets/data/telemetry_spain_2021_VER.csv"
-#     ham_csv_path = "assets/data/telemetry_spain_2021_HAM.csv"
-#     fig = graph_idriss(ver_csv_path, ham_csv_path)
-#     fig.show()
+
+def get_color_with_hue(hue,normalized_speed):
+    
+    saturation = 50 + 50 * normalized_speed  
+   
+    return f"hsl({hue}, {saturation}%, {50}%)"
