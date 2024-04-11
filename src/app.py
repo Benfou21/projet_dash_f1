@@ -102,20 +102,19 @@ graph_container_style = {
 
 app.layout = html.Div([
         html.Div(style={'margin-top': '100px'}), 
-        html.H1(children=["Comprendre une course de Formule 1,la bataille",
+        html.H1(children=["Comprendre une course de Formule 1, la bataille",
                         html.Br(),
                         "Verstappen-Hamilton lors du GP d'Espagne 2021"]),
         html.Div(style={'margin-top': '50px'}), 
-        html.P(children=[
-            "Une course de Formule 1 dure deux heures, et les pilotes parcourent le circuit près de 60 fois à plus de 300 km/h. Ils se battent tous pour dépasser leurs adversaires et",
-            html.Br(),
-            "franchir la ligne d'arrivée en premier, mais un seul gagne! Le spectacle d'une course est captivant, mais pour un amateur, il est compliqué de comprendre les stratégies et",
-            html.Br(),
-            "les idées que suivent les équipes et les pilotes pour parvenir à la victoire.La bataille pour remporter le Grand Prix d'Espagne 2021 servira d'exemple pour",
-            html.Br(),
-            "comprendre certains de ces principes de course."
-        ]),
-        html.Div(style={'margin-top': '100px'}),        
+        html.P(children=
+               '''Une course de Formule 1 dure deux heures, et les pilotes parcourent le circuit près de 60 fois à plus 
+               de 300 km/h. Ils se battent tous pour dépasser leurs adversaires et
+               franchir la ligne d'arrivée en premier, mais un seul gagne! Le spectacle d'une course est captivant, 
+               mais pour un amateur, il est compliqué de comprendre les stratégies et
+               les idées que suivent les équipes et les pilotes pour parvenir à la victoire.La bataille pour remporter 
+               le Grand Prix d'Espagne 2021 servira d'exemple pour comprendre certains de ces principes de course.'''
+        , style={'text-align': 'justify'}),
+        html.Div(style={'margin-top': '30px'}),        
         html.Table([
                 html.Tr([
                     html.Td([
@@ -142,45 +141,58 @@ app.layout = html.Div([
         
         html.Div(style={'margin-top': '30px'}),  
         
-        html.P(children=[
-            " La saison 2021 est l'une des plus disputée des 10 dernières années. L'expérience du",
-            html.Br(),
-            "champion en titre Lexis Hamilton et le talent brut de Max Verstappen s'affronte tout",
-            html.Br(),
-            "au long de l'année 2021. Les 2 pilotes se livrent d'incroyables duels pour remporter",
-            html.Br(),
-            "le championnat du monde. Le GP d'Espagne se déroule au début de la saison, alors que",
-            html.Br(),
-            "Hamilton est déjà 1er au classement. Verstappen se bat pour ne pas prendre trop de retard."
-        ]),   
-        html.Div(style={'margin-top': '200px'}), 
+        html.P(children=
+            '''La saison 2021 est l'une des plus disputée des 10 dernières années. L'expérience du
+            champion en titre Lexis Hamilton et le talent brut de Max Verstappen s'affrontent tout
+            au long de l'année. Les deux pilotes livrent d'incroyables duels pour remporter
+            le championnat du monde. Le Grand Prix d'Espagne se déroule au début de la saison, alors que
+            Lewis Hamilton a pris la tête du classement. Verstappen, qui finira par remporter le titre,
+            se bat pour ne pas prendre trop de retard.'''
+            , style={'text-align': 'justify'}), 
         
-        html.H1(children = "Le Grand Prix d'Espagne 2021 "),
-        
-        html.P(children=[
-            "Le GP d'Espagne 2021 prend place le dimanche 9 mai à Barcelone, sur le circuit de",
-            html.Br(), 
-            "Barcelona-Catalunya, utilisé depuis 1991.La caractéristique principale du circuit",
-            html.Br(),
-            "est sa longue ligne droite des stands d'environ 1,05km où les pilotes peuvent  ",
-            html.Br(),
-            "atteindre des vitesses supérieures à 310 km/h. C'est la plus longue ligne droite",
-            html.Br(),
-            "dite « des stands » du championnat du monde de Formule 1.Le reste du circuit est",
-            html.Br(),
-            " composé de successions de virages rapides, de quelques gros freinages et d'une ligne droite opposée."
-        ]),   
-        
-        html.Div(style={'margin-top': '200px'}),
         # Évolution classement championnat du monde
         html.Div([
             html.Div([
                 dcc.Graph(id='graph_evol_classement', figure=evol_classement_1,config=dict(
                       showTips=False,
                       showAxisDragHandles=False,
-                      displayModeBar=False))
+                      displayModeBar=False),
+                          style={
+                              "width": "75%",
+                              "height": "500px",
+                              "display": "inline-block",
+                              "top": "25%",
+                              "left": "25%",
+                    })
                 ])
         ]),
+          
+        html.Div(style={'margin-top': '60px'}), 
+        
+        html.H1(children = "Le Grand Prix d'Espagne 2021 "),
+        
+        html.P(children=
+               '''Le Grand Prix d'Espagne 2021 prend place le dimanche 9 mai à Barcelone, sur le circuit de Barcelona-Catalunya.
+               Utilisé depuis 1991, la caractéristique principale du circuit
+               est la longue ligne droite des stands, d'environ 1050 mètres, où les pilotes peuvent
+               atteindre des vitesses supérieures à 310 km/h. C'est la plus longue ligne droite
+               « des stands » du championnat du monde de Formule 1. Le reste du circuit est
+               composé de successions de virages rapides, de quelques gros freinages et d'une ligne droite opposée.'''
+        , style={'text-align': 'justify'}),
+        
+        html.Div(children=
+                 [html.Img(src='assets/data/circuit-catalogne.png',
+                 style={'height': '100%',
+                        'width' : 'auto',
+                        "display": 'inline-block', 
+                        'max-width': '1000px'}
+                 )],style={'height': '400px'}
+                 ),
+         html.Div([html.Span('Track Map Circuit de Catalunya - '),
+             dcc.Link("Grand Prix d'Espagne 2021", href="https://fr.wikipedia.org/wiki/Grand_Prix_automobile_d%27Espagne_2021")
+             ]),
+                 
+        
         
     #Partie 2  
     #Titre 2 eme section
@@ -383,16 +395,14 @@ app.layout = html.Div([
             "On ne peut faire ressortir l'un des pilotes comme celui ayant la conduite la plus rapide. "
            
         ]),  
-    html.Div(style={'margin-top': '200px'}),
+    html.Div(style={'margin-top': '90px'}),
     html.H1("Conlusion"),
-    html.P(children=[
-            "Le vainqueur de le course est Lewis Hamilton, Max Verstappen finissant deuxième.",
-            html.Br(),
-            " Ces graphiques nous ont montrés une bataille très sérrée entre les deux pilotes, les deux possèdants des conduites performantes",
-            html.Br(),
-            "C'est la stratégie des pneus de Hamilton qui lui a donné sa victoire en fin de course."
-           
-        ]), 
+    html.P(children=
+            '''Le vainqueur de le course est Lewis Hamilton, Max Verstappen finissant deuxième.
+            Ces graphiques nous ont montrés une bataille très sérrée entre les deux pilotes, les deux possèdants des conduites performantes
+            C'est la stratégie des pneus de Hamilton qui lui a donné sa victoire en fin de course.''',
+            style={'text-align': 'justify'}
+            ), 
     html.Div(style={'margin-top': '200px'}),
     ],
     style={'textAlign': 'center'},  
