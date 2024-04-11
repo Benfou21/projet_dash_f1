@@ -7,7 +7,7 @@ def get_classement_hover_template(name):
                       '<extra></extra>'
         )
     elif name == 'Verstappen':
-        hover_template = ('<b>%{customdata[0]} - %{customdata[1]}<br>' +
+        hover_template = ('<b>%{customdata[0]}<br>' +
                       f'<b>{name}: </b>' + '%{customdata[6]} - %{customdata[8]}pts<br>' +
                       '<b>Championnat du monde<br>' +
                       f'<b>{name}: </b>' + '%{customdata[12]}e - %{customdata[10]}pts<br>' +

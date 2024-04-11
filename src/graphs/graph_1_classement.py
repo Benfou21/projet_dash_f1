@@ -15,7 +15,7 @@ def get_evol_classement(df):
         x=df['GP'],
         y=df['Cumul Hamilton'],
         name='Hamilton',
-        mode='markers',
+        mode='lines+markers',
         marker=dict(color='#00D2BE'),
         customdata = np.stack((df['Grand Prix'],df['Date'],df['Circuit'],df['Vainqueur'],df['Pole Position'],
                             df['Position Hamilton'],df['Position Verstappen'],df['Points Hamilton'],df['Points Verstappen'],
@@ -29,8 +29,8 @@ def get_evol_classement(df):
         x=df['GP'],
         y=df['Cumul Verstappen'],
         name='Verstappen',
-        mode='markers',
-        marker=dict(color='#0600EF'),
+        mode='lines+markers',
+        marker=dict(color='#0600EF', symbol="diamond"),
         customdata = np.stack((df['Grand Prix'],df['Date'],df['Circuit'],df['Vainqueur'],df['Pole Position'],
                             df['Position Hamilton'],df['Position Verstappen'],df['Points Hamilton'],df['Points Verstappen'],
                             df['Cumul Hamilton'],df['Cumul Verstappen'],df['Classement Hamilton'],df['Classement Verstappen'])
@@ -39,7 +39,7 @@ def get_evol_classement(df):
     ))
 
     fig.update_layout(
-        title='Évolution des points au classement du championnat du monde de F1<br><sup>Lewis Hamilton (Mercedes) et Max Verstappen (Red Bull)</sup>',
+        title='Évolution des points au classement du championnat du monde de F1 2021<br><sup>Lewis Hamilton (Mercedes) et Max Verstappen (Red Bull)</sup>',
         xaxis_title='Grand Prix',
         yaxis_title='Points',
         legend_title='Pilotes'
