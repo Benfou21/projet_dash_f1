@@ -239,7 +239,7 @@ app.layout = html.Div([
             Finalement, après son deuxième arrêt, Verstappen se retrouve surclassé avec des pneus neufs mais non encore à leur pleine efficacité thermique, ce qui a facilité son dépassement par Hamilton''',
            
     ]),  
-  
+    
     html.Div(style={'margin-top': '100px'}),
     html.H2(children = "Les temps de pit stops des pilotes"),
     html.Div(style={'margin-top': '50px'}),
