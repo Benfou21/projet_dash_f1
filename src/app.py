@@ -232,8 +232,9 @@ app.layout = html.Div([
     ]),
     html.Div(style={'margin-top': '50px'}), 
     html.P(children=[
-            "Observation",
+            "Observation : ",
             html.Br(),
+            ""
            
     ]),  
   
@@ -309,7 +310,7 @@ app.layout = html.Div([
         html.Div([
             html.Div(
                 id='speed-display-1', 
-                children=f'Current Speed: {telemetry_df_max["Speed"][0]} km/h', 
+                children=f'Vitesse actuelle: {telemetry_df_max["Speed"][0]} km/h', 
                 style={
                     'flex': '1',
                     'fontSize': '16px',
@@ -325,7 +326,7 @@ app.layout = html.Div([
             ),
             html.Div(
                 id='speed-display-2', 
-                children=f'Current Speed: {telemetry_df_ham["Speed"][0]} km/h',  
+                children=f'Vitesse actuelle: {telemetry_df_ham["Speed"][0]} km/h',  
                 style={
                     'flex': '1',
                     'fontSize': '16px',
