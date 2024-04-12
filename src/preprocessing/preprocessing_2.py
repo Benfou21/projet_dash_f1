@@ -37,11 +37,15 @@ import os
 def add_delta_columns(ver_csv_path, ham_csv_path):
     # Charger les données des CSV dans des DataFrames
     
+    # ver_df = pd.read_csv(ver_csv_path)
+    # ham_df = pd.read_csv(ham_csv_path)
 
-    ver_df = pd.read_csv(ver_csv_path)
+    ver_df = remplir_lignes_manquantes(ver_csv_path)
     
-    ham_df = pd.read_csv(ham_csv_path)
-    print(ver_df[["LapNumber"]])
+    ham_df = remplir_lignes_manquantes(ham_csv_path)
+    
+    
+    # print(ver_df[["LapNumber"]])
 
     # Convertir les temps au tour en timedelta
     ver_df['LapTime'] = pd.to_timedelta(ver_df['LapTime'])
@@ -89,15 +93,66 @@ def preprocess_data(ver_csv_path, ham_csv_path):
     # Appel de la fonction add_segments
     ver_df = add_segments(ver_df)
     ham_df = add_segments(ham_df)
+    ham_df['Compound'][41] = 'MEDIUM'
+    ham_df['Segment'][40:-1] = 2
+    ham_df = ham_df.drop(ham_df.index[-1])
+    ver_df['Pit_stop'] = False
+    ham_df['Pit_stop'] = False
+    ver_df.loc[ver_df['LapNumber'].isin([26, 61]), 'Pit_stop'] = True
+    ham_df.loc[ham_df['LapNumber'].isin([30, 42]), 'Pit_stop'] = True
+
+    # ver_df['Pit_stop'][26] = True
+    # ver_df['Pit_stop'][60] = True
+    # ham_df['Pit_stop'][30] = True
+    # ham_df['Pit_stop'][42] = True
 
 
     # # Encore une fois, imprimez les tours manquants pour vérifier
-    # print(ver_df[ver_df['LapNumber'] == 5])
-    # print(ham_df[ham_df['LapNumber'] == 5])
+    print(ver_df[ver_df['LapNumber'] == 26])
+    print(ham_df[ham_df['LapNumber'] == 42])
     
     return ver_df, ham_df
 
+def remplir_lignes_manquantes(fichier_csv):
+    # Charger le fichier CSV
+    df = pd.read_csv(fichier_csv)
+    
+    # Convertir 'LapNumber' en int si nécessaire
+    df['LapNumber'] = df['LapNumber'].astype(int)
+    
+    # Trouver les numéros de tour manquants
+    tous_les_tours = range(1, int(df['LapNumber'].max()) + 1)
+    tours_manquants = set(tous_les_tours) - set(df['LapNumber'])
+    
+    # Tri préalable du DataFrame par 'LapNumber' pour éviter des problèmes lors de l'utilisation de iloc
+    df.sort_values('LapNumber', inplace=True)
+    
+    # Pour chaque tour manquant, ajouter une ligne avec les infos du tour précédent
+    for tour in sorted(tours_manquants):
+        # Trouver l'index du dernier tour avant le tour manquant
+        index_du_dernier = df[df['LapNumber'] < tour].index.max()
+        # S'assurer qu'il existe un tour précédent
+        if pd.isna(index_du_dernier):
+            print(f"Aucun tour précédent trouvé pour le tour {tour}.")
+            continue
+        ligne_precedente = df.loc[index_du_dernier].copy()
+        ligne_precedente['LapNumber'] = tour
+        df = pd.concat([df, ligne_precedente.to_frame().T], ignore_index=True)
+    
+    # Trier le DataFrame par 'LapNumber' après l'ajout
+    df.sort_values('LapNumber', inplace=True)
+    df.reset_index(drop=True, inplace=True)
+    
+    # print(df['LapNumber'].head(11))
+    
+    return df
 
+
+
+
+# path_scatter_max = os.path.join("src","assets", "data", "driver_laps_2021_VER.csv")
+# # Utiliser la fonction
+# df_modifie = remplir_lignes_manquantes(path_scatter_max)
 
 # import os
 # # Chemins vers les fichiers CSV
