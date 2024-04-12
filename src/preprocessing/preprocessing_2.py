@@ -98,7 +98,7 @@ def preprocess_data(ver_csv_path, ham_csv_path):
     ham_df = ham_df.drop(ham_df.index[-1])
     ver_df['Pit_stop'] = False
     ham_df['Pit_stop'] = False
-    ver_df.loc[ver_df['LapNumber'].isin([26, 61]), 'Pit_stop'] = True
+    ver_df.loc[ver_df['LapNumber'].isin([26, 60]), 'Pit_stop'] = True
     ham_df.loc[ham_df['LapNumber'].isin([30, 42]), 'Pit_stop'] = True
 
     # ver_df['Pit_stop'][26] = True
