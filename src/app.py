@@ -205,11 +205,9 @@ app.layout = html.Div([
     html.P(children=[
         "Description : ",
         html.Br(),
-        "Ce graphique met en evidence les delta de temps entre Verstappen et Hamilton en",
-        html.Br(),
-        "fonction des tours et en fonction des pneus. La liste déroulantes en bas du graphique permet de changer de",
-        html.Br(),
-        "pilote. En vert nous avons un delta positif et en rouge le delta est négatif.",
+        '''Ce graphique met en evidence les delta de temps entre Verstappen et Hamilton en fonction des tours en mettant en évidence les changments de pneus.
+        Nous permettant ainsi d'observer les stratégies réalisées par les écuries.
+        En vert nous avons un delta positif et en rouge le delta est négatif.  La liste déroulantes en bas du graphique permet de changer de pilote. '''
     ]),      
     html.Div(style={'margin-top': '50px'}), 
     html.Div([
@@ -234,7 +232,11 @@ app.layout = html.Div([
     html.P(children=[
             "Observation : ",
             html.Br(),
-            ""
+            '''On remarque que Hamilton a opté pour des relais plus courts sur ses pneus comparativement à Verstappen. 
+            En procédant à un premier changement de pneus anticipé, Hamilton avec des pneus neufs a pu rattraper son retard sur Verstappen entre le tour 30 et 42.
+            Il recidive avec un changement surprise de pneus au tour 42, alors que Verstappen réalise son deuxième changement au tour 60.
+            Cette manœuvre a permis à Hamilton de se retrouver sur des pneus plus frais, lui donnant l'opportunité de réduire l'écart de manière significative à partir du 56e tour 
+            Finalement, après son deuxième arrêt, Verstappen se retrouve surclassé avec des pneus neufs mais non encore à leur pleine efficacité thermique, ce qui a facilité son dépassement par Hamilton''',
            
     ]),  
   
@@ -266,11 +268,9 @@ app.layout = html.Div([
     html.P(children=[
         "Observation : ",
         html.Br(),
-        "On remarque que l'équipe de Verstappen a été plus consitant sur la course que celle de Hamilton lors du GP d'Espagne.",
-        html.Br(),
-        "On note cependant que Hamilton possède le temps le plus rapide.",
-        html.Br(),
-        "Sur ce point Max Verstappen possède l'avantage."
+        '''On remarque que l'équipe de Verstappen a été plus consitant sur la course que celle de Hamilton lors du GP d'Espagne
+        On note cependant que Hamilton possède le temps le plus rapide.
+        Sur ce point Max Verstappen possède l'avantage.'''
         
     ]),  
         #Partie 3 
@@ -389,19 +389,17 @@ app.layout = html.Div([
     html.P(children=[
             "Observation : ",
             html.Br(),
-            "On remarque que Max Verstappen est plus rapide en sortie de virage. Il est cependant plus lent que Lewis dans les virages.",
-            html.Br(),
-            " Enfin la grande ligne droite du circuit est à l'avantage de Lewis.",
-            html.Br(),
-            "On ne peut faire ressortir l'un des pilotes comme celui ayant la conduite la plus rapide. "
+            '''On remarque que Max Verstappen est plus rapide en sortie de virage. Il est cependant plus lent que Lewis dans les virages.
+            Enfin la grande ligne droite du circuit est à l'avantage de Lewis.
+            On ne peut faire ressortir l'un des pilotes comme celui ayant la conduite la plus rapide. '''
            
         ]),  
     html.Div(style={'margin-top': '90px'}),
     html.H1("Conlusion"),
     html.P(children=
             '''Le vainqueur de le course est Lewis Hamilton, Max Verstappen finissant deuxième.
-            Ces graphiques nous ont montrés une bataille très sérrée entre les deux pilotes, les deux possèdants des conduites performantes
-            C'est la stratégie des pneus de Hamilton qui lui a donné sa victoire en fin de course.''',
+            Ces graphiques nous ont montrés une bataille très sérrée entre les deux pilotes, les deux possèdants des conduites performantes.
+            C'est la stratégie des pneus de Hamilton qui lui a donné sa victoire.''',
             style={'text-align': 'justify'}
             ), 
     html.Div(style={'margin-top': '200px'}),
