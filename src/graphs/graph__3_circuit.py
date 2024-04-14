@@ -11,7 +11,7 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')
 from hover_template import hover_template_3_circuit
 import ast
 
-def get_circuit(data,index,pilote):
+def get_circuit(data,index,pilote,legend):
     
     fig = make_subplots(rows=1, cols=1)
     x = data['X']
@@ -37,10 +37,12 @@ def get_circuit(data,index,pilote):
             hoverinfo='text'
         ))
     
+    fig.add_trace(go.Bar(x=[None], y=[None], marker_color='rgba(0,0,0,0)', showlegend=True, name="Légende"))
+    
     # Marquer le point actuel avec un marker
     text_index = [str(speed.iloc[index]) + ' km/h'] * 2
     fig.add_trace(
-        go.Scatter(x=[x.iloc[index]], y=[y.iloc[index]], mode='markers', marker=dict(size=10, color='purple'), name='Car',text =text_index,hoverinfo='text')
+        go.Scatter(x=[x.iloc[index]], y=[y.iloc[index]], mode='markers', marker=dict(size=10, color='purple'), name='Point selectionné',text =text_index,hoverinfo='text')
     )
     
     # Set up the layout of the figure
@@ -48,7 +50,7 @@ def get_circuit(data,index,pilote):
         
         title=f'Vitesse selon la position du circuit de {pilote}',
         
-        showlegend=False,
+        showlegend=legend,
         # width = 800,
         # height = 500,
         autosize=True,
@@ -72,8 +74,32 @@ def get_circuit(data,index,pilote):
         # plot_bgcolor='white',  
         #paper_bgcolor='white',
     )
+    
+    
+    
+    fig.add_trace(go.Bar(x=[None], y=[None], marker=dict(
+        color=['rgba(0, 255, 0, 0.5)', 'rgba(0, 255, 0, 1)'],
+        colorsrc="speed",
+    ), showlegend=True, name="Encodage de la vitesse par l'intensité"))
+
    
     fig.update_traces(hovertemplate=hover_template_3_circuit.get_speed_circuit_hover_template())
+    
+    fig.update_layout(
+        legend=dict(
+            traceorder='normal',
+            font=dict(
+                family='sans-serif',
+                size=10,
+                color='black'
+            ),
+            bordercolor='#344feb',
+            borderwidth=1,
+            y=1.3,
+            xanchor='right',  
+            yanchor='top',  
+        )
+    )
     
     
     return fig
@@ -103,15 +129,16 @@ def get_bars(data,index,pilote,legend):
     elapsed_time_index = [elapsed_time[index]]
     colors_index = ["purple"]  # ou toute autre couleur distincte pour la barre d'index
 
+    fig.add_trace(go.Bar(x=[None], y=[None], marker_color='rgba(0,0,0,0)', showlegend=True, name="Légende"))
+    
     fig.add_trace(go.Bar(x=elapsed_time_index, y=speed_index, marker_color=colors_index, width=0.6, showlegend=True, name="Point selectionné"))
 
-    # fig.add_trace(go.Bar(x=[None], y=[None], marker_color='green', name='Vert - Vitesses de pointe'))
-    # fig.add_trace(go.Bar(x=[None], y=[None], marker_color='orange', name='Orange - Accélération/Décélération'))
-    # fig.add_trace(go.Bar(x=[None], y=[None], marker_color='red', name='Rouge - Freinage'))
-    
-    
+    fig.add_trace(go.Bar(x=[None], y=[None], marker=dict(
+        color=['rgba(0, 255, 0, 0.5)', 'rgba(0, 255, 0, 1)'],
+        colorsrc="speed",
+    ), showlegend=True, name="Encodage de la vitesse par l'intensité"))
 
-    # Personnaliser le layout si nécessaire
+    
     fig.update_layout(
         title=f'Vitesse de {pilote} lors de son tour', 
         xaxis_title='Temps en seconde', 
@@ -148,19 +175,11 @@ def get_bars(data,index,pilote,legend):
 
 
 def create_colors(speed):
-    min_red_speed, max_red_speed = 0, 100
-    min_orange_speed, max_orange_speed = 100, 250
-    min_green_speed, max_green_speed = 250, max(speed)
     
     colors = []
     for s in speed:
         colors.append(get_color_with_single_hue(s, 0, max(speed)))
-        # if s < 100:
-        #     colors.append(get_color_2(s, min_red_speed, max_red_speed))
-        # elif 100 <= s < 250:
-        #     colors.append(get_color_2(s, min_orange_speed, max_orange_speed))
-        # else:
-        #     colors.append(get_color_2(s, min_green_speed, max_green_speed))
+       
     return colors
             
 
@@ -177,24 +196,3 @@ def get_color_with_single_hue(speed_value, min_speed, max_speed):
     return f"hsl({hue}, {saturation}%, {lumi}%)"
 
 
-
-def get_color_2(speed_value, min_speed, max_speed):
-    
-    relative_speed = (speed_value - min_speed) / (max_speed - min_speed)
-    saturation = 50 + 50 * (relative_speed)  # Saturation varie à hauteur de 40%
-    
-    if speed_value < 100:
-        return f"hsl(0, {saturation}%, 50%)"  # Rouge avec saturation variable
-    elif 100 <= speed_value < 250:
-        return f"hsl(39, {saturation}%, 50%)"  # Orange avec saturation variable
-    else:
-        return f"hsl(120, {saturation}%, 50%)"  # Vert avec saturation variable
-
-
-def get_color(speed_value):
-    if speed_value < 100:
-        return 'red'
-    elif 100 <= speed_value < 250:
-        return 'orange'
-    else:
-        return 'green'

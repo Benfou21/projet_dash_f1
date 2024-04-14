@@ -43,11 +43,11 @@ time_str = telemetry_df_max["Time"]   # c'est une chaîne de caractères qui res
 x_length = len(telemetry_df_max['X'])
 
 index_initial = 0
-circuit_figure_max_initial = graph__3_circuit.get_circuit(telemetry_df_max, index_initial, "Max")
+circuit_figure_max_initial = graph__3_circuit.get_circuit(telemetry_df_max, index_initial, "Max",False)
 bars_figure_max_initial = graph__3_circuit.get_bars(telemetry_df_max, index_initial, "Max",False)
 
 # Génération initiale des figures pour telemetry_df_ham
-circuit_figure_ham_initial = graph__3_circuit.get_circuit(telemetry_df_ham, index_initial, "Ham")
+circuit_figure_ham_initial = graph__3_circuit.get_circuit(telemetry_df_ham, index_initial, "Ham",True)
 bars_figure_ham_initial = graph__3_circuit.get_bars(telemetry_df_ham, index_initial, "Ham",True)
 
 # Génération de la figure évolution du classement au championnat du monde
@@ -339,15 +339,16 @@ app.layout = html.Div([
                     'padding': '5px',
                     'margin': '0 200px',
                     
-                    
                 }
             ),
         ], style={'justifyContent': 'space-between', 'alignItems': 'center', 'display': 'flex',}),
         
+        html.Div(style={'margin-top': '20px'}),
+        html.P(children="En cochant la case synchronisation, lorsque vous allez modifier la position sur un graphe cela synchronise l'autre", style={'fontSize': '12px',}),
         html.Div([
             dcc.Checklist(
                 id='toggle-sync',
-                options=[{'label': ' Synchroniser les graphes ', 'value': 'sync'}],
+                options=[{'label': ' Synchronisation ', 'value': 'sync'}],
                 value=[],
                 labelStyle={'display': 'block'}
             )
@@ -433,12 +434,12 @@ def update_graph(clickData1, clickData2,sync_value, fig1, fig2):
                 index_max = find_closest_index(x, y, telemetry_df_max)
                 index_ham = find_closest_index(x, y, telemetry_df_ham)
 
-                new_fig1 = graph__3_circuit.get_circuit(telemetry_df_max, index_max, "Max")
+                new_fig1 = graph__3_circuit.get_circuit(telemetry_df_max, index_max, "Max",False)
                 new_fig1_bars = graph__3_circuit.get_bars(telemetry_df_max, index_max, "Max",False)
                 speed_value_max = telemetry_df_max.loc[index_max, 'Speed']
                 speed_display_max = f"Current Speed: {speed_value_max} km/h"
 
-                new_fig2 = graph__3_circuit.get_circuit(telemetry_df_ham, index_ham, "Ham")
+                new_fig2 = graph__3_circuit.get_circuit(telemetry_df_ham, index_ham, "Ham",True)
                 new_fig2_bars = graph__3_circuit.get_bars(telemetry_df_ham, index_ham, "Ham",True)
                 speed_value_ham = telemetry_df_ham.loc[index_ham, 'Speed']
                 speed_display_ham = f"Current Speed: {speed_value_ham} km/h"
@@ -450,7 +451,7 @@ def update_graph(clickData1, clickData2,sync_value, fig1, fig2):
             x = clickData1['points'][0]['x']
             y = clickData1['points'][0]['y']
             index = find_closest_index(x, y, telemetry_df_max)
-            new_fig1 = graph__3_circuit.get_circuit(telemetry_df_max, index, "Max")
+            new_fig1 = graph__3_circuit.get_circuit(telemetry_df_max, index, "Max",False)
             new_fig1_bars = graph__3_circuit.get_bars(telemetry_df_max, index, "Max",False)
             speed_value_max = telemetry_df_max.loc[index, 'Speed']
             speed_display_max = f"Current Speed: {speed_value_max} km/h"
@@ -463,7 +464,7 @@ def update_graph(clickData1, clickData2,sync_value, fig1, fig2):
             x = clickData2['points'][0]['x']
             y = clickData2['points'][0]['y']
             index = find_closest_index(x, y, telemetry_df_max)
-            new_fig2 = graph__3_circuit.get_circuit(telemetry_df_ham, index, "Ham")
+            new_fig2 = graph__3_circuit.get_circuit(telemetry_df_ham, index, "Ham",True)
             new_fig2_bars = graph__3_circuit.get_bars(telemetry_df_ham, index, "Ham",True)
             speed_value_ham = telemetry_df_ham.loc[index, 'Speed']
             speed_display_ham = f"Current Speed: {speed_value_ham} km/h"
