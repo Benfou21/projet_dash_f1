@@ -437,12 +437,12 @@ def update_graph(clickData1, clickData2,sync_value, fig1, fig2):
                 new_fig1 = graph__3_circuit.get_circuit(telemetry_df_max, index_max, "Max",False)
                 new_fig1_bars = graph__3_circuit.get_bars(telemetry_df_max, index_max, "Max",False)
                 speed_value_max = telemetry_df_max.loc[index_max, 'Speed']
-                speed_display_max = f"Current Speed: {speed_value_max} km/h"
+                speed_display_max = f"Vitesse actuelle: {speed_value_max} km/h"
 
                 new_fig2 = graph__3_circuit.get_circuit(telemetry_df_ham, index_ham, "Ham",True)
                 new_fig2_bars = graph__3_circuit.get_bars(telemetry_df_ham, index_ham, "Ham",True)
                 speed_value_ham = telemetry_df_ham.loc[index_ham, 'Speed']
-                speed_display_ham = f"Current Speed: {speed_value_ham} km/h"
+                speed_display_ham = f"Vitesse actuelle: {speed_value_ham} km/h"
 
                 return new_fig1, new_fig1_bars, new_fig2, new_fig2_bars, speed_display_max, speed_display_ham
     else :
@@ -454,7 +454,7 @@ def update_graph(clickData1, clickData2,sync_value, fig1, fig2):
             new_fig1 = graph__3_circuit.get_circuit(telemetry_df_max, index, "Max",False)
             new_fig1_bars = graph__3_circuit.get_bars(telemetry_df_max, index, "Max",False)
             speed_value_max = telemetry_df_max.loc[index, 'Speed']
-            speed_display_max = f"Current Speed: {speed_value_max} km/h"
+            speed_display_max = f"Vitesse actuelle: {speed_value_max} km/h"
 
             return new_fig1, new_fig1_bars, dash.no_update, dash.no_update, speed_display_max, dash.no_update
 
@@ -467,7 +467,7 @@ def update_graph(clickData1, clickData2,sync_value, fig1, fig2):
             new_fig2 = graph__3_circuit.get_circuit(telemetry_df_ham, index, "Ham",True)
             new_fig2_bars = graph__3_circuit.get_bars(telemetry_df_ham, index, "Ham",True)
             speed_value_ham = telemetry_df_ham.loc[index, 'Speed']
-            speed_display_ham = f"Current Speed: {speed_value_ham} km/h"
+            speed_display_ham = f"Vitesse actuelle: {speed_value_ham} km/h"
 
             return dash.no_update, dash.no_update, new_fig2, new_fig2_bars, dash.no_update, speed_display_ham
     
