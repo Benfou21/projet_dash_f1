@@ -48,8 +48,18 @@ def get_circuit(data,index,pilote,legend):
     # Set up the layout of the figure
     fig.update_layout(
         
-        title=f'Vitesse selon la position du circuit de {pilote}',
         
+        title=dict(
+        text=f'<b>Vitesse selon la position du circuit de {pilote}</b>',  # Utilisation de HTML pour mettre en gras
+        x=0.5,  # Centrage du titre sur l'axe horizontal
+        y=0.95,  # Positionnement en haut du graphique, légèrement en dessous du bord supérieur
+        xanchor='center',  # Le titre est ancré autour de son centre
+        font=dict(  # Configuration de la police du titre
+            family='sans-serif',  # Choix de la famille de police
+            size=20,  # Taille de la police
+            color='black'  # Couleur de la police
+        )
+    ),
         showlegend=legend,
         # width = 800,
         # height = 500,
@@ -95,9 +105,12 @@ def get_circuit(data,index,pilote,legend):
             ),
             bordercolor='#344feb',
             borderwidth=1,
-            y=1.3,
-            xanchor='right',  
-            yanchor='top',  
+            x=1,  # Aligné à droite
+            y=0,  # En bas
+            xanchor='right',  # Ancrage à droite
+            yanchor='bottom',  # Ancrage en bas
+            bgcolor='rgba(255,255,255,0.5)',  # Fond semi-transparent pour la lisibilité 
+            itemwidth=30
         )
     )
     
@@ -140,7 +153,18 @@ def get_bars(data,index,pilote,legend):
 
     
     fig.update_layout(
-        title=f'Vitesse de {pilote} lors de son tour', 
+        title=dict(
+        text=f'Vitesse de {pilote} lors de son tour',  # Titre en gras avec HTML
+        x=0.5,  # Centrage horizontal du titre
+        y=0.95,  # Position verticale, ajustable selon le besoin
+        xanchor='center',  # Le titre est centré autour de ce point
+        font=dict(
+            family='sans-serif',  # Famille de police
+            size=20,  # Taille de la police
+            color='black'  # Couleur de la police
+        )
+    ),
+         
         xaxis_title='Temps en seconde', 
         yaxis_title='Vitesse en km/h', 
         showlegend = legend,
@@ -161,9 +185,12 @@ def get_bars(data,index,pilote,legend):
             ),
             bordercolor='#344feb',
             borderwidth=1,
-            y=1.10,
-            xanchor='right',  # 'left', 'center', 'right'
-            yanchor='top',  # 'top', 'middle', 'bottom'
+            x=1,  # Aligné à droite
+            y=0.10,  # Légèrement au-dessus du bas pour éviter tout chevauchement
+            xanchor='right',  # Ancrage à droite
+            yanchor='bottom',  # Ancrage en bas
+            bgcolor='rgba(255,255,255,0.5)',
+            itemwidth=30
         )
     )
     

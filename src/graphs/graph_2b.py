@@ -97,7 +97,17 @@ def create_pitstop_plot(df_combined):
 
     # Mise en forme du graphique
     fig.update_layout(
-        title='Temps de pit stop pour Hamilton et Verstappen',
+        title=dict(
+        text='<b>Temps de pit stop pour Hamilton et Verstappen</b>',  # Titre en gras avec HTML
+        x=0.5,  # Centrage horizontal du titre
+        y=0.95,  # Position verticale, ajustable selon le besoin
+        xanchor='center',  # Le titre est centré autour de ce point
+        font=dict(
+            family='sans-serif',  # Famille de police
+            size=20,  # Taille de la police
+            color='black'  # Couleur de la police
+        )
+    ),
         xaxis_title='Temps (s)',
         yaxis_title='Pilotes',
         showlegend=True,

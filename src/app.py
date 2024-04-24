@@ -113,8 +113,8 @@ app.layout = html.Div([
                mais pour un amateur, il est compliqué de comprendre les stratégies et
                les idées que suivent les équipes et les pilotes pour parvenir à la victoire.La bataille pour remporter 
                le Grand Prix d'Espagne 2021 servira d'exemple pour comprendre certains de ces principes de course.'''
-        , style={'text-align': 'justify'}),
-        html.Div(style={'margin-top': '30px'}),        
+        ),
+        html.Div(style={'margin-top': '60px'}),        
         html.Table([
                 html.Tr([
                     html.Td([
@@ -124,9 +124,11 @@ app.layout = html.Div([
                         html.Div(children='10 Grand Prix remportés', style={'text-align': 'right'})
                         ]),
                     html.Td([
+                        html.Div('Max Verstappen', style={'text-align': 'center', 'font-weight': 'bold'}),
                         html.Img(src='assets/data/verstappen.png'),
                         ]),
                     html.Td([
+                        html.Div('Lewis Hamilton', style={'text-align': 'center', 'font-weight': 'bold'}),
                         html.Img(src='assets/data/Hamilton.png')
                         ]),
                     html.Td([
@@ -148,7 +150,7 @@ app.layout = html.Div([
             le championnat du monde. Le Grand Prix d'Espagne se déroule au début de la saison, alors que
             Lewis Hamilton a pris la tête du classement. Verstappen, qui finira par remporter le titre,
             se bat pour ne pas prendre trop de retard.'''
-            , style={'text-align': 'justify'}), 
+            ), 
         
         # Évolution classement championnat du monde
         html.Div([
@@ -178,7 +180,7 @@ app.layout = html.Div([
                atteindre des vitesses supérieures à 310 km/h. C'est la plus longue ligne droite
                « des stands » du championnat du monde de Formule 1. Le reste du circuit est
                composé de successions de virages rapides, de quelques gros freinages et d'une ligne droite opposée.'''
-        , style={'text-align': 'justify'}),
+        ),
         
         html.Div(children=
                  [html.Img(src='assets/data/circuit-catalogne.png',
@@ -186,7 +188,7 @@ app.layout = html.Div([
                         'width' : 'auto',
                         "display": 'inline-block', 
                         'max-width': '1000px'}
-                 )],style={'height': '400px'}
+                 )],style={'height': '300px'}
                  ),
          html.Div([html.Span('Track Map Circuit de Catalunya - '),
              dcc.Link("Grand Prix d'Espagne 2021", href="https://fr.wikipedia.org/wiki/Grand_Prix_automobile_d%27Espagne_2021")
@@ -203,8 +205,7 @@ app.layout = html.Div([
     html.H2(children = "Stratégie des Pneus et leurs impacts sur le temps au tour"),
     html.Div(style={'margin-top': '50px'}),
     html.P(children=[
-        "Description : ",
-        html.Br(),
+    
         '''Ce graphique met en evidence les delta de temps entre Verstappen et Hamilton en fonction des tours en mettant en évidence les changments de pneus.
         Nous permettant ainsi d'observer les stratégies réalisées par les écuries.
         En vert nous avons un delta positif et en rouge le delta est négatif.  La liste déroulantes en bas du graphique permet de changer de pilote. '''
@@ -226,12 +227,10 @@ app.layout = html.Div([
                 style=dropdown_style
             )
         ], style=graph_container_style),
-        dcc.Graph(id='delta-scatter-plot', figure=scatter_plot_initial),
+        dcc.Graph(id='delta-scatter-plot', figure=scatter_plot_initial,className='graph-small'),
     ]),
     html.Div(style={'margin-top': '50px'}), 
     html.P(children=[
-            "Observation : ",
-            html.Br(),
             '''On remarque que Hamilton a opté pour des relais plus courts sur ses pneus comparativement à Verstappen. 
             En procédant à un premier changement de pneus anticipé, Hamilton avec des pneus neufs a pu rattraper son retard sur Verstappen entre le tour 30 et 42.
             Il recidive avec un changement surprise de pneus au tour 42, alors que Verstappen réalise son deuxième changement au tour 60.
@@ -241,11 +240,9 @@ app.layout = html.Div([
     ]),  
     
     html.Div(style={'margin-top': '100px'}),
-    html.H2(children = "Les temps de pit stops des pilotes"),
+    html.H1(children = "Les temps de pit stops des pilotes"),
     html.Div(style={'margin-top': '50px'}),
     html.P(children=[
-        "Description : ",
-        html.Br(),
         "Ce graphique permet d'observer les temps que passes les deux pilotes lors des arrêts aux ",
         html.Br(),
         "stands. Les points bleu corresponds aux pit stops antérieurs au GP d'Espagne.Les points",
@@ -254,7 +251,7 @@ app.layout = html.Div([
         html.Br(),
         "points bleu ou orange en cliquant sur la légende.",
     ]),  
-    html.Div(style={'margin-top': '50px'}),
+    html.Div(style={'margin-top': '100px'}),
     # Graphes Pitstops
     html.Div([
         dcc.Graph(id='pitstop-graph', figure=pitstops_graph)
@@ -264,10 +261,9 @@ app.layout = html.Div([
         # 'width': '100%',  
         # 'height': 'auto'  
     }),
-    html.Div(style={'margin-top': '50px'}),
+    html.Div(style={'margin-top': '10px'}),
     html.P(children=[
-        "Observation : ",
-        html.Br(),
+
         '''On remarque que l'équipe de Verstappen a été plus consitant sur la course que celle de Hamilton lors du GP d'Espagne
         On note cependant que Hamilton possède le temps le plus rapide.
         Sur ce point Max Verstappen possède l'avantage.'''
@@ -277,12 +273,10 @@ app.layout = html.Div([
         html.Div(style={'margin-top': '200px'}),
         
         html.H1(children = "La vitesse et la conduite en F1"),
-        html.Div(style={'margin-top': '100px'}),
+        html.Div(style={'margin-top': '80px'}),
         html.H3(children = "Observation de la vitesse"),
-        html.Div(style={'margin-top': '50px'}),
+        html.Div(style={'margin-top': '20px'}),
         html.P(children=[
-            "Description : ",
-            html.Br(),
             "Ces graphiques vous montrent la vitesse des deux pilotes sur leurs meilleurs tours.",
             html.Br(),
             "Vous pouvez cliquer sur une position du circuit pour vous y déplacer et observer la",
@@ -291,7 +285,7 @@ app.layout = html.Div([
             html.Br(),
             " graphiques en même temps."
         ]),   
-        html.Div(style={'margin-top': '50px'}),
+        html.Div(style={'margin-top': '100px'}),
         
         
         html.Div([
@@ -299,13 +293,13 @@ app.layout = html.Div([
             
             html.Div([
                 dcc.Graph(id='circuit-graph-1', figure=circuit_figure_max_initial)
-            ], style={'display': 'inline-block','flex' : '1'}),
+            ], style={'display': 'inline-block','flex' : '1','margin':'0px'}),
             
             html.Div([
                 dcc.Graph(id='circuit-graph-2', figure=circuit_figure_ham_initial)
-            ], style={'display': 'inline-block','flex' : '1'}),
+            ], style={'display': 'inline-block','flex' : '1','margin':'0px'}),
             
-        ], style={'display': 'flex', 'justifyContent': 'center', 'alignItems': 'center'}), # This ensures that the sub-blocks for Max are in one line
+        ], style={'display': 'flex', 'justifyContent': 'center', 'alignItems': 'center'},), # This ensures that the sub-blocks for Max are in one line
         
         html.Div([
             html.Div(
@@ -372,8 +366,6 @@ app.layout = html.Div([
     html.H3(children = "Observation de la vitesse relatives sur les section de circuit "),
     html.Div(style={'margin-top': '50px'}),
     html.P(children=[
-        "Description : ",
-        html.Br(),
         "Ce graphique montre les section de circuit ou Max Verstappen est plus rapide que Lewis",
         html.Br(),
         "Hamilton. En rouge sont les protions de circuit ou Verstappen avait une vistesse inférieur",
@@ -385,11 +377,11 @@ app.layout = html.Div([
     html.Div(style={'margin-top': '50px'}),
     html.Div([
         dcc.Graph(id='speed-difference-plot')  # Nouvel ID pour le graphique de différence de vitesse
-    ], style={'paddingLeft': '15%', 'paddingRight': '15%', 'alignItems': 'center', 'justifyContent': 'center',}),  
-    html.Div(style={'margin-top': '50px'}),
+    ], style={'paddingLeft': '15%', 'paddingRight': '15%', 'alignItems': 'center', 'justifyContent': 'center',}),
+      
+    html.Div(style={'margin-top': '100px'}),
     html.P(children=[
-            "Observation : ",
-            html.Br(),
+          
             '''On remarque que Max Verstappen est plus rapide en sortie de virage. Il est cependant plus lent que Lewis dans les virages.
             Enfin la grande ligne droite du circuit est à l'avantage de Lewis.
             On ne peut faire ressortir l'un des pilotes comme celui ayant la conduite la plus rapide. '''
@@ -401,11 +393,11 @@ app.layout = html.Div([
             '''Le vainqueur de le course est Lewis Hamilton, Max Verstappen finissant deuxième.
             Ces graphiques nous ont montrés une bataille très sérrée entre les deux pilotes, les deux possèdants des conduites performantes.
             C'est la stratégie des pneus de Hamilton qui lui a donné sa victoire.''',
-            style={'text-align': 'justify'}
+            
             ), 
     html.Div(style={'margin-top': '200px'}),
     ],
-    style={'textAlign': 'center'},  
+    style={'textAlign': 'center', 'padding' : '50px'},  
 )
 
 
