@@ -107,7 +107,7 @@ app.layout = html.Div(
     html.H1(children=["Comprendre une course de Formule 1, la bataille",
             html.Br(),
             "Verstappen-Hamilton lors du GP d'Espagne 2021"]),
-    html.Div(style={'margin-top': '50px'}), 
+    html.Div(style={'margin-top': '100px'}), 
     html.P(children=
             '''Une course de Formule 1 dure deux heures, et les pilotes parcourent le circuit près de 60 fois à plus 
             de 300 km/h. Ils se battent tous pour dépasser leurs adversaires et
@@ -116,7 +116,7 @@ app.layout = html.Div(
             les idées que suivent les équipes et les pilotes pour parvenir à la victoire.La bataille pour remporter 
             le Grand Prix d'Espagne 2021 servira d'exemple pour comprendre certains de ces principes de course.'''
     ),
-    html.Div(style={'margin-top': '60px'}),        
+    html.Div(style={'margin-top': '80px'}),        
     html.Table([
         html.Tr([
             html.Td([
@@ -143,7 +143,7 @@ app.layout = html.Div(
         ])       
     ]),
         
-    html.Div(style={'margin-top': '50px'}),  
+    html.Div(style={'margin-top': '100px'}),  
         
     html.P(children=
         '''La saison 2021 est l'une des plus disputée des 10 dernières années. L'expérience du
@@ -155,7 +155,7 @@ app.layout = html.Div(
     ), 
         
     # Évolution classement championnat du monde
-    html.Div(style={'margin-top': '30px'}), 
+    html.Div(style={'margin-top': '50px'}), 
     html.Div([
         html.Div([
             dcc.Graph(id='graph_evol_classement', figure=evol_classement_1,config=dict(
@@ -172,11 +172,11 @@ app.layout = html.Div(
         ])
     ]),
           
-    html.Div(style={'margin-top': '100px'}), 
+    html.Div(style={'margin-top': '200px'}), 
         
     html.H1(children = "Le Grand Prix d'Espagne 2021 "),
     
-    html.Div(style={'margin-top': '40px'}), 
+    html.Div(style={'margin-top': '50px'}), 
         
     html.P(children=
            '''Le Grand Prix d'Espagne 2021 prend place le dimanche 9 mai à Barcelone, sur le circuit de Barcelona-Catalunya.
@@ -186,7 +186,7 @@ app.layout = html.Div(
            « des stands » du championnat du monde de Formule 1. Le reste du circuit est
            composé de successions de virages rapides, de quelques gros freinages et d'une ligne droite opposée.'''
     ),
-    html.Div(style={'margin-top': '30px'}), 
+    html.Div(style={'margin-top': '50px'}), 
     html.Div(children=
         [html.Img(src='assets/data/circuit-catalogne.png',
             style={
