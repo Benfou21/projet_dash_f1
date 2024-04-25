@@ -3,13 +3,10 @@ import subprocess
 import pandas as pd
 
 
-# subprocess.check_call([sys.executable, "-m", "pip", "install", "fastf1"])
 
 import fastf1 as f1
 
 
-# Activer le mode cache pour accélérer le chargement des données
-# f1.Cache.enable_cache('projet_dash_f1\src\preprocessing\__pycache__') 
 
 import sys
 import subprocess
@@ -20,37 +17,23 @@ import pandas as pd
 import fastf1 as f1
 
 
-# Activer le mode cache pour accélérer le chargement des données
-# f1.Cache.enable_cache('projet_dash_f1\src\preprocessing\__pycache__') 
-
-
-
-
-#Colone: ['Time', 'Driver', 'DriverNumber', 'LapTime', 'LapNumber', 'Stint',
-#        'PitOutTime', 'PitInTime', 'Sector1Time', 'Sector2Time', 'Sector3Time',
-#        'Sector1SessionTime', 'Sector2SessionTime', 'Sector3SessionTime',
-#        'SpeedI1', 'SpeedI2', 'SpeedFL', 'SpeedST', 'IsPersonalBest',
-#        'Compound', 'TyreLife', 'FreshTyre', 'Team', 'LapStartTime',
-#        'LapStartDate', 'TrackStatus', 'Position', 'Deleted', 'DeletedReason',
-#        'FastF1Generated', 'IsAccurate']
 
 # Fonction pour extraire les données d'arrêts au stand pour une session donnée
 def extract_pit_stops(laps_data, session_number, driver_name):
-    # Filtrer les tours avec des données de PitIn ou PitOut
+    # On filtre les tours correpondant aux sortie ou entrées de stand
     pit_stops = laps_data.dropna(subset=['PitInTime', 'PitOutTime'], how='all')
     
-    pit_stop_durations = []  # Liste pour stocker les informations sur les pit stops
+    pit_stop_durations = []  
     
     for i in range(len(pit_stops)-1):
-        # Trouver les paires PitIn et PitOut consécutives
+        # On récupérer les les pairs de ligne correspondant à une entrée de stand et sa sortie
         if pd.notna(pit_stops.iloc[i]['PitInTime']) and pd.notna(pit_stops.iloc[i + 1]['PitOutTime']):
             pit_in_time = pit_stops.iloc[i]['PitInTime']
             pit_out_time = pit_stops.iloc[i + 1]['PitOutTime']
             
-            # Calculer la durée du pit stop
+            # On calcule la durée du pit stop en faisant la différence
             duration = pit_out_time - pit_in_time
             
-            # Ajouter les informations au résultat
             pit_stop_durations.append({
                 'SessionNumber': session_number,
                 'Driver': driver_name,
@@ -59,36 +42,37 @@ def extract_pit_stops(laps_data, session_number, driver_name):
                 'Duration': duration
             })
             
-    # Créer un DataFrame à partir de la liste des informations
+    # On crée le dataframe contenant nos pit stop, nos temps d'entrée et de sorties, la durée du pit stop
+    # le conducteur ayant effectué le pit stop et le grand prix (session)
     return pd.DataFrame(pit_stop_durations)
 
 def savedata():
-    # SESSION 1 
+    # Récupération des données de Verstappen et Hamilton pour le Grand Prix de Bahreïn
     session1 = f1.get_session(2021, 1, 'R')
     session1.load()
     verstappen_laps1 = session1.laps.pick_driver('VER')
     hamilton_laps1 = session1.laps.pick_driver('HAM')
 
 
-    # SESSION 2
+    # Récupération des données de Verstappen et Hamilton pour le Grand Prix d'Émilie-Romagne
     session2 = f1.get_session(2021, 2, 'R')
     session2.load()
     verstappen_laps2 = session2.laps.pick_driver('VER')
     hamilton_laps2 = session2.laps.pick_driver('HAM')
 
-    # SESSION 3
+    # Récupération des données de Verstappen et Hamilton pour le Grand Prix du Portugal
     session3 = f1.get_session(2021, 3, 'R')
     session3.load()
     verstappen_laps3 = session3.laps.pick_driver('VER')
     hamilton_laps3 = session3.laps.pick_driver('HAM')
 
-    # SESSION 4
+    # Récupération des données de Verstappen et Hamilton pour le Grand Prix d'Espagne
     session4 = f1.get_session(2021, 4, 'R')
     session4.load()
     verstappen_laps4 = session4.laps.pick_driver('VER')
     hamilton_laps4 = session4.laps.pick_driver('HAM')
     
-    # Utiliser la fonction pour chaque session de Verstappen et Hamilton
+    # Utiliser la fonction de récupération de pitstop pour chaque Grand prix de Verstappen et Hamilton
     df_session1_verstappen = extract_pit_stops(verstappen_laps1, 1, 'VER')
     df_session1_hamilton = extract_pit_stops(hamilton_laps1, 1, 'HAM')
 
@@ -107,16 +91,10 @@ def savedata():
                             df_session3_verstappen, df_session3_hamilton,
                             df_session4_verstappen, df_session4_hamilton])
 
-    # Réinitialiser l'index du DataFrame combiné, si nécessaire
     df_combined.reset_index(drop=True, inplace=True)
-
-    # Remplacer la colonne 'Duration' par sa valeur en secondes
     df_combined['Duration'] = df_combined['Duration'].dt.total_seconds()
-
-    # Supprimer les lignes avec une durée de pit stop supérieure à 1000
     df_combined = df_combined[df_combined['Duration'] <= 1000]
 
-    # Save le dataset
     df_combined.to_csv(f"assets/data/pitstops.csv", index=False)
 
 
