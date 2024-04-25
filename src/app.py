@@ -99,12 +99,12 @@ graph_container_style = {
 app.layout = html.Div(
 [
     
-    html.Div(style={'margin-top': '100px'}), 
+    html.Div(style={'margin-top': '400'}), 
     html.H1(children=["Comprendre une course de Formule 1, la bataille",
             html.Br(),
             "Verstappen-Hamilton lors du GP d'Espagne 2021"]),
     
-    html.Div(style={'margin-top': '200px'}), 
+    html.Div(style={'margin-top': '400px'}), 
     
     html.P(children=
             '''Une course de Formule 1 dure deux heures, et les pilotes parcourent le circuit près de 60 fois à plus 
@@ -241,11 +241,11 @@ app.layout = html.Div(
     ]),
     html.Div(style={'margin-top': '60px'}), 
     html.P(children=[
-            '''On remarque que Hamilton a opté pour des relais plus courts sur ses pneus comparativement à Verstappen. 
-            En procédant à un premier changement de pneus anticipé, Hamilton avec des pneus neufs a pu rattraper son retard sur Verstappen entre le tour 30 et 42.
-            Il recidive avec un changement surprise de pneus au tour 42, alors que Verstappen réalise son deuxième changement au tour 60.
-            Cette manœuvre a permis à Hamilton de se retrouver sur des pneus plus frais, lui donnant l'opportunité de réduire l'écart de manière significative à partir du 56e tour 
-            Finalement, après son deuxième arrêt, Verstappen se retrouve surclassé avec des pneus neufs mais non encore à leur pleine efficacité thermique, ce qui a facilité son dépassement par Hamilton''',
+            '''Notre analyse graphique révèle une stratégie audacieuse et décisive de la part de Lewis Hamilton qui a manifestement privilégié des relais plus courts sur ses pneus en comparaison à ceux de Max Verstappen. En initiant un premier arrêt aux stands de manière anticipée, Hamilton, chaussé de pneus flambant neufs, a pu engager une remontée impétueuse, effaçant petit à petit le retard accumulé sur Verstappen entre le 30e et le 42e tour. Sa tactique est d'autant plus remarquable qu'elle a été accentuée par un deuxième changement de pneus inattendu au 42e tour, déstabilisant ainsi le rythme de Verstappen qui, lui, ne changea ses pneus qu'au 60e tour.
+
+Cette manœuvre stratégique de la part de l'équipe de Hamilton s'est avérée payante, puisqu'elle lui a octroyé un avantage considérable : celui de se battre sur la piste avec des pneus plus frais. Ce facteur a été primordial, notamment à partir du 56e tour, où nous observons une réduction conséquente de l'écart entre les deux concurrents. Lorsque Verstappen effectue enfin son deuxième arrêt, il se retrouve avec des pneus neufs qui n'avaient pas encore atteint leur température de fonctionnement optimale. Cette situation a inévitablement conduit à un moment-clé de la course, où Hamilton, avec sa monture mieux adaptée, dépasse Verstappen avec une facilité qui semble presque prédestinée.
+
+La subtilité de cette bataille pneumatique ne réside pas seulement dans le choix des composés ou le timing des arrêts, mais aussi dans la capacité à exploiter au mieux les performances des gommes dans leur fenêtre d'efficacité optimale. La victoire de Hamilton témoigne de l'importance cruciale d'une symbiose parfaite entre la stratégie d'équipe et l'excellence du pilote, un duo qui, lorsqu'il est harmonisé, peut définir le dénouement d'une course.''',
            
     ]),  
     
@@ -271,9 +271,15 @@ app.layout = html.Div(
     html.Div(style={'margin-top': '10px'}),
     html.P(children=[
 
-        '''On remarque que l'équipe de Verstappen a été plus consitant sur la course que celle de Hamilton lors du GP d'Espagne
-        On note cependant que Hamilton possède le temps le plus rapide.
-        Sur ce point Max Verstappen possède l'avantage.'''
+        '''L'observation détaillée des données du Grand Prix d'Espagne souligne une performance remarquablement consistante de l'équipe de Max Verstappen, qui a maintenu un rythme soutenu tout au long de l'événement. Cette constance est le reflet d'une maîtrise technique et d'une préparation rigoureuse qui ont permis à Verstappen de rester un compétiteur redoutable dans cette course au sommet de la Formule 1.
+
+Néanmoins, une analyse plus approfondie révèle que, malgré cette consistence, c'est Lewis Hamilton qui a enregistré le tour le plus rapide durant le Grand Prix. Cette performance illustre une capacité à pousser sa monoplace à ses limites absolues, un talent qui, combiné avec l'expérience et la finesse technique de Hamilton, a abouti à un résultat impressionnant.
+
+Cependant, même si Hamilton a décroché le tour le plus rapide, il est essentiel de souligner que Verstappen a su capitaliser sur d'autres avantages stratégiques. En maintenant un rythme élevé avec une régularité exemplaire, Verstappen a démontré que la vitesse brute n'est qu'une partie de l'équation qui mène à la victoire. Sa capacité à rester constant dans ses performances et à gérer la pression tout au long de la course s'avère être un atout majeur, qui, dans bien des cas, peut se révéler plus bénéfique que le simple fait de détenir le record du tour le plus rapide.
+
+En définitive, l'évaluation des performances des deux équipes met en lumière une compétition fascinante où chaque détail compte. Si la vitesse de pointe est une démonstration spectaculaire de compétence, la régularité et la stratégie globale s'avèrent être des composantes tout aussi cruciales pour le succès en Formule 1.
+
+'''
         
     ]),  
         #Partie 3 
@@ -386,9 +392,13 @@ app.layout = html.Div(
     html.Div(style={'margin-top': '100px'}),
     
     html.P(children=[
-        '''On remarque que Max Verstappen est plus rapide en sortie de virage. Il est cependant plus lent que Lewis dans les virages.
-        Enfin la grande ligne droite du circuit est à l'avantage de Lewis.
-        On ne peut faire ressortir l'un des pilotes comme celui ayant la conduite la plus rapide. '''
+        '''L'analyse des performances de Max Verstappen et Lewis Hamilton durant le Grand Prix met en lumière des nuances fascinantes dans leur style de conduite et leur adaptation aux caractéristiques spécifiques du circuit. Il est particulièrement intéressant de noter que Max Verstappen excelle en sortie de virage, exploitant au mieux l'accélération de sa monoplace pour gagner des fractions précieuses de seconde. Cette capacité à sortir rapidement des virages est cruciale, car elle lui permet de maximiser sa vitesse sur les portions suivantes du circuit.
+
+Cependant, les données montrent également que Verstappen est légèrement moins rapide que Lewis Hamilton dans les virages eux-mêmes. Hamilton, avec son expérience et sa technique raffinée, parvient à négocier les virages avec une vitesse supérieure, ce qui témoigne de sa capacité à maintenir une adhérence optimale et à utiliser efficacement l'aérodynamisme de sa voiture.
+
+En ce qui concerne la longue ligne droite du circuit, qui est un élément distinctif du tracé, Lewis Hamilton semble tirer un avantage significatif. Sa maîtrise de la vitesse pure et la puissance de son moteur se conjuguent pour lui donner le dessus dans cette section cruciale, où les vitesses atteignent des sommets et où les opportunités de dépassement sont les plus manifestes.
+
+Face à ces observations, il est difficile de déclarer catégoriquement quel pilote possède la conduite la plus rapide globalement. Chacun montre des forces dans différents aspects de la course : Verstappen dans l'exploitation de l'accélération en sortie de virage et Hamilton dans le maintien de la vitesse en virage et sur les lignes droites. Cette complémentarité de compétences souligne la complexité et la richesse de la Formule 1, où différents styles et techniques peuvent coexister et exceller, chacun adapté aux particularités des circuits et aux conditions de course.'''
     ]),  
     
     html.Div(style={'margin-top': '200px'}),
@@ -446,7 +456,7 @@ Cette victoire vient rappeler la complexité tactique de la Formule 1, où la vi
     " Chaque tour où un pilote effectue un arrêt au stand est clairement marqué dans notre jeu de données. ",
     "Cette distinction nous permet de déceler l'impact des stratégies de pit stop sur la performance globale et de saisir les dynamiques clés de la course.",
     html.Br(),
-    "III) Encodage le l'intensité :",
+    "III) Encodage de la vitesse :",
     "L'encodage de la vitesse a été réalisé en variant la saturation (0-100%) et la luminosité (10-55%) d'une couleur de base verte."
 ])
     
