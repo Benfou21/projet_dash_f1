@@ -83,7 +83,7 @@ graph_style = {
 }
 
 dropdown_style = {
-    'width': '100%',  # Ajustez la largeur à 100% de son conteneur
+    'width': '80%',  # Ajustez la largeur à 100% de son conteneur
     'margin': '10px auto',  # Centre le dropdown avec une marge en haut et en bas
     'font-size': '16px',  # Ajustez ceci selon vos préférences et la longueur du texte
 }
@@ -100,99 +100,105 @@ graph_container_style = {
     'margin': '0 auto',  # Centre le conteneur sur la page
 }
 
-app.layout = html.Div([
-        html.Div(style={'margin-top': '100px'}), 
-        html.H1(children=["Comprendre une course de Formule 1, la bataille",
-                        html.Br(),
-                        "Verstappen-Hamilton lors du GP d'Espagne 2021"]),
-        html.Div(style={'margin-top': '50px'}), 
-        html.P(children=
-               '''Une course de Formule 1 dure deux heures, et les pilotes parcourent le circuit près de 60 fois à plus 
-               de 300 km/h. Ils se battent tous pour dépasser leurs adversaires et
-               franchir la ligne d'arrivée en premier, mais un seul gagne! Le spectacle d'une course est captivant, 
-               mais pour un amateur, il est compliqué de comprendre les stratégies et
-               les idées que suivent les équipes et les pilotes pour parvenir à la victoire.La bataille pour remporter 
-               le Grand Prix d'Espagne 2021 servira d'exemple pour comprendre certains de ces principes de course.'''
-        ),
-        html.Div(style={'margin-top': '60px'}),        
-        html.Table([
-                html.Tr([
-                    html.Td([
-                        html.Div(children = 'Red Bull', style={'text-align': 'right'}),
-                        html.Div(children='23 ans', style={'text-align': 'right'}),
-                        html.Div(children='7e saison en F1', style={'text-align': 'right'}),
-                        html.Div(children='10 Grand Prix remportés', style={'text-align': 'right'})
-                        ]),
-                    html.Td([
-                        html.Div('Max Verstappen', style={'text-align': 'center', 'font-weight': 'bold'}),
-                        html.Img(src='assets/data/verstappen.png'),
-                        ]),
-                    html.Td([
-                        html.Div('Lewis Hamilton', style={'text-align': 'center', 'font-weight': 'bold'}),
-                        html.Img(src='assets/data/Hamilton.png')
-                        ]),
-                    html.Td([
-                        html.Div(children = 'Mercedes', style={'text-align': 'left'}),
-                        html.Div(children = '36 ans', style={'text-align': 'left'}),
-                        html.Div(children = '15e saison en F1', style={'text-align': 'left'}),
-                        html.Div(children = '95 Grand Prix remportés', style={'text-align': 'left'}),
-                        html.Div(children = '7 fois champion du monde', style={'text-align': 'left'}),
-                        ])
-                    ])       
-            ]),
+app.layout = html.Div(
+[
+    
+    html.Div(style={'margin-top': '100px'}), 
+    html.H1(children=["Comprendre une course de Formule 1, la bataille",
+            html.Br(),
+            "Verstappen-Hamilton lors du GP d'Espagne 2021"]),
+    html.Div(style={'margin-top': '50px'}), 
+    html.P(children=
+            '''Une course de Formule 1 dure deux heures, et les pilotes parcourent le circuit près de 60 fois à plus 
+            de 300 km/h. Ils se battent tous pour dépasser leurs adversaires et
+            franchir la ligne d'arrivée en premier, mais un seul gagne! Le spectacle d'une course est captivant, 
+            mais pour un amateur, il est compliqué de comprendre les stratégies et
+            les idées que suivent les équipes et les pilotes pour parvenir à la victoire.La bataille pour remporter 
+            le Grand Prix d'Espagne 2021 servira d'exemple pour comprendre certains de ces principes de course.'''
+    ),
+    html.Div(style={'margin-top': '60px'}),        
+    html.Table([
+        html.Tr([
+            html.Td([
+                html.Div(children = 'Red Bull', style={'text-align': 'right'}),
+                html.Div(children='23 ans', style={'text-align': 'right'}),
+                html.Div(children='7e saison en F1', style={'text-align': 'right'}),
+                html.Div(children='10 Grand Prix remportés', style={'text-align': 'right'})
+                 ]),
+             html.Td([
+                html.Div('Max Verstappen', style={'text-align': 'center', 'font-weight': 'bold'}),
+                html.Img(src='assets/data/verstappen.png'),
+                ]),
+            html.Td([
+                html.Div('Lewis Hamilton', style={'text-align': 'center', 'font-weight': 'bold'}),
+                html.Img(src='assets/data/Hamilton.png')
+                ]),
+            html.Td([
+                html.Div(children = 'Mercedes', style={'text-align': 'left'}),
+                html.Div(children = '36 ans', style={'text-align': 'left'}),
+                html.Div(children = '15e saison en F1', style={'text-align': 'left'}),
+                html.Div(children = '95 Grand Prix remportés', style={'text-align': 'left'}),
+                html.Div(children = '7 fois champion du monde', style={'text-align': 'left'}),
+            ])
+        ])       
+    ]),
         
-        html.Div(style={'margin-top': '30px'}),  
+    html.Div(style={'margin-top': '30px'}),  
         
-        html.P(children=
-            '''La saison 2021 est l'une des plus disputée des 10 dernières années. L'expérience du
-            champion en titre Lexis Hamilton et le talent brut de Max Verstappen s'affrontent tout
-            au long de l'année. Les deux pilotes livrent d'incroyables duels pour remporter
-            le championnat du monde. Le Grand Prix d'Espagne se déroule au début de la saison, alors que
-            Lewis Hamilton a pris la tête du classement. Verstappen, qui finira par remporter le titre,
-            se bat pour ne pas prendre trop de retard.'''
-            ), 
+    html.P(children=
+        '''La saison 2021 est l'une des plus disputée des 10 dernières années. L'expérience du
+        champion en titre Lexis Hamilton et le talent brut de Max Verstappen s'affrontent tout
+        au long de l'année. Les deux pilotes livrent d'incroyables duels pour remporter
+        le championnat du monde. Le Grand Prix d'Espagne se déroule au début de la saison, alors que
+        Lewis Hamilton a pris la tête du classement. Verstappen, qui finira par remporter le titre,
+        se bat pour ne pas prendre trop de retard.'''
+        ), 
         
         # Évolution classement championnat du monde
+    html.Div([
         html.Div([
-            html.Div([
-                dcc.Graph(id='graph_evol_classement', figure=evol_classement_1,config=dict(
-                      showTips=False,
-                      showAxisDragHandles=False,
-                      displayModeBar=False),
-                          style={
-                              "width": "75%",
-                              "height": "500px",
-                              "display": "inline-block",
-                              "top": "25%",
-                              "left": "25%",
-                    })
-                ])
-        ]),
+            dcc.Graph(id='graph_evol_classement', figure=evol_classement_1,config=dict(
+                  showTips=False,
+                  showAxisDragHandles=False,
+                  displayModeBar=False),
+                      style={
+                          "width": "75%",
+                          "height": "500px",
+                          "display": "inline-block",
+                          "top": "25%",
+                          "left": "25%",
+            })
+        ])
+    ]),
           
-        html.Div(style={'margin-top': '60px'}), 
+    html.Div(style={'margin-top': '60px'}), 
         
-        html.H1(children = "Le Grand Prix d'Espagne 2021 "),
+    html.H1(children = "Le Grand Prix d'Espagne 2021 "),
         
-        html.P(children=
-               '''Le Grand Prix d'Espagne 2021 prend place le dimanche 9 mai à Barcelone, sur le circuit de Barcelona-Catalunya.
-               Utilisé depuis 1991, la caractéristique principale du circuit
-               est la longue ligne droite des stands, d'environ 1050 mètres, où les pilotes peuvent
-               atteindre des vitesses supérieures à 310 km/h. C'est la plus longue ligne droite
-               « des stands » du championnat du monde de Formule 1. Le reste du circuit est
-               composé de successions de virages rapides, de quelques gros freinages et d'une ligne droite opposée.'''
-        ),
+    html.P(children=
+           '''Le Grand Prix d'Espagne 2021 prend place le dimanche 9 mai à Barcelone, sur le circuit de Barcelona-Catalunya.
+           Utilisé depuis 1991, la caractéristique principale du circuit
+           est la longue ligne droite des stands, d'environ 1050 mètres, où les pilotes peuvent
+           atteindre des vitesses supérieures à 310 km/h. C'est la plus longue ligne droite
+           « des stands » du championnat du monde de Formule 1. Le reste du circuit est
+           composé de successions de virages rapides, de quelques gros freinages et d'une ligne droite opposée.'''
+    ),
         
-        html.Div(children=
-                 [html.Img(src='assets/data/circuit-catalogne.png',
-                 style={'height': '100%',
-                        'width' : 'auto',
-                        "display": 'inline-block', 
-                        'max-width': '1000px'}
-                 )],style={'height': '300px'}
-                 ),
-         html.Div([html.Span('Track Map Circuit de Catalunya - '),
-             dcc.Link("Grand Prix d'Espagne 2021", href="https://fr.wikipedia.org/wiki/Grand_Prix_automobile_d%27Espagne_2021")
-             ]),
+    html.Div(children=
+        [html.Img(src='assets/data/circuit-catalogne.png',
+            style={
+                'height': '100%',
+                'width' : 'auto',
+                "display": 'inline-block', 
+                'max-width': '1000px'
+            }
+            
+        )],style={'height': '300px'}
+    ),
+    
+    html.Div([html.Span('Track Map Circuit de Catalunya - '),
+        dcc.Link("Grand Prix d'Espagne 2021", href="https://fr.wikipedia.org/wiki/Grand_Prix_automobile_d%27Espagne_2021")
+    ]),
                  
         
         
@@ -270,101 +276,103 @@ app.layout = html.Div([
         
     ]),  
         #Partie 3 
-        html.Div(style={'margin-top': '200px'}),
+    html.Div(style={'margin-top': '200px'}),
         
-        html.H1(children = "La vitesse et la conduite en F1"),
-        html.Div(style={'margin-top': '80px'}),
-        html.H3(children = "Observation de la vitesse"),
-        html.Div(style={'margin-top': '20px'}),
-        html.P(children=[
-            "Ces graphiques vous montrent la vitesse des deux pilotes sur leurs meilleurs tours.",
-            html.Br(),
-            "Vous pouvez cliquer sur une position du circuit pour vous y déplacer et observer la",
-            html.Br(), 
-            "vitesse. Vous pouvez cocher la case de synchronisation pour interargir avec les deux",
-            html.Br(),
-            " graphiques en même temps."
-        ]),   
-        html.Div(style={'margin-top': '100px'}),
+    html.H1(children = "La vitesse et la conduite en F1"),
+    html.Div(style={'margin-top': '80px'}),
+    html.H3(children = "Observation de la vitesse"),
+    html.Div(style={'margin-top': '20px'}),
+    html.P(children=[
+        "Ces graphiques vous montrent la vitesse des deux pilotes sur leurs meilleurs tours.",
+        html.Br(),
+        "Vous pouvez cliquer sur une position du circuit pour vous y déplacer et observer la",
+        html.Br(), 
+        "vitesse. Vous pouvez cocher la case de synchronisation pour interargir avec les deux",
+        html.Br(),
+        " graphiques en même temps."
+    ]),   
+    html.Div(style={'margin-top': '100px'}),
         
         
+    html.Div([
+            
         html.Div([
+            dcc.Graph(id='circuit-graph-1', figure=circuit_figure_max_initial)
+        ], style={'display': 'inline-block','flex' : '1','margin':'0px'}),
             
-            
-            html.Div([
-                dcc.Graph(id='circuit-graph-1', figure=circuit_figure_max_initial)
-            ], style={'display': 'inline-block','flex' : '1','margin':'0px'}),
-            
-            html.Div([
-                dcc.Graph(id='circuit-graph-2', figure=circuit_figure_ham_initial)
-            ], style={'display': 'inline-block','flex' : '1','margin':'0px'}),
-            
-        ], style={'display': 'flex', 'justifyContent': 'center', 'alignItems': 'center'},), # This ensures that the sub-blocks for Max are in one line
-        
         html.Div([
-            html.Div(
-                id='speed-display-1', 
-                children=f'Vitesse actuelle: {telemetry_df_max["Speed"][0]} km/h', 
-                style={
-                    'flex': '1',
-                    'fontSize': '16px',
-                    'display': 'inline-block',
-                    'textAlign': 'center',
-                    'border': '2px solid #344feb',  # color border
-                    'borderRadius': '10px',  # Rounded corners
-                    'backgroundColor': '#f9f9f9',  # Light grey background
-                    'boxShadow': '0px 4px 8px rgba(0, 0, 0, 0.1)',  # Subtle shadow
-                    'padding': '5px',
-                    'margin': '0 200px',
-                }
+            dcc.Graph(id='circuit-graph-2', figure=circuit_figure_ham_initial)
+                
+    ], style={'display': 'inline-block','flex' : '1','margin':'0px'}),
+            
+    ], style={'display': 'flex', 'justifyContent': 'center', 'alignItems': 'center'},), # This ensures that the sub-blocks for Max are in one line
+        
+    html.Div([
+        
+        html.Div(
+            id='speed-display-1', 
+            children=f'Vitesse actuelle: {telemetry_df_max["Speed"][0]} km/h', 
+            style={
+                'flex': '1',
+                'fontSize': '16px',
+                'display': 'inline-block',
+                'textAlign': 'center',
+                'border': '2px solid #344feb',  # color border
+                'borderRadius': '10px',  # Rounded corners
+                'backgroundColor': '#f9f9f9',  # Light grey background
+                'boxShadow': '0px 4px 8px rgba(0, 0, 0, 0.1)',  # Subtle shadow
+                'padding': '5px',
+                'margin': '0 200px',
+            }
+        ),
+        
+        html.Div(
+            id='speed-display-2', 
+            children=f'Vitesse actuelle: {telemetry_df_ham["Speed"][0]} km/h',  
+            style={
+                'flex': '1',
+                'fontSize': '16px',
+                'display': 'inline-block',
+                'textAlign': 'center',
+                'border': '2px solid #344feb', 
+                'borderRadius': '10px',  
+                'backgroundColor': '#f9f9f9', 
+                'boxShadow': '0px 4px 8px rgba(0, 0, 0, 0.1)', 
+                'padding': '5px',
+                'margin': '0 200px',      
+            }
             ),
-            html.Div(
-                id='speed-display-2', 
-                children=f'Vitesse actuelle: {telemetry_df_ham["Speed"][0]} km/h',  
-                style={
-                    'flex': '1',
-                    'fontSize': '16px',
-                    'display': 'inline-block',
-                    'textAlign': 'center',
-                    'border': '2px solid #344feb', 
-                    'borderRadius': '10px',  
-                    'backgroundColor': '#f9f9f9', 
-                    'boxShadow': '0px 4px 8px rgba(0, 0, 0, 0.1)', 
-                    'padding': '5px',
-                    'margin': '0 200px',
-                    
-                }
-            ),
-        ], style={'justifyContent': 'space-between', 'alignItems': 'center', 'display': 'flex',}),
+    ], style={'justifyContent': 'space-between', 'alignItems': 'center', 'display': 'flex',}),
         
-        html.Div(style={'margin-top': '20px'}),
-        html.P(children="En cochant la case synchronisation, lorsque vous allez modifier la position sur un graphe cela synchronise l'autre", style={'fontSize': '12px',}),
+    html.Div(style={'margin-top': '20px'}),
+    html.P(children="En cochant la case synchronisation, lorsque vous allez modifier la position sur un graphe cela synchronise l'autre", style={'fontSize': '12px',}),
+    html.Div([
+        dcc.Checklist(
+            id='toggle-sync',
+            options=[{'label': ' Synchronisation ', 'value': 'sync'}],
+            value=[],
+            labelStyle={'display': 'block'}
+        )
+    ], style={'textAlign': 'center', 'margin': '5px'}),
+    # Horizontal block for Ham
+    html.Div([
+         # Vertical sub-block for Max's bar graph
         html.Div([
-            dcc.Checklist(
-                id='toggle-sync',
-                options=[{'label': ' Synchronisation ', 'value': 'sync'}],
-                value=[],
-                labelStyle={'display': 'block'}
-            )
-        ], style={'textAlign': 'center', 'margin': '5px'}),
-        # Horizontal block for Ham
-        html.Div([
-             # Vertical sub-block for Max's bar graph
-            html.Div([
-                dcc.Graph(id='speed-graph-1', figure=bars_figure_max_initial)
-            ], style={'display': 'inline-block','flex' : '1'}),
+            dcc.Graph(id='speed-graph-1', figure=bars_figure_max_initial)
+        ], style={'display': 'inline-block','flex' : '1'}),
             # Vertical sub-block for Ham's bar graph
-            html.Div([
-                dcc.Graph(id='speed-graph-2', figure=bars_figure_ham_initial)
-            ], style={'display': 'inline-block','flex' : '1'}),
-        ], style={'display': 'flex', 'justifyContent': 'center', 'alignItems': 'center'}),
-        # This ensures that the sub-blocks for Ham are in one line
-        
+        html.Div([
+            dcc.Graph(id='speed-graph-2', figure=bars_figure_ham_initial)
+        ], style={'display': 'inline-block','flex' : '1'}),
+    ], style={'display': 'flex', 'justifyContent': 'center', 'alignItems': 'center'}),
         
         
     html.Div(style={'margin-top': '100px'}),
+    
     html.H3(children = "Observation de la vitesse relatives sur les section de circuit "),
+    
     html.Div(style={'margin-top': '50px'}),
+    
     html.P(children=[
         "Ce graphique montre les section de circuit ou Max Verstappen est plus rapide que Lewis",
         html.Br(),
@@ -374,31 +382,35 @@ app.layout = html.Div([
         html.Br(),
         " supérieur à Hamilton."
     ]),
+    
     html.Div(style={'margin-top': '50px'}),
+    
     html.Div([
         dcc.Graph(id='speed-difference-plot')  # Nouvel ID pour le graphique de différence de vitesse
     ], style={'paddingLeft': '15%', 'paddingRight': '15%', 'alignItems': 'center', 'justifyContent': 'center',}),
       
     html.Div(style={'margin-top': '100px'}),
+    
     html.P(children=[
-          
-            '''On remarque que Max Verstappen est plus rapide en sortie de virage. Il est cependant plus lent que Lewis dans les virages.
-            Enfin la grande ligne droite du circuit est à l'avantage de Lewis.
-            On ne peut faire ressortir l'un des pilotes comme celui ayant la conduite la plus rapide. '''
-           
-        ]),  
+        '''On remarque que Max Verstappen est plus rapide en sortie de virage. Il est cependant plus lent que Lewis dans les virages.
+        Enfin la grande ligne droite du circuit est à l'avantage de Lewis.
+        On ne peut faire ressortir l'un des pilotes comme celui ayant la conduite la plus rapide. '''
+    ]),  
+    
     html.Div(style={'margin-top': '90px'}),
+    
     html.H1("Conlusion"),
+    
     html.P(children=
-            '''Le vainqueur de le course est Lewis Hamilton, Max Verstappen finissant deuxième.
-            Ces graphiques nous ont montrés une bataille très sérrée entre les deux pilotes, les deux possèdants des conduites performantes.
-            C'est la stratégie des pneus de Hamilton qui lui a donné sa victoire.''',
-            
-            ), 
+        '''Le vainqueur de le course est Lewis Hamilton, Max Verstappen finissant deuxième.
+        Ces graphiques nous ont montrés une bataille très sérrée entre les deux pilotes, les deux possèdants des conduites performantes.
+        C'est la stratégie des pneus de Hamilton qui lui a donné sa victoire.''',
+    ), 
+    
     html.Div(style={'margin-top': '200px'}),
-    ],
-    style={'textAlign': 'center', 'padding' : '50px'},  
-)
+    
+    
+], style={'textAlign': 'center', 'padding' : '50px'}, )
 
 
 

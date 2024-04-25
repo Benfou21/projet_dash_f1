@@ -154,9 +154,9 @@ def get_bars(data,index,pilote,legend):
     
     fig.update_layout(
         title=dict(
-        text=f'Vitesse de {pilote} lors de son tour',  # Titre en gras avec HTML
-        x=0.5,  # Centrage horizontal du titre
-        y=0.95,  # Position verticale, ajustable selon le besoin
+        text=f'Vitesse de {pilote} lors de son tour',  
+        # x=0.5,  # Centrage horizontal du titre
+        # y=0.95,  # Position verticale, ajustable selon le besoin
         xanchor='center',  # Le titre est centré autour de ce point
         font=dict(
             family='sans-serif',  # Famille de police
