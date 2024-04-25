@@ -393,7 +393,7 @@ app.layout = html.Div(
         On ne peut faire ressortir l'un des pilotes comme celui ayant la conduite la plus rapide. '''
     ]),  
     
-    html.Div(style={'margin-top': '90px'}),
+    html.Div(style={'margin-top': '200px'}),
     
     html.H1("Conlusion"),
     html.Div(style={'margin-top': '40px'}),
