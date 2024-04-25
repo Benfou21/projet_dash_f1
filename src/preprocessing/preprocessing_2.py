@@ -30,15 +30,11 @@ def load_and_save_driver_laps_race_pilote(year, pilote):
     
     return driver_laps
 
-#load_and_save_driver_laps_race_pilote(2021,'HAM')
-#load_and_save_driver_laps_race_pilote(2021,'VER')
 
 import os
 def add_delta_columns(ver_csv_path, ham_csv_path):
     # Charger les données des CSV dans des DataFrames
     
-    # ver_df = pd.read_csv(ver_csv_path)
-    # ham_df = pd.read_csv(ham_csv_path)
 
     ver_df = remplir_lignes_manquantes(ver_csv_path)
     
@@ -79,10 +75,7 @@ def preprocess_data(ver_csv_path, ham_csv_path):
     
     # Ajoutez ici d'autres traitements si nécessaire
     ver_df, ham_df = add_delta_columns(ver_csv_path, ham_csv_path)
-    
-    #pour debug
-    # print(ver_df[["LapNumber"]])
-    
+        
     
     # Assurez-vous que les colonnes nécessaires sont présentes
     if 'Compound' not in ver_df or 'LapNumber' not in ver_df:
@@ -101,15 +94,6 @@ def preprocess_data(ver_csv_path, ham_csv_path):
     ver_df.loc[ver_df['LapNumber'].isin([26, 60]), 'Pit_stop'] = True
     ham_df.loc[ham_df['LapNumber'].isin([30, 42]), 'Pit_stop'] = True
 
-    # ver_df['Pit_stop'][26] = True
-    # ver_df['Pit_stop'][60] = True
-    # ham_df['Pit_stop'][30] = True
-    # ham_df['Pit_stop'][42] = True
-
-
-    # # Encore une fois, imprimez les tours manquants pour vérifier
-    print(ver_df[ver_df['LapNumber'] == 26])
-    print(ham_df[ham_df['LapNumber'] == 42])
     
     return ver_df, ham_df
 
@@ -143,32 +127,5 @@ def remplir_lignes_manquantes(fichier_csv):
     df.sort_values('LapNumber', inplace=True)
     df.reset_index(drop=True, inplace=True)
     
-    # print(df['LapNumber'].head(11))
     
     return df
-
-
-
-
-# path_scatter_max = os.path.join("src","assets", "data", "driver_laps_2021_VER.csv")
-# # Utiliser la fonction
-# df_modifie = remplir_lignes_manquantes(path_scatter_max)
-
-# import os
-# # Chemins vers les fichiers CSV
-# ver_csv_path = os.path.join("src","assets", "data", "driver_laps_2021_VER.csv")
-# ham_csv_path = os.path.join("src","assets", "data", "driver_laps_2021_HAM.csv")
-
-
-# ver_df = pd.read_csv(ver_csv_path)
-# ham_df = pd.read_csv(ham_csv_path)
-
-# # Par exemple, si vous savez que le tour 5 est manquant, vérifiez:
-# print(ver_df[ver_df['LapNumber'] == 24])
-# print(ham_df[ham_df['LapNumber'] == 24])
-
-
-# Appeler la fonction avec les chemins des fichiers CSV
-#ver_df, ham_df = add_delta_columns(ver_csv_path, ham_csv_path)
-
-# Afficher les DataFrames modifiés
