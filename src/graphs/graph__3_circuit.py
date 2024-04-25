@@ -50,7 +50,7 @@ def get_circuit(data,index,pilote,legend):
         
         
         title=dict(
-        text=f'<b>Vitesse selon la position du circuit de {pilote}</b>',  # Utilisation de HTML pour mettre en gras
+        text=f'<b>Vitesse selon la position du circuit de {pilote}</b>',  
         x=0.5,  # Centrage du titre sur l'axe horizontal
         y=0.95,  # Positionnement en haut du graphique, légèrement en dessous du bord supérieur
         xanchor='center',  # Le titre est ancré autour de son centre
@@ -154,9 +154,9 @@ def get_bars(data,index,pilote,legend):
     
     fig.update_layout(
         title=dict(
-        text=f'Vitesse de {pilote} lors de son tour',  
-        # x=0.5,  # Centrage horizontal du titre
-        # y=0.95,  # Position verticale, ajustable selon le besoin
+        text=f'<b>Vitesse de {pilote} lors de son tour</b>',
+        x=0.5,  # Centrage horizontal du titre
+        y=0.95,  # Position verticale, ajustable selon le besoin
         xanchor='center',  # Le titre est centré autour de ce point
         font=dict(
             family='sans-serif',  # Famille de police
@@ -186,7 +186,7 @@ def get_bars(data,index,pilote,legend):
             bordercolor='#344feb',
             borderwidth=1,
             x=1,  # Aligné à droite
-            y=0.10,  # Légèrement au-dessus du bas pour éviter tout chevauchement
+            y=0,  # Légèrement au-dessus du bas pour éviter tout chevauchement
             xanchor='right',  # Ancrage à droite
             yanchor='bottom',  # Ancrage en bas
             bgcolor='rgba(255,255,255,0.5)',

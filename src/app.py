@@ -345,11 +345,11 @@ app.layout = html.Div(
     ], style={'justifyContent': 'space-between', 'alignItems': 'center', 'display': 'flex',}),
         
     html.Div(style={'margin-top': '20px'}),
-    html.P(children="En cochant la case synchronisation, lorsque vous allez modifier la position sur un graphe cela synchronise l'autre", style={'fontSize': '12px',}),
+    html.P(children="En cochant la case synchronisation, lorsque vous allez modifier la position sur un graphe cela synchronise l'autre.", style={'fontSize': '12px','textAlign': 'center'}),
     html.Div([
         dcc.Checklist(
             id='toggle-sync',
-            options=[{'label': ' Synchronisation ', 'value': 'sync'}],
+            options=[{'label': 'Synchronisation ', 'value': 'sync'}],
             value=[],
             labelStyle={'display': 'block'}
         )
