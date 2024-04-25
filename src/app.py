@@ -164,7 +164,7 @@ app.layout = html.Div(
                   showAxisDragHandles=False,
                   displayModeBar=False),
                       style={
-                          "width": "75%",
+                          "width": "80%",
                           "height": "500px",
                           "display": "inline-block",
                           "top": "25%",
@@ -211,8 +211,8 @@ app.layout = html.Div(
     html.Div(style={'margin-top': '200px'}),
     html.H1(children = "Stratégie des Pneus"),        
     #1er partie 2 eme section
-    # html.Div(style={'margin-top': '100px'}),
-    # html.H2(children = "Stratégie des Pneus et leurs impacts sur le temps au tour"),
+    html.Div(style={'margin-top': '100px'}),
+    html.H3(children = "Stratégie des Pneus et leurs impacts sur le temps au tour"),
     html.Div(style={'margin-top': '50px'}),
     html.P(children=[
     
@@ -251,8 +251,8 @@ app.layout = html.Div(
            
     ]),  
     
-    html.Div(style={'margin-top': '200px'}),
-    html.H1(children = "Les temps de pit stops des pilotes"),
+    html.Div(style={'margin-top': '100px'}),
+    html.H3(children = "Les temps de pit stops des pilotes"),
     html.Div(style={'margin-top': '50px'}),
     html.P(children=[
         '''Ce graphique permet d'observer les temps que passes les deux pilotes lors des arrêts aux 
@@ -267,7 +267,7 @@ app.layout = html.Div(
     ], style={
         # 'display': 'flex', 
         'justifyContent': 'center', 
-        # 'width': '100%',  
+        'width': '100%',  
         # 'height': 'auto'  
     }),
     html.Div(style={'margin-top': '10px'}),
@@ -284,7 +284,7 @@ app.layout = html.Div(
     html.H1(children = "La vitesse et la conduite en F1"),
     html.Div(style={'margin-top': '80px'}),
     html.H3(children = "Observation de la vitesse"),
-    html.Div(style={'margin-top': '20px'}),
+    html.Div(style={'margin-top': '50px'}),
     html.P(children=[
         '''Ces graphiques vous montrent la vitesse des deux pilotes sur leurs meilleurs tours.
         Vous pouvez cliquer sur une position du circuit pour vous y déplacer et observer la vitesse. 
@@ -379,7 +379,7 @@ app.layout = html.Div(
         supérieur à Hamilton.'''
     ]),
     
-    html.Div(style={'margin-top': '50px'}),
+    html.Div(style={'margin-top': '80px'}),
     
     html.Div([
         dcc.Graph(id='speed-difference-plot')  # Nouvel ID pour le graphique de différence de vitesse
@@ -406,7 +406,7 @@ app.layout = html.Div(
     html.Div(style={'margin-top': '200px'}),
     
     
-], style={ 'padding' : '50px',  'textAlign': 'center'},)
+], style={ 'padding' : '80px',  'textAlign': 'center'},)
 
 
 
