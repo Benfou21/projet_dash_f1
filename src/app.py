@@ -405,6 +405,27 @@ app.layout = html.Div(
     
     html.Div(style={'margin-top': '200px'}),
     
+    html.H1("Annexe"),
+    html.Div(style={'margin-top': '40px'}),
+    html.P([
+    "L’ensemble des données présentées sur ce site provient de l'API ",
+    html.A("Fast F1", href="https://github.com/theOehrly/Fast-F1", target="_blank"),
+    ", une ressource de premier plan pour les statistiques et informations détaillées sur la Formule 1. ",
+    "Fast F1 est reconnu pour son approche exhaustive et précise, offrant des données fiables et à jour qui comprennent les temps au tour, ",
+    "les positions, les états des pneus et bien plus encore.",
+    html.Br(),
+    "Cette API tire profit des dernières avancées en matière de traitement de données pour fournir des informations en temps quasi réel, ",
+    "ce qui permet aux amateurs de course ainsi qu'aux professionnels d’analyser en profondeur chaque Grand Prix. ",
+    "La rigueur de la collecte des données et l'attention portée à la mise à jour continue font de Fast F1 une source incontournable ",
+    "pour tous ceux qui cherchent à comprendre les nuances et la dynamique de ce sport de haute voltige.",
+    html.Br(),
+    "Nous nous engageons à respecter l'intégrité des informations et à créditer Fast F1 comme source principale des données utilisées ",
+    "pour les analyses et visualisations disponibles sur notre site. Pour plus d'informations sur l'API Fast F1 et pour accéder à leur documentation complète, ",
+    "veuillez visiter leur ",
+    html.A("site officiel", href="https://github.com/theOehrly/Fast-F1", target="_blank"),
+    "."
+]), 
+    
     
 ], style={ 'padding' : '80px',  'textAlign': 'center'},)
 
