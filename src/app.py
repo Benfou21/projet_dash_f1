@@ -87,12 +87,7 @@ dropdown_style = {
     'margin': '10px auto',  # Centre le dropdown avec une marge en haut et en bas
     'font-size': '16px',  # Ajustez ceci selon vos préférences et la longueur du texte
 }
-# legend_style = {
-#     'textAlign': 'center',  # Centre le texte de la légende
-#     'padding': '10px',
-#     'margin': '0 auto',  # Centre la légende
-#     'width': '100%',  # La légende prend toute la largeur disponible
-# }
+
 graph_container_style = {
     'display': 'flex',
     'flexDirection': 'column',
@@ -108,7 +103,9 @@ app.layout = html.Div(
     html.H1(children=["Comprendre une course de Formule 1, la bataille",
             html.Br(),
             "Verstappen-Hamilton lors du GP d'Espagne 2021"]),
-    html.Div(style={'margin-top': '100px'}), 
+    
+    html.Div(style={'margin-top': '200px'}), 
+    
     html.P(children=
             '''Une course de Formule 1 dure deux heures, et les pilotes parcourent le circuit près de 60 fois à plus 
             de 300 km/h. Ils se battent tous pour dépasser leurs adversaires et
@@ -144,7 +141,7 @@ app.layout = html.Div(
         ])       
     ]),
         
-    html.Div(style={'margin-top': '100px'}),  
+    html.Div(style={'margin-top': '150px'}),  
         
     html.P(children=
         '''La saison 2021 est l'une des plus disputée des 10 dernières années. L'expérience du
