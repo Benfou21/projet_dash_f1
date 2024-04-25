@@ -99,7 +99,7 @@ graph_container_style = {
 app.layout = html.Div(
 [
     
-    html.Div(style={'margin-top': '400'}), 
+    html.Div(style={'margin-top': '200px'}), 
     html.H1(children=["Comprendre une course de Formule 1, la bataille",
             html.Br(),
             "Verstappen-Hamilton lors du GP d'Espagne 2021"]),
