@@ -41,7 +41,7 @@ h3 {
     color: #444; /* Légèrement plus clair que le h2 pour différencier les niveaux */
     font-weight: 500; /* Équilibre entre le gras et le normal */
     margin-bottom: 10px; /* Un peu moins d'espace en dessous que le h2 */
-    text-align: center; /* Alignement à gauche pour varier selon le niveau de titre */
+    text-align: left; /* Alignement à gauche pour varier selon le niveau de titre */
     text-transform: none; /* Pas de transformation pour différencier du h1 et h2 */
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.05); /* Ombre plus légère pour un effet subtil */
     text-decoration: underline;

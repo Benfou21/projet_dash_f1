@@ -65,9 +65,17 @@ def create_scatter_plot(reference_pilot, ver_csv_path, ham_csv_path):
 
     # Personnalisation de la mise en page du graphique
     fig.update_layout(
-        title_text=f"Différences de temps au tour par rapport à {reference_pilot}",
-        title_x=0.5,  # Centrer le titre
-        title_font_size=24,
+        
+        title=dict(
+            text=f'<b>Différences de temps au tour par rapport à {reference_pilot}',
+            x=0.5,  # Centrage horizontal du titre
+            font=dict(
+                family='sans-serif',  # Famille de police
+                size=20,  # Taille de la police
+                color='black'  # Couleur de la police
+                )
+        ),
+        
         legend_title_text='Pneus',
         legend_title_side='top',
         plot_bgcolor='white',  # Fond blanc

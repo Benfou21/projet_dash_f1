@@ -226,7 +226,7 @@ app.layout = html.Div(
             html.Br(),
             "Changement de pilote dans cette liste déroulante.",
         ],style={'textAlign': 'center'}),
-        html.Div(style={'margin-top': '20px'}), 
+        html.Div(style={'margin-top': '10px'}), 
         html.Div([
             dcc.Dropdown(
                 id='pilote-dropdown',
@@ -239,6 +239,7 @@ app.layout = html.Div(
                 style=dropdown_style
             )
         ], style=graph_container_style),
+        html.Div(style={'margin-top': '30px'}), 
         dcc.Graph(id='delta-scatter-plot', figure=scatter_plot_initial,className='graph-small'),
     ]),
     html.Div(style={'margin-top': '60px'}), 
@@ -251,7 +252,7 @@ app.layout = html.Div(
            
     ]),  
     
-    html.Div(style={'margin-top': '100px'}),
+    html.Div(style={'margin-top': '150px'}),
     html.H3(children = "Les temps de pit stops des pilotes"),
     html.Div(style={'margin-top': '50px'}),
     html.P(children=[
@@ -366,7 +367,7 @@ app.layout = html.Div(
     ], style={'display': 'flex', 'justifyContent': 'center', 'alignItems': 'center'}),
         
         
-    html.Div(style={'margin-top': '100px'}),
+    html.Div(style={'margin-top': '150px'}),
     
     html.H3(children = "Observation de la vitesse relatives sur les section de circuit "),
     

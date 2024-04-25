@@ -39,7 +39,7 @@ def get_evol_classement(df):
     ))
 
     fig.update_layout(
-        title='Évolution des points au classement du championnat du monde de F1 2021<br><sup>Lewis Hamilton (Mercedes) et Max Verstappen (Red Bull)</sup>',
+        title='<b>Évolution des points au classement du championnat du monde de F1 2021<br><sup>Lewis Hamilton (Mercedes) et Max Verstappen (Red Bull)</sup>',
         xaxis_title='Grand Prix',
         yaxis_title='Points',
         legend_title='Pilotes',    
@@ -53,10 +53,13 @@ def get_evol_classement(df):
             ),
         ),
         title=dict(
+            
+            x =0.5,
             font=dict(
                 family='sans-serif',
                 size=20,
-                color='black'
+                color='black',
+                
             ),
         )
     )
