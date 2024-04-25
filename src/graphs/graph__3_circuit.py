@@ -47,8 +47,7 @@ def get_circuit(data,index,pilote,legend):
     
     # Set up the layout of the figure
     fig.update_layout(
-        
-        
+
         title=dict(
         text=f'<b>Vitesse selon la position du circuit de {pilote}</b>',  
         x=0.5,  # Centrage du titre sur l'axe horizontal
@@ -61,8 +60,6 @@ def get_circuit(data,index,pilote,legend):
         )
     ),
         showlegend=legend,
-        # width = 800,
-        # height = 500,
         autosize=True,
         xaxis=dict(
             range=[min(x), max(x)], 
@@ -81,8 +78,7 @@ def get_circuit(data,index,pilote,legend):
             tickvals=[],  
             ticktext=[] 
         ),
-        # plot_bgcolor='white',  
-        #paper_bgcolor='white',
+     
     )
     
     
@@ -100,7 +96,7 @@ def get_circuit(data,index,pilote,legend):
             traceorder='normal',
             font=dict(
                 family='sans-serif',
-                size=10,
+                size=12,
                 color='black'
             ),
             bordercolor='#344feb',
@@ -140,7 +136,7 @@ def get_bars(data,index,pilote,legend):
     
     speed_index = [speed[index]]
     elapsed_time_index = [elapsed_time[index]]
-    colors_index = ["purple"]  # ou toute autre couleur distincte pour la barre d'index
+    colors_index = ["purple"]  # barre d'index
 
     fig.add_trace(go.Bar(x=[None], y=[None], marker_color='rgba(0,0,0,0)', showlegend=True, name="Légende"))
     
@@ -162,15 +158,13 @@ def get_bars(data,index,pilote,legend):
             family='sans-serif',  # Famille de police
             size=20,  # Taille de la police
             color='black'  # Couleur de la police
-        )
-    ),
+            )
+        ),
          
         xaxis_title='Temps en seconde', 
         yaxis_title='Vitesse en km/h', 
         showlegend = legend,
        
-        # width = 800,
-        # height = 500,
         autosize=True,
         
     )
@@ -180,7 +174,7 @@ def get_bars(data,index,pilote,legend):
             traceorder='normal',
             font=dict(
                 family='sans-serif',
-                size=10,
+                size=12,
                 color='black'
             ),
             bordercolor='#344feb',

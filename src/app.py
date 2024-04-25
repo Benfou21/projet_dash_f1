@@ -143,7 +143,7 @@ app.layout = html.Div(
         ])       
     ]),
         
-    html.Div(style={'margin-top': '30px'}),  
+    html.Div(style={'margin-top': '50px'}),  
         
     html.P(children=
         '''La saison 2021 est l'une des plus disputée des 10 dernières années. L'expérience du
@@ -152,9 +152,10 @@ app.layout = html.Div(
         le championnat du monde. Le Grand Prix d'Espagne se déroule au début de la saison, alors que
         Lewis Hamilton a pris la tête du classement. Verstappen, qui finira par remporter le titre,
         se bat pour ne pas prendre trop de retard.'''
-        ), 
+    ), 
         
-        # Évolution classement championnat du monde
+    # Évolution classement championnat du monde
+    html.Div(style={'margin-top': '30px'}), 
     html.Div([
         html.Div([
             dcc.Graph(id='graph_evol_classement', figure=evol_classement_1,config=dict(
@@ -171,9 +172,11 @@ app.layout = html.Div(
         ])
     ]),
           
-    html.Div(style={'margin-top': '60px'}), 
+    html.Div(style={'margin-top': '100px'}), 
         
     html.H1(children = "Le Grand Prix d'Espagne 2021 "),
+    
+    html.Div(style={'margin-top': '40px'}), 
         
     html.P(children=
            '''Le Grand Prix d'Espagne 2021 prend place le dimanche 9 mai à Barcelone, sur le circuit de Barcelona-Catalunya.
@@ -183,7 +186,7 @@ app.layout = html.Div(
            « des stands » du championnat du monde de Formule 1. Le reste du circuit est
            composé de successions de virages rapides, de quelques gros freinages et d'une ligne droite opposée.'''
     ),
-        
+    html.Div(style={'margin-top': '30px'}), 
     html.Div(children=
         [html.Img(src='assets/data/circuit-catalogne.png',
             style={
@@ -216,11 +219,13 @@ app.layout = html.Div(
         Nous permettant ainsi d'observer les stratégies réalisées par les écuries.
         En vert nous avons un delta positif et en rouge le delta est négatif.  La liste déroulantes en bas du graphique permet de changer de pilote. '''
     ]),      
-    html.Div(style={'margin-top': '50px'}), 
+    html.Div(style={'margin-top': '30px'}), 
     html.Div([
         html.P(children=[
-        html.Br(),
-        "Changement de pilote dans cette liste déroulante.",]),
+            html.Br(),
+            "Changement de pilote dans cette liste déroulante.",
+        ],style={'textAlign': 'center'}),
+        html.Div(style={'margin-top': '20px'}), 
         html.Div([
             dcc.Dropdown(
                 id='pilote-dropdown',
@@ -235,7 +240,7 @@ app.layout = html.Div(
         ], style=graph_container_style),
         dcc.Graph(id='delta-scatter-plot', figure=scatter_plot_initial,className='graph-small'),
     ]),
-    html.Div(style={'margin-top': '50px'}), 
+    html.Div(style={'margin-top': '60px'}), 
     html.P(children=[
             '''On remarque que Hamilton a opté pour des relais plus courts sur ses pneus comparativement à Verstappen. 
             En procédant à un premier changement de pneus anticipé, Hamilton avec des pneus neufs a pu rattraper son retard sur Verstappen entre le tour 30 et 42.
@@ -245,7 +250,7 @@ app.layout = html.Div(
            
     ]),  
     
-    html.Div(style={'margin-top': '100px'}),
+    html.Div(style={'margin-top': '200px'}),
     html.H1(children = "Les temps de pit stops des pilotes"),
     html.Div(style={'margin-top': '50px'}),
     html.P(children=[
@@ -400,7 +405,7 @@ app.layout = html.Div(
     html.Div(style={'margin-top': '90px'}),
     
     html.H1("Conlusion"),
-    
+    html.Div(style={'margin-top': '40px'}),
     html.P(children=
         '''Le vainqueur de le course est Lewis Hamilton, Max Verstappen finissant deuxième.
         Ces graphiques nous ont montrés une bataille très sérrée entre les deux pilotes, les deux possèdants des conduites performantes.

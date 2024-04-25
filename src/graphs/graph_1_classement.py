@@ -42,9 +42,24 @@ def get_evol_classement(df):
         title='Évolution des points au classement du championnat du monde de F1 2021<br><sup>Lewis Hamilton (Mercedes) et Max Verstappen (Red Bull)</sup>',
         xaxis_title='Grand Prix',
         yaxis_title='Points',
-        legend_title='Pilotes'
+        legend_title='Pilotes',    
     )
-    
+    fig.update_layout(
+        legend=dict(
+            font=dict(
+                family='sans-serif',
+                size=15,
+                color='black'
+            ),
+        ),
+        title=dict(
+            font=dict(
+                family='sans-serif',
+                size=20,
+                color='black'
+            ),
+        )
+    )
     # Ajout de la ligne de highlight pour le gp d'espagne étudié
     fig.add_vline(x=3, line_width=3,
                   line_dash="dash", line_color="red",
