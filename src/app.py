@@ -255,13 +255,10 @@ app.layout = html.Div(
     html.H1(children = "Les temps de pit stops des pilotes"),
     html.Div(style={'margin-top': '50px'}),
     html.P(children=[
-        "Ce graphique permet d'observer les temps que passes les deux pilotes lors des arrêts aux ",
-        html.Br(),
-        "stands. Les points bleu corresponds aux pit stops antérieurs au GP d'Espagne.Les points",
-        html.Br(),
-        "orange corresponds aux pit stops du GP d'Espagne.Vous pouvez affichez uniquement les",
-        html.Br(),
-        "points bleu ou orange en cliquant sur la légende.",
+        '''Ce graphique permet d'observer les temps que passes les deux pilotes lors des arrêts aux 
+            stands. Les points bleu corresponds aux pit stops antérieurs au GP d'Espagne.Les points
+            orange corresponds aux pit stops du GP d'Espagne.Vous pouvez affichez uniquement les
+            points bleu ou orange en cliquant sur la légende'''
     ]),  
     html.Div(style={'margin-top': '100px'}),
     # Graphes Pitstops
@@ -289,13 +286,9 @@ app.layout = html.Div(
     html.H3(children = "Observation de la vitesse"),
     html.Div(style={'margin-top': '20px'}),
     html.P(children=[
-        "Ces graphiques vous montrent la vitesse des deux pilotes sur leurs meilleurs tours.",
-        html.Br(),
-        "Vous pouvez cliquer sur une position du circuit pour vous y déplacer et observer la",
-        html.Br(), 
-        "vitesse. Vous pouvez cocher la case de synchronisation pour interargir avec les deux",
-        html.Br(),
-        " graphiques en même temps."
+        '''Ces graphiques vous montrent la vitesse des deux pilotes sur leurs meilleurs tours.
+        Vous pouvez cliquer sur une position du circuit pour vous y déplacer et observer la vitesse. 
+        Vous pouvez cocher la case de synchronisation pour interargir avec les deux graphiques en même temps.'''
     ]),   
     html.Div(style={'margin-top': '100px'}),
         
@@ -380,13 +373,10 @@ app.layout = html.Div(
     html.Div(style={'margin-top': '50px'}),
     
     html.P(children=[
-        "Ce graphique montre les section de circuit ou Max Verstappen est plus rapide que Lewis",
-        html.Br(),
-        "Hamilton. En rouge sont les protions de circuit ou Verstappen avait une vistesse inférieur",
-        html.Br(),
-        "à Hamilton. En vert sont les protions de circuit ou Verstappen avait une vistesse",
-        html.Br(),
-        " supérieur à Hamilton."
+        '''Ce graphique montre les section de circuit ou Max Verstappen est plus rapide que Lewis
+        Hamilton. En rouge sont les protions de circuit ou Verstappen avait une vistesse inférieur
+        à Hamilton. En vert sont les protions de circuit ou Verstappen avait une vistesse
+        supérieur à Hamilton.'''
     ]),
     
     html.Div(style={'margin-top': '50px'}),
@@ -416,7 +406,7 @@ app.layout = html.Div(
     html.Div(style={'margin-top': '200px'}),
     
     
-], style={ 'padding' : '50px'}, )
+], style={ 'padding' : '50px',  'textAlign': 'center'},)
 
 
 
