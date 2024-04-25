@@ -87,18 +87,19 @@ dropdown_style = {
     'margin': '10px auto',  # Centre le dropdown avec une marge en haut et en bas
     'font-size': '16px',  # Ajustez ceci selon vos préférences et la longueur du texte
 }
-legend_style = {
-    'textAlign': 'center',  # Centre le texte de la légende
-    'padding': '10px',
-    'margin': '0 auto',  # Centre la légende
-    'width': '100%',  # La légende prend toute la largeur disponible
-}
+# legend_style = {
+#     'textAlign': 'center',  # Centre le texte de la légende
+#     'padding': '10px',
+#     'margin': '0 auto',  # Centre la légende
+#     'width': '100%',  # La légende prend toute la largeur disponible
+# }
 graph_container_style = {
     'display': 'flex',
     'flexDirection': 'column',
     # 'alignItems': 'center',  # Centre le graphique scatter plot horizontalement
     'margin': '0 auto',  # Centre le conteneur sur la page
 }
+
 
 app.layout = html.Div(
 [
@@ -156,7 +157,7 @@ app.layout = html.Div(
         
     # Évolution classement championnat du monde
     html.Div(style={'margin-top': '50px'}), 
-    html.Div([
+    html.Div(className='centered-div', children= [
         html.Div([
             dcc.Graph(id='graph_evol_classement', figure=evol_classement_1,config=dict(
                   showTips=False,
@@ -186,8 +187,8 @@ app.layout = html.Div(
            « des stands » du championnat du monde de Formule 1. Le reste du circuit est
            composé de successions de virages rapides, de quelques gros freinages et d'une ligne droite opposée.'''
     ),
-    html.Div(style={'margin-top': '50px'}), 
-    html.Div(children=
+    html.Div(style={'margin-top': '80px'}), 
+    html.Div(className='centered-div', children=
         [html.Img(src='assets/data/circuit-catalogne.png',
             style={
                 'height': '100%',
@@ -199,7 +200,7 @@ app.layout = html.Div(
         )],style={'height': '300px'}
     ),
     
-    html.Div([html.Span('Track Map Circuit de Catalunya - '),
+    html.Div(className='centered-div', children= [html.Span('Track Map Circuit de Catalunya - '),
         dcc.Link("Grand Prix d'Espagne 2021", href="https://fr.wikipedia.org/wiki/Grand_Prix_automobile_d%27Espagne_2021")
     ]),
                  
@@ -210,8 +211,8 @@ app.layout = html.Div(
     html.Div(style={'margin-top': '200px'}),
     html.H1(children = "Stratégie des Pneus"),        
     #1er partie 2 eme section
-    html.Div(style={'margin-top': '100px'}),
-    html.H2(children = "Stratégie des Pneus et leurs impacts sur le temps au tour"),
+    # html.Div(style={'margin-top': '100px'}),
+    # html.H2(children = "Stratégie des Pneus et leurs impacts sur le temps au tour"),
     html.Div(style={'margin-top': '50px'}),
     html.P(children=[
     
@@ -415,7 +416,7 @@ app.layout = html.Div(
     html.Div(style={'margin-top': '200px'}),
     
     
-], style={'textAlign': 'center', 'padding' : '50px'}, )
+], style={ 'padding' : '50px'}, )
 
 
 

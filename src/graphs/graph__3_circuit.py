@@ -150,15 +150,15 @@ def get_bars(data,index,pilote,legend):
     
     fig.update_layout(
         title=dict(
-        text=f'<b>Vitesse de {pilote} lors de son tour</b>',
-        x=0.5,  # Centrage horizontal du titre
-        y=0.95,  # Position verticale, ajustable selon le besoin
-        xanchor='center',  # Le titre est centré autour de ce point
-        font=dict(
-            family='sans-serif',  # Famille de police
-            size=20,  # Taille de la police
-            color='black'  # Couleur de la police
-            )
+            text=f'<b>Vitesse de {pilote} lors de son tour</b>',
+            x=0.5,  # Centrage horizontal du titre
+            y=0.95,  # Position verticale, ajustable selon le besoin
+            xanchor='center',  # Le titre est centré autour de ce point
+            font=dict(
+                family='sans-serif',  # Famille de police
+                size=20,  # Taille de la police
+                color='black'  # Couleur de la police
+                )
         ),
          
         xaxis_title='Temps en seconde', 

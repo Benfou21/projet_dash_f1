@@ -91,22 +91,30 @@ def graph_idriss(ver_csv_path, ham_csv_path):
 
     # Mise à jour du layout
     fig.update_layout(
-    title='Vitesse relative de Max Vertsappen en coparaison avec Lewis Hamilton',
-    legend_title='Légende',
-    showlegend=True,
-    plot_bgcolor='white',  # Définir le fond à blanc
-    xaxis=dict(showticklabels=False),
-    yaxis=dict(showticklabels=False),
-    margin=dict(l=0, r=0, t=40, b=0),  # Margin top pour le titre
-    autosize=True,
-    # width=1200,
-    # height=800,
-)
+        title=dict(
+            text=f'<b>Vitesse relative de Max Vertsappen en coparaison avec Lewis Hamilton</b>',
+            x=0.5,  # Centrage horizontal du titre
+            font=dict(
+                family='sans-serif',  # Famille de police
+                size=20,  # Taille de la police
+                color='black'  # Couleur de la police
+                )
+        ),
+        
+        legend_title='Légende',
+        showlegend=True,
+        plot_bgcolor='white',  # Définir le fond à blanc
+        xaxis=dict(showticklabels=False),
+        yaxis=dict(showticklabels=False),
+        margin=dict(l=0, r=0, t=40, b=0),  # Margin top pour le titre
+        autosize=True,
+        
+    )
     fig.add_trace(go.Scatter(
-    x=[None], y=[None], mode='lines',
-    name='Lewis plus rapide (rouge)',
-    line=dict(color='red', width=10)
-))
+        x=[None], y=[None], mode='lines',
+        name='Lewis plus rapide (rouge)',
+        line=dict(color='red', width=10)
+    ))
     fig.add_trace(go.Scatter(
         x=[None], y=[None], mode='lines',
         name='Vitesse égale (jaune)',
@@ -125,7 +133,12 @@ def graph_idriss(ver_csv_path, ham_csv_path):
             y=0.99,
             xanchor="left",
             x=0.01
-        )
+        ),
+        font=dict(
+                family='sans-serif',
+                size=15,
+                color='black'
+            ),
     )
     return fig
 
