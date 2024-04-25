@@ -430,21 +430,24 @@ Cette victoire vient rappeler la complexité tactique de la Formule 1, où la vi
     "."
 ]), 
     html.P([
-    "Calcul des Deltas de Temps :",
+    "II) Calcul des Deltas de Temps :",
     " Afin de comparer les performances entre différents pilotes, nous procédons au calcul des deltas de temps tour par tour. ",
     "Ces différences de temps sont ensuite converties en secondes, simplifiant l'analyse des écarts de performance.",
     html.Br(),
-    "Ajout de Segments :",
+    "II) Ajout de Segments :",
     " L'analyse des données est affinée par l'introduction d'une nouvelle colonne 'Segment' qui prend en compte les changements ",
     "de composés de pneus. Cette méthode permet de suivre les différentes phases de la course et de mieux comprendre les stratégies adoptées par les écuries.",
     html.Br(),
-    "Gestion des Tours Manquants :",
+    "II) Gestion des Tours Manquants :",
     " Pour assurer l'intégrité des données en cas de tours manquants, notre méthode consiste à combler ces vides avec ",
     "les informations du tour immédiatement précédent. Cette approche garantit une continuité et une complétude des données pour chaque pilote, permettant des analyses cohérentes.",
     html.Br(),
-    "Marquage des Arrêts au Stand :",
+    "II) Marquage des Arrêts au Stand :",
     " Chaque tour où un pilote effectue un arrêt au stand est clairement marqué dans notre jeu de données. ",
-    "Cette distinction nous permet de déceler l'impact des stratégies de pit stop sur la performance globale et de saisir les dynamiques clés de la course."
+    "Cette distinction nous permet de déceler l'impact des stratégies de pit stop sur la performance globale et de saisir les dynamiques clés de la course.",
+    html.Br(),
+    "III) Encodage le l'intensité :",
+    "L'encodage de la vitesse a été réalisé en variant la saturation (0-100%) et la luminosité (10-55%) d'une couleur de base verte."
 ])
     
     
