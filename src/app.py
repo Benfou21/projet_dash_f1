@@ -172,7 +172,7 @@ app.layout = html.Div(
           
     html.Div(style={'margin-top': '200px'}), 
         
-    html.H1(children = "Le Grand Prix d'Espagne 2021 "),
+    html.H1(children = "I) Le Grand Prix d'Espagne 2021 "),
     
     html.Div(style={'margin-top': '50px'}), 
         
@@ -206,10 +206,10 @@ app.layout = html.Div(
     #Partie 2  
     #Titre 2 eme section
     html.Div(style={'margin-top': '200px'}),
-    html.H1(children = "Stratégie des Pneus"),        
+    html.H1(children = "II) Stratégie des Pneus"),        
     #1er partie 2 eme section
     html.Div(style={'margin-top': '100px'}),
-    html.H3(children = "Stratégie des Pneus et leurs impacts sur le temps au tour"),
+    html.H3(children = "1) Stratégie des Pneus et leurs impacts sur le temps au tour"),
     html.Div(style={'margin-top': '50px'}),
     html.P(children=[
     
@@ -250,7 +250,7 @@ app.layout = html.Div(
     ]),  
     
     html.Div(style={'margin-top': '150px'}),
-    html.H3(children = "Les temps de pit stops des pilotes"),
+    html.H3(children = "2) Les temps de pit stops des pilotes"),
     html.Div(style={'margin-top': '50px'}),
     html.P(children=[
         '''Ce graphique permet d'observer les temps que passes les deux pilotes lors des arrêts aux 
@@ -279,9 +279,9 @@ app.layout = html.Div(
         #Partie 3 
     html.Div(style={'margin-top': '200px'}),
         
-    html.H1(children = "La vitesse et la conduite en F1"),
+    html.H1(children = "III) La vitesse et la conduite en F1"),
     html.Div(style={'margin-top': '80px'}),
-    html.H3(children = "Observation de la vitesse"),
+    html.H3(children = "1) Observation de la vitesse"),
     html.Div(style={'margin-top': '50px'}),
     html.P(children=[
         '''Ces graphiques vous montrent la vitesse des deux pilotes sur leurs meilleurs tours.
@@ -366,7 +366,7 @@ app.layout = html.Div(
         
     html.Div(style={'margin-top': '150px'}),
     
-    html.H3(children = "Observation de la vitesse relatives sur les section de circuit "),
+    html.H3(children = "2) Observation de la vitesse relatives sur les section de circuit "),
     
     html.Div(style={'margin-top': '50px'}),
     
@@ -396,9 +396,15 @@ app.layout = html.Div(
     html.H1("Conlusion"),
     html.Div(style={'margin-top': '40px'}),
     html.P(children=
-        '''Le vainqueur de le course est Lewis Hamilton, Max Verstappen finissant deuxième.
-        Ces graphiques nous ont montrés une bataille très sérrée entre les deux pilotes, les deux possèdants des conduites performantes.
-        C'est la stratégie des pneus de Hamilton qui lui a donné sa victoire.''',
+        '''La course s'est conclue sur un triomphe de Lewis Hamilton, avec Max Verstappen franchissant la ligne d'arrivée juste derrière lui. L'analyse approfondie des graphiques de performance révèle une compétition acharnée entre ces deux titans de la Formule 1, où chaque fraction de seconde était disputée avec une intensité hors du commun. Leurs talents de pilotes, alliant précision technique et agressivité calculée sur la piste, se sont exprimés pleinement tout au long de cette joute mécanique.
+
+Cependant, au-delà de l'habileté pure, c'est la stratégie de gestion des pneus qui a joué un rôle déterminant dans la victoire de Hamilton. L'équipe de Hamilton a opté pour une stratégie osée mais judicieuse, changeant les pneus à des moments clés de la course pour exploiter au maximum les fenêtres de performance optimale des gommes. Cette décision stratégique s'est avérée payante, permettant à Hamilton de prendre l'avantage sur Verstappen dans les derniers tours, où l'adhérence et la vitesse sont cruciales.
+
+Les données de télémétrie nous ont permis de suivre avec précision l'usure des pneus de chaque pilote et de comprendre comment les choix des écuries en termes de pneumatiques et de timing des arrêts aux stands influencent le déroulement de la course. En fin de compte, ce sont ces décisions prises en fraction de seconde par l'équipe au muret des stands, conjuguées à l'expertise de Hamilton à préserver la performance de ses pneus sous haute pression, qui ont scellé l'issue de cette épreuve.
+
+Cette victoire vient rappeler la complexité tactique de la Formule 1, où la vitesse n'est pas le seul facteur de succès. La capacité à anticiper les conditions de course, à s'adapter aux défis imprévus et à exécuter une stratégie avec précision est souvent ce qui distingue un champion. La bataille entre Hamilton et Verstappen, loin d'être simplement une mesure de puissance ou d'habileté, est une danse délicate entre stratégie et exécution, une démonstration de la synergie entre pilote et équipe.
+
+''',
     ), 
     
     html.Div(style={'margin-top': '200px'}),
