@@ -213,9 +213,9 @@ app.layout = html.Div(
     html.Div(style={'margin-top': '50px'}),
     html.P(children=[
     
-        '''Ce graphique met en evidence les delta de temps entre Verstappen et Hamilton en fonction des tours en mettant en évidence les changments de pneus.
+        '''Ce graphique met en évidence les delta de temps entre Verstappen et Hamilton en fonction des tours en mettant en évidence les changements de pneus.
         Nous permettant ainsi d'observer les stratégies réalisées par les écuries.
-        En vert nous avons un delta positif et en rouge le delta est négatif.  La liste déroulantes en bas du graphique permet de changer de pilote. '''
+        En vert nous avons un delta positif et en rouge le delta est négatif.  La liste déroulante en bas du graphique permet de changer de pilote. '''
     ]),      
     html.Div(style={'margin-top': '30px'}), 
     html.Div([
@@ -253,10 +253,10 @@ La subtilité de cette bataille pneumatique ne réside pas seulement dans le cho
     html.H3(children = "2) Les temps de pit stops des pilotes"),
     html.Div(style={'margin-top': '50px'}),
     html.P(children=[
-        '''Ce graphique permet d'observer les temps que passes les deux pilotes lors des arrêts aux 
-            stands. Les points bleu corresponds aux pit stops antérieurs au GP d'Espagne.Les points
-            orange corresponds aux pit stops du GP d'Espagne.Vous pouvez affichez uniquement les
-            points bleu ou orange en cliquant sur la légende'''
+        '''Ce graphique permet d'observer les temps que passent les deux pilotes lors des arrêts aux 
+            stands. Les points bleus correspondent aux pit stops antérieurs au GP d'Espagne. Les points
+            orange correspondent aux pit stops du GP d'Espagne. Vous pouvez afficher uniquement les
+            points bleus ou orange en cliquant sur la légende'''
     ]),  
     html.Div(style={'margin-top': '100px'}),
     # Graphes Pitstops
@@ -273,7 +273,7 @@ La subtilité de cette bataille pneumatique ne réside pas seulement dans le cho
 
         '''L'observation détaillée des données du Grand Prix d'Espagne souligne une performance remarquablement consistante de l'équipe de Max Verstappen, qui a maintenu un rythme soutenu tout au long de l'événement. Cette constance est le reflet d'une maîtrise technique et d'une préparation rigoureuse qui ont permis à Verstappen de rester un compétiteur redoutable dans cette course au sommet de la Formule 1.
 
-Néanmoins, une analyse plus approfondie révèle que, malgré cette consistence, c'est Lewis Hamilton qui a enregistré le tour le plus rapide durant le Grand Prix. Cette performance illustre une capacité à pousser sa monoplace à ses limites absolues, un talent qui, combiné avec l'expérience et la finesse technique de Hamilton, a abouti à un résultat impressionnant.
+Néanmoins, une analyse plus approfondie révèle que, malgré cette consistance, c'est Lewis Hamilton qui a enregistré le tour le plus rapide durant le Grand Prix. Cette performance illustre une capacité à pousser sa monoplace à ses limites absolues, un talent qui, combiné avec l'expérience et la finesse technique de Hamilton, a abouti à un résultat impressionnant.
 
 Cependant, même si Hamilton a décroché le tour le plus rapide, il est essentiel de souligner que Verstappen a su capitaliser sur d'autres avantages stratégiques. En maintenant un rythme élevé avec une régularité exemplaire, Verstappen a démontré que la vitesse brute n'est qu'une partie de l'équation qui mène à la victoire. Sa capacité à rester constant dans ses performances et à gérer la pression tout au long de la course s'avère être un atout majeur, qui, dans bien des cas, peut se révéler plus bénéfique que le simple fait de détenir le record du tour le plus rapide.
 
@@ -292,7 +292,7 @@ En définitive, l'évaluation des performances des deux équipes met en lumière
     html.P(children=[
         '''Ces graphiques vous montrent la vitesse des deux pilotes sur leurs meilleurs tours.
         Vous pouvez cliquer sur une position du circuit pour vous y déplacer et observer la vitesse. 
-        Vous pouvez cocher la case de synchronisation pour interargir avec les deux graphiques en même temps.'''
+        Vous pouvez cocher la case de synchronisation pour interagir avec les deux graphiques en même temps.'''
     ]),   
     html.Div(style={'margin-top': '100px'}),
         
@@ -348,7 +348,7 @@ En définitive, l'évaluation des performances des deux équipes met en lumière
     ], style={'justifyContent': 'space-between', 'alignItems': 'center', 'display': 'flex',}),
         
     html.Div(style={'margin-top': '20px'}),
-    html.P(children="En cochant la case synchronisation, lorsque vous allez modifier la position sur un graphe cela synchronise l'autre.", style={'fontSize': '12px','textAlign': 'center'}),
+    html.P(children="En cochant la case synchronisation, lorsque vous allez modifier la position sur un graphe, cela synchronise l'autre.", style={'fontSize': '12px','textAlign': 'center'}),
     html.Div([
         dcc.Checklist(
             id='toggle-sync',
@@ -372,14 +372,14 @@ En définitive, l'évaluation des performances des deux équipes met en lumière
         
     html.Div(style={'margin-top': '150px'}),
     
-    html.H3(children = "2) Observation de la vitesse relatives sur les section de circuit "),
+    html.H3(children = "2) Observation de la vitesse relative sur les sections du circuit "),
     
     html.Div(style={'margin-top': '50px'}),
     
     html.P(children=[
-        '''Ce graphique montre les section de circuit ou Max Verstappen est plus rapide que Lewis
-        Hamilton. En rouge sont les protions de circuit ou Verstappen avait une vistesse inférieur
-        à Hamilton. En vert sont les protions de circuit ou Verstappen avait une vistesse
+        '''Ce graphique montre les sections du circuit où Max Verstappen est plus rapide que Lewis
+        Hamilton. En rouge sont les portions de circuit où Verstappen a une vitesse inférieure
+        à Hamilton. En vert sont les portions de circuit où Verstappen a une vistesse
         supérieur à Hamilton.'''
     ]),
     
